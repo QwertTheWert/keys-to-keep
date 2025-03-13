@@ -6,33 +6,33 @@
 
 
 {% block body %}
-<form>
+<form action="/register" method="POST">
 	<div class="container border mt-4 p-4">
 		<h1>Register</h1>
 		<hr>
 		<div class="mb-3">
-			<label for="exampleInputUsername1" class="form-label">Username</label>
-			<input type="text" class="form-control" id="exampleInputUsername1">
+			<label class="form-label">Username</label>
+			<input type="text" name="username" class="form-control" id="exampleInputUsername1">
 		</div>
 		<div class="mb-3">
-			<label for="exampleFullName1" class="form-label">Full Name</label>
-			<input type="text" class="form-control" id="exampleFullName1">
+			<label class="form-label">Full Name</label>
+			<input type="text" name="full_name" class="form-control" id="exampleFullName1">
 		</div>
 		<div class="mb-3">
-			<label for="exampleInputEmail1" class="form-label">Email address</label>
-			<input type="email" class="form-control" id="exampleInputEmail1">
+			<label class="form-label">Email address</label>
+			<input type="email" name="email" class="form-control" id="exampleInputEmail1">
 		</div>
 		<div class="mb-3">
-			<label for="exampleInputPassword1" class="form-label">Password</label>
-			<input type="password" class="form-control" id="exampleInputPassword1">
+			<label class="form-label">Password</label>
+			<input type="password" name="password" class="form-control" id="exampleInputPassword1">
 		</div>
 		<div class="mb-3">
-			<label for="exampleBankNumber1" class="form-label">Bank Number</label>
-			<input type="text" class="form-control" id="exampleBankNumber1">
+			<label class="form-label">Bank Number</label>
+			<input type="text" name="bank_number" class="form-control" id="exampleBankNumber1">
 		</div>
 		<p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 		<div class="mb-3">
-			<button type="submit" class="btn btn-success">Register</button>
+			<button type="submit" class="btn btn-primary">Register</button>
 		</div>
 		<p>Already have an account? <a href="http://127.0.0.1:5000/login">Sign in</a>.</p>
 	</div>
