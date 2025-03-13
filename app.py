@@ -37,7 +37,6 @@ class ProductModel(db.Model):
 	name = db.Column(db.String(200), nullable=False)
 	price = db.Column(db.Integer, nullable=False)
 	quantity = db.Column(db.Integer, nullable=False)
-	
 	product = db.relationship('Product', foreign_keys = "ProductModel.product_id")
 
 	def __repr__(self):
@@ -47,6 +46,11 @@ class ProductModel(db.Model):
 @app.route('/')
 def index():
 	return render_template("index.html")
+
+
+@app.route('/register')
+def register():
+	return render_template("register.html")
 
 if __name__ == "__main__":
 	app.run(debug=True)
