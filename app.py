@@ -63,10 +63,7 @@ def on_register():
 	email = request.form.get("email")
 	password = request.form.get("password")
 	bank_number = request.form.get("bank_number")
-	print(full_name, username, email, password, bank_number)
-	# return redirect('/register')
-	# create an object of the Profile class of models
-	# and store data as a row in our datatable
+	
 	if full_name != "" and username != "" and email != "" and password != "" and bank_number != "":
 		new_user = User(full_name=full_name, username=username, email=email, password=password, bank_number=bank_number)
 		db.session.add(new_user)
