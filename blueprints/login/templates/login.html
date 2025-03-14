@@ -15,19 +15,11 @@
 		<hr>
 		<div class="mb-3">
 			<label for="exampleInputUsername1" class="form-label">Email or Username</label>
-			<input type="text" class="form-control" name="identifier" required="required" 
-				{% if identifier is defined and identifier %}
-					value={{identifier}}
-				{% endif %}
-			>
+			<input type="text" class="form-control" name="identifier" required="required">
 		</div>
 		<div class="mb-3">
 			<label for="exampleInputPassword1" class="form-label">Password</label>
-			<input type="password" class="form-control" name="password" required="required" 
-				{% if password is defined and password %}
-					value={{password}}
-				{% endif %}
-			>
+			<input type="password" class="form-control" name="password" required="required">
 		</div>
 		<div class="mb-3">
 			<button type="submit" class="btn btn-success">Login</button>

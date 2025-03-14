@@ -27,7 +27,7 @@ def create_app():
 	import blueprints.register.register as register
 	import blueprints.login.login as login
 	register.register_to_app(app, bcrypt)
-	login.register_to_app(app)
+	login.register_to_app(app, bcrypt)
 
 	@login_manager.user_loader 
 	def load_user(user):

@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for
+from flask_login import current_user
 
 register_bp = Blueprint("register", __name__, template_folder="templates")
 
@@ -21,8 +22,7 @@ def register_to_app(flask_app, bcrypt):
 			if select_by_username is None and select_by_email is None:
 				new_user = User(full_name=full_name, username=username, email=email, password=hashed_password, bank_number=bank_number)
 				db.session.add(new_user)
-				db.session.commit()
-				
+				db.session.commit()				
 				return redirect(url_for("register.index"))
 			elif select_by_username is not None:
 				message = "Username is taken. Please use another one."
@@ -33,6 +33,11 @@ def register_to_app(flask_app, bcrypt):
 
 	@register_bp.route('/')
 	def index():
+		if current_user.is_authenticated:
+			print(str(current_user.username))
+		else:
+			print("No user")
+
 		return render_template("main_page.html")
 
 	flask_app.register_blueprint(register_bp)
