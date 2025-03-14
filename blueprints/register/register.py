@@ -25,17 +25,12 @@ def register_to_app(flask_app):
 				message = "Username is taken. Please use another one."
 		elif request.method == "POST":
 			message = "Incomplete registration data. Please fill all fields." 
-		return render_template('register/register.html', message=message, full_name=f_nm, username=usrnm, email=eml, password=pwd, bank_number=bk_nbr)
+		return render_template('register.html', message=message, full_name=f_nm, username=usrnm, email=eml, password=pwd, bank_number=bk_nbr)
 
 
 	@register_bp.route('/')
 	def index():
 		return render_template("main_page.html")
-
-	@register_bp.route('/login')
-	def login():
-		return render_template("login.html")
-
 
 	flask_app.register_blueprint(register_bp)
 
