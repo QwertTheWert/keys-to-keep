@@ -1,369 +1,372 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keys 2 Keep</title>
-    <link rel="stylesheet" href="http://127.0.0.1:5000/static/main_page.css">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="logo">KEYS2KEEB</div>
-        <ul class="nav-links">
-            <li><a href="#">Keyboards</a></li>
-            <li><a href="#">Accessories</a></li>
-            <li><a href="#">Community</a></li>
-            <li><a href="#">Support</a></li>
-            <li><a href="#">About Us</a></li>
-            <li class="search-bar">
-                <input type="text" placeholder="Search">
-            </li>
-            <li><img src="http://127.0.0.1:5000/static/assets/cart-icon.png" alt="Cart" class="icon"></li>
-            <li><a href="http://127.0.0.1:5000/register"><img src="http://127.0.0.1:5000/static/assets/profile-icon.png" alt="Register" class="icon"></a></li>
-        </ul>
-    </nav>
+{% extends 'basic_template.html' %}
 
-    <div class="slider-container">
-        <div class="slider">
-            <div class="slide active">
-                <img src="http://127.0.0.1:5000/static/assets/Noir new.png" alt="Keyboard 1">
-                <div class="slide-text">
-                    <h2>NOIR TIMELESS82 V2</h2>
-                    <p>This 75% keyboard features a programmable knob, TFT LCD Screen, gasket mount for a soft typing feel, and supports QMK/VIA for full customization. It also offers multi-layout flexibility.</p>
-                </div>
-            </div>
-            <div class="slide">
-                <img src="http://127.0.0.1:5000/static/assets/keyboard2.jpg" alt="Keyboard 2">
-                <div class="slide-text">
-                    <h2>MECHA65 PRO</h2>
-                    <p>A high-end 65% keyboard with a wireless option, aluminum case, and hot-swappable PCB.</p>
-                </div>
-            </div>
-            <div class="slide">
-                <img src="http://127.0.0.1:5000/static/assets/keyboard3.jpg" alt="Keyboard 3">
-                <div class="slide-text">
-                    <h2>LUXURY75 X</h2>
-                    <p>Premium 75% keyboard with brass plate, per-key RGB, and ergonomic typing experience.</p>
-                </div>
-            </div>
-        </div>
-    
-        <!-- Navigation Arrows -->
-        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-        <button class="next" onclick="moveSlide(1)">&#10095;</button>
-    
-        <!-- Dots for navigation -->
-        <div class="dots">
-            <span class="dot active" onclick="currentSlide(0)"></span>
-            <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-        </div>
-    </div>
+{% block head %}
+<title>Keys 2 Keep</title>
+<link rel="stylesheet" href="http://127.0.0.1:5000/static/main_page.css">
+{% endblock %}
 
-    <div class="trending-items">
-        <div class="trending-header">
-            <h2>TRENDING ITEMS</h2>
-            <a href="#" class="view-all">View All &gt;</a>
-        </div>
-        <div class="trending-items-container">
-            <div class="trending-item">
-                <div class="trending-badge">Trending</div>
-                <img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
-                <h3>Vortexseries - Swift82</h3>
-                <p>Rapid Trigger - Snap Tap - Magnetic</p>
-                <div class="rating">
-                    <span class="stars">★★★★☆</span>
-                    <span class="ratings">100+ Ratings</span>
-                </div>
-                <div class="price">
-                    <span class="current-price">Rp659.000</span>
-                    <span class="original-price">Rp1.299.000</span>
-                    <span class="discount">49% OFF</span>
-                </div>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-            <!-- Add more trending items as needed -->
-            <div class="trending-item">
-                <div class="trending-badge">Trending</div>
-                <img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
-                <h3>Vortexseries - Swift82</h3>
-                <p>Rapid Trigger - Snap Tap - Magnetic</p>
-                <div class="rating">
-                    <span class="stars">★★★★☆</span>
-                    <span class="ratings">100+ Ratings</span>
-                </div>
-                <div class="price">
-                    <span class="current-price">Rp659.000</span>
-                    <span class="original-price">Rp1.299.000</span>
-                    <span class="discount">49% OFF</span>
-                </div>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
+{% block body %}
+<nav class="navbar">
+	<div class="logo">KEYS2KEEB</div>
+	<ul class="nav-links">
+		<li><a href="#">Keyboards</a></li>
+		<li><a href="#">Accessories</a></li>
+		<li><a href="#">Community</a></li>
+		<li><a href="#">Support</a></li>
+		<li><a href="#">About Us</a></li>
+		<li class="search-bar">
+			<input type="text" placeholder="Search">
+		</li>
+		<li><img src="http://127.0.0.1:5000/static/assets/cart-icon.png" alt="Cart" class="icon"></li>
+		<li><a href= "{% if current_user.is_authenticated %} {{ url_for('profile.profile')}} {% else %} {{ url_for('login.login')}} {% endif %}">
+			
+			{% if current_user.is_authenticated %} Profile {% else %} Login {% endif %}
+			
+		</a></li>
+		
+	</ul>
+</nav>
 
-            <div class="trending-item">
-                <div class="trending-badge">Trending</div>
-                <img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
-                <h3>Vortexseries - Swift82</h3>
-                <p>Rapid Trigger - Snap Tap - Magnetic</p>
-                <div class="rating">
-                    <span class="stars">★★★★☆</span>
-                    <span class="ratings">100+ Ratings</span>
-                </div>
-                <div class="price">
-                    <span class="current-price">Rp659.000</span>
-                    <span class="original-price">Rp1.299.000</span>
-                    <span class="discount">49% OFF</span>
-                </div>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
+<div class="slider-container">
+	<div class="slider">
+		<div class="slide active">
+			<img src="http://127.0.0.1:5000/static/assets/Noir new.png" alt="Keyboard 1">
+			<div class="slide-text">
+				<h2>NOIR TIMELESS82 V2</h2>
+				<p>This 75% keyboard features a programmable knob, TFT LCD Screen, gasket mount for a soft typing feel, and supports QMK/VIA for full customization. It also offers multi-layout flexibility.</p>
+			</div>
+		</div>
+		<div class="slide">
+			<img src="http://127.0.0.1:5000/static/assets/keyboard2.jpg" alt="Keyboard 2">
+			<div class="slide-text">
+				<h2>MECHA65 PRO</h2>
+				<p>A high-end 65% keyboard with a wireless option, aluminum case, and hot-swappable PCB.</p>
+			</div>
+		</div>
+		<div class="slide">
+			<img src="http://127.0.0.1:5000/static/assets/keyboard3.jpg" alt="Keyboard 3">
+			<div class="slide-text">
+				<h2>LUXURY75 X</h2>
+				<p>Premium 75% keyboard with brass plate, per-key RGB, and ergonomic typing experience.</p>
+			</div>
+		</div>
+	</div>
 
-            <div class="trending-item">
-                <div class="trending-badge">Trending</div>
-                <img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
-                <h3>Vortexseries - Swift82</h3>
-                <p>Rapid Trigger - Snap Tap - Magnetic</p>
-                <div class="rating">
-                    <span class="stars">★★★★☆</span>
-                    <span class="ratings">100+ Ratings</span>
-                </div>
-                <div class="price">
-                    <span class="current-price">Rp659.000</span>
-                    <span class="original-price">Rp1.299.000</span>
-                    <span class="discount">49% OFF</span>
-                </div>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
+	<!-- Navigation Arrows -->
+	<button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+	<button class="next" onclick="moveSlide(1)">&#10095;</button>
 
-            <div class="trending-item">
-                <div class="trending-badge">Trending</div>
-                <img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
-                <h3>Vortexseries - Swift82</h3>
-                <p>Rapid Trigger - Snap Tap - Magnetic</p>
-                <div class="rating">
-                    <span class="stars">★★★★☆</span>
-                    <span class="ratings">100+ Ratings</span>
-                </div>
-                <div class="price">
-                    <span class="current-price">Rp659.000</span>
-                    <span class="original-price">Rp1.299.000</span>
-                    <span class="discount">49% OFF</span>
-                </div>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
+	<!-- Dots for navigation -->
+	<div class="dots">
+		<span class="dot active" onclick="currentSlide(0)"></span>
+		<span class="dot" onclick="currentSlide(1)"></span>
+		<span class="dot" onclick="currentSlide(2)"></span>
+	</div>
+</div>
 
-            <div class="trending-item">
-                <div class="trending-badge">Trending</div>
-                <img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
-                <h3>Vortexseries - Swift82</h3>
-                <p>Rapid Trigger - Snap Tap - Magnetic</p>
-                <div class="rating">
-                    <span class="stars">★★★★☆</span>
-                    <span class="ratings">100+ Ratings</span>
-                </div>
-                <div class="price">
-                    <span class="current-price">Rp659.000</span>
-                    <span class="original-price">Rp1.299.000</span>
-                    <span class="discount">49% OFF</span>
-                </div>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-        </div>
-    </div>
+<div class="trending-items">
+	<div class="trending-header">
+		<h2>TRENDING ITEMS</h2>
+		<a href="#" class="view-all">View All &gt;</a>
+	</div>
+	<div class="trending-items-container">
+		<div class="trending-item">
+			<div class="trending-badge">Trending</div>
+			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<h3>Vortexseries - Swift82</h3>
+			<p>Rapid Trigger - Snap Tap - Magnetic</p>
+			<div class="rating">
+				<span class="stars">★★★★☆</span>
+				<span class="ratings">100+ Ratings</span>
+			</div>
+			<div class="price">
+				<span class="current-price">Rp659.000</span>
+				<span class="original-price">Rp1.299.000</span>
+				<span class="discount">49% OFF</span>
+			</div>
+			<button class="add-to-cart">Add to Cart</button>
+		</div>
+		<!-- Add more trending items as needed -->
+		<div class="trending-item">
+			<div class="trending-badge">Trending</div>
+			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<h3>Vortexseries - Swift82</h3>
+			<p>Rapid Trigger - Snap Tap - Magnetic</p>
+			<div class="rating">
+				<span class="stars">★★★★☆</span>
+				<span class="ratings">100+ Ratings</span>
+			</div>
+			<div class="price">
+				<span class="current-price">Rp659.000</span>
+				<span class="original-price">Rp1.299.000</span>
+				<span class="discount">49% OFF</span>
+			</div>
+			<button class="add-to-cart">Add to Cart</button>
+		</div>
 
-    <div class="compare-section">
-        <a href="compare.html" class="compare-link">
-            <div class="compare-text">
-                <span>COMPARE</span>
-                <span>ITEMS HERE</span>
-            </div>
-            <div class="compare-arrows">
-                <span>&#8592;</span>
-                <span>&#8594;</span>
-            </div>
-        </a>
-    </div>
+		<div class="trending-item">
+			<div class="trending-badge">Trending</div>
+			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<h3>Vortexseries - Swift82</h3>
+			<p>Rapid Trigger - Snap Tap - Magnetic</p>
+			<div class="rating">
+				<span class="stars">★★★★☆</span>
+				<span class="ratings">100+ Ratings</span>
+			</div>
+			<div class="price">
+				<span class="current-price">Rp659.000</span>
+				<span class="original-price">Rp1.299.000</span>
+				<span class="discount">49% OFF</span>
+			</div>
+			<button class="add-to-cart">Add to Cart</button>
+		</div>
 
-    <div class="newest-items">
-        <div class="newest-header">
-            <h2>NEWEST ITEMS</h2>
-            <a href="#" class="view-all">View All &gt;</a>
-        </div>
-        <div class="newest-items-container">
-            <div class="newest-item">
-                <div class="newest-badge">New</div>
-                <img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
-                <h3>Vortexseries - Swift82</h3>
-                <p>Rapid Trigger - Snap Tap - Magnetic</p>
-                <div class="rating">
-                    <span class="stars">★★★★☆</span>
-                    <span class="ratings">100+ Ratings</span>
-                </div>
-                <div class="price">
-                    <span class="current-price">Rp659.000</span>
-                    <span class="original-price">Rp1.299.000</span>
-                    <span class="discount">49% OFF</span>
-                </div>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-            <!-- Add more newest items as needed -->
-            <div class="newest-item">
-                <div class="newest-badge">New</div>
-                <img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
-                <h3>Vortexseries - Swift82</h3>
-                <p>Rapid Trigger - Snap Tap - Magnetic</p>
-                <div class="rating">
-                    <span class="stars">★★★★☆</span>
-                    <span class="ratings">100+ Ratings</span>
-                </div>
-                <div class="price">
-                    <span class="current-price">Rp659.000</span>
-                    <span class="original-price">Rp1.299.000</span>
-                    <span class="discount">49% OFF</span>
-                </div>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
+		<div class="trending-item">
+			<div class="trending-badge">Trending</div>
+			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<h3>Vortexseries - Swift82</h3>
+			<p>Rapid Trigger - Snap Tap - Magnetic</p>
+			<div class="rating">
+				<span class="stars">★★★★☆</span>
+				<span class="ratings">100+ Ratings</span>
+			</div>
+			<div class="price">
+				<span class="current-price">Rp659.000</span>
+				<span class="original-price">Rp1.299.000</span>
+				<span class="discount">49% OFF</span>
+			</div>
+			<button class="add-to-cart">Add to Cart</button>
+		</div>
 
-            <div class="newest-item">
-                <div class="newest-badge">New</div>
-                <img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
-                <h3>Vortexseries - Swift82</h3>
-                <p>Rapid Trigger - Snap Tap - Magnetic</p>
-                <div class="rating">
-                    <span class="stars">★★★★☆</span>
-                    <span class="ratings">100+ Ratings</span>
-                </div>
-                <div class="price">
-                    <span class="current-price">Rp659.000</span>
-                    <span class="original-price">Rp1.299.000</span>
-                    <span class="discount">49% OFF</span>
-                </div>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
+		<div class="trending-item">
+			<div class="trending-badge">Trending</div>
+			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<h3>Vortexseries - Swift82</h3>
+			<p>Rapid Trigger - Snap Tap - Magnetic</p>
+			<div class="rating">
+				<span class="stars">★★★★☆</span>
+				<span class="ratings">100+ Ratings</span>
+			</div>
+			<div class="price">
+				<span class="current-price">Rp659.000</span>
+				<span class="original-price">Rp1.299.000</span>
+				<span class="discount">49% OFF</span>
+			</div>
+			<button class="add-to-cart">Add to Cart</button>
+		</div>
 
-            <div class="newest-item">
-                <div class="newest-badge">New</div>
-                <img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
-                <h3>Vortexseries - Swift82</h3>
-                <p>Rapid Trigger - Snap Tap - Magnetic</p>
-                <div class="rating">
-                    <span class="stars">★★★★☆</span>
-                    <span class="ratings">100+ Ratings</span>
-                </div>
-                <div class="price">
-                    <span class="current-price">Rp659.000</span>
-                    <span class="original-price">Rp1.299.000</span>
-                    <span class="discount">49% OFF</span>
-                </div>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
+		<div class="trending-item">
+			<div class="trending-badge">Trending</div>
+			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<h3>Vortexseries - Swift82</h3>
+			<p>Rapid Trigger - Snap Tap - Magnetic</p>
+			<div class="rating">
+				<span class="stars">★★★★☆</span>
+				<span class="ratings">100+ Ratings</span>
+			</div>
+			<div class="price">
+				<span class="current-price">Rp659.000</span>
+				<span class="original-price">Rp1.299.000</span>
+				<span class="discount">49% OFF</span>
+			</div>
+			<button class="add-to-cart">Add to Cart</button>
+		</div>
+	</div>
+</div>
 
-            <div class="newest-item">
-                <div class="newest-badge">New</div>
-                <img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
-                <h3>Vortexseries - Swift82</h3>
-                <p>Rapid Trigger - Snap Tap - Magnetic</p>
-                <div class="rating">
-                    <span class="stars">★★★★☆</span>
-                    <span class="ratings">100+ Ratings</span>
-                </div>
-                <div class="price">
-                    <span class="current-price">Rp659.000</span>
-                    <span class="original-price">Rp1.299.000</span>
-                    <span class="discount">49% OFF</span>
-                </div>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
+<div class="compare-section">
+	<a href="compare.html" class="compare-link">
+		<div class="compare-text">
+			<span>COMPARE</span>
+			<span>ITEMS HERE</span>
+		</div>
+		<div class="compare-arrows">
+			<span>&#8592;</span>
+			<span>&#8594;</span>
+		</div>
+	</a>
+</div>
 
-            <div class="newest-item">
-                <div class="newest-badge">New</div>
-                <img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
-                <h3>Vortexseries - Swift82</h3>
-                <p>Rapid Trigger - Snap Tap - Magnetic</p>
-                <div class="rating">
-                    <span class="stars">★★★★☆</span>
-                    <span class="ratings">100+ Ratings</span>
-                </div>
-                <div class="price">
-                    <span class="current-price">Rp659.000</span>
-                    <span class="original-price">Rp1.299.000</span>
-                    <span class="discount">49% OFF</span>
-                </div>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-        </div>
-    </div>
+<div class="newest-items">
+	<div class="newest-header">
+		<h2>NEWEST ITEMS</h2>
+		<a href="#" class="view-all">View All &gt;</a>
+	</div>
+	<div class="newest-items-container">
+		<div class="newest-item">
+			<div class="newest-badge">New</div>
+			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<h3>Vortexseries - Swift82</h3>
+			<p>Rapid Trigger - Snap Tap - Magnetic</p>
+			<div class="rating">
+				<span class="stars">★★★★☆</span>
+				<span class="ratings">100+ Ratings</span>
+			</div>
+			<div class="price">
+				<span class="current-price">Rp659.000</span>
+				<span class="original-price">Rp1.299.000</span>
+				<span class="discount">49% OFF</span>
+			</div>
+			<button class="add-to-cart">Add to Cart</button>
+		</div>
+		<!-- Add more newest items as needed -->
+		<div class="newest-item">
+			<div class="newest-badge">New</div>
+			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<h3>Vortexseries - Swift82</h3>
+			<p>Rapid Trigger - Snap Tap - Magnetic</p>
+			<div class="rating">
+				<span class="stars">★★★★☆</span>
+				<span class="ratings">100+ Ratings</span>
+			</div>
+			<div class="price">
+				<span class="current-price">Rp659.000</span>
+				<span class="original-price">Rp1.299.000</span>
+				<span class="discount">49% OFF</span>
+			</div>
+			<button class="add-to-cart">Add to Cart</button>
+		</div>
 
-    <div class="category-buttons">
-        <a href="keyboards.html" class="category-button">KEYBOARDS</a>
-        <a href="barebones.html" class="category-button">BAREBONES</a>
-        <a href="switches.html" class="category-button">SWITCHES</a>
-        <a href="keycaps.html" class="category-button">KEYCAPS</a>
-        <a href="accessories.html" class="category-button">ACCESSORIES</a>
-        <a href="others.html" class="category-button">OTHERS</a>
-    </div>
+		<div class="newest-item">
+			<div class="newest-badge">New</div>
+			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<h3>Vortexseries - Swift82</h3>
+			<p>Rapid Trigger - Snap Tap - Magnetic</p>
+			<div class="rating">
+				<span class="stars">★★★★☆</span>
+				<span class="ratings">100+ Ratings</span>
+			</div>
+			<div class="price">
+				<span class="current-price">Rp659.000</span>
+				<span class="original-price">Rp1.299.000</span>
+				<span class="discount">49% OFF</span>
+			</div>
+			<button class="add-to-cart">Add to Cart</button>
+		</div>
 
-    <div class="vendors-carousel">
-        <h2>OUR VENDORS</h2>
-        <div class="carousel-container">
-            <div class="carousel-track">
-                <img src="http://127.0.0.1:5000/static/assets/AjazzLogo.jpeg" alt="Vendor 1">
-                <img src="http://127.0.0.1:5000/static/assets/Fantech Logo.png" alt="Vendor 2">
-                <img src="http://127.0.0.1:5000/static/assets/gamenLogo.png" alt="Vendor 3">
-                <img src="http://127.0.0.1:5000/static/assets/keyChronLogo.png" alt="Vendor 4">
-                <img src="http://127.0.0.1:5000/static/assets/NoirLogo.webp" alt="Vendor 5">
-                <img src="http://127.0.0.1:5000/static/assets/pressPlayLogo.webp" alt="Vendor 6">
-                <img src="http://127.0.0.1:5000/static/assets/rexuss.webp" alt="Vendor 7">
-            </div>
-        </div>
-    </div>
+		<div class="newest-item">
+			<div class="newest-badge">New</div>
+			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<h3>Vortexseries - Swift82</h3>
+			<p>Rapid Trigger - Snap Tap - Magnetic</p>
+			<div class="rating">
+				<span class="stars">★★★★☆</span>
+				<span class="ratings">100+ Ratings</span>
+			</div>
+			<div class="price">
+				<span class="current-price">Rp659.000</span>
+				<span class="original-price">Rp1.299.000</span>
+				<span class="discount">49% OFF</span>
+			</div>
+			<button class="add-to-cart">Add to Cart</button>
+		</div>
 
-    <footer>
-        <div class="footer-container">
-            <div class="footer-column">
-                <h3>Shop by Category</h3>
-                <ul>
-                    <li><a href="keyboards.html">Keyboards</a></li>
-                    <li><a href="barebones.html">Barebones</a></li>
-                    <li><a href="switches.html">Switches</a></li>
-                    <li><a href="keycaps.html">Keycaps</a></li>
-                    <li><a href="accessories.html">Accessories</a></li>
-                    <li><a href="others.html">Others</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Community</h3>
-                <ul>
-                    <li><a href="#">Reviews</a></li>
-                    <li><a href="#">Forums</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>About Us</h3>
-                <ul>
-                    <li><a href="#">Return Policy</a></li>
-                    <li><a href="#">Terms of Use</a></li>
-                    <li><a href="#">Sitemap</a></li>
-                    <li><a href="#">Security</a></li>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">EPR Compliance</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <div class="social-media">
-                    <a href="#"><img src="http://127.0.0.1:5000/static/assets/facebook-icon.png" alt="Facebook"></a>
-                    <a href="#"><img src="http://127.0.0.1:5000/static/assets/instagram-icon.png" alt="Instagram"></a>
-                    <a href="#"><img src="http://127.0.0.1:5000/static/assets/twitter-icon.png" alt="Twitter"></a>
-                    <a href="#"><img src="http://127.0.0.1:5000/static/assets/youtube-icon.png" alt="YouTube"></a>
-                </div>
-                <div class="footer-info">
-                    <p>Indonesia</p>
-                    <p>&copy; 2025 | All Rights Reserved</p>
-                    <p class="brand-name">KEYS2KEEB</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    
-    <script src="http://127.0.0.1:5000/static/main_page.js"></script>
-</body>
-</html>
+		<div class="newest-item">
+			<div class="newest-badge">New</div>
+			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<h3>Vortexseries - Swift82</h3>
+			<p>Rapid Trigger - Snap Tap - Magnetic</p>
+			<div class="rating">
+				<span class="stars">★★★★☆</span>
+				<span class="ratings">100+ Ratings</span>
+			</div>
+			<div class="price">
+				<span class="current-price">Rp659.000</span>
+				<span class="original-price">Rp1.299.000</span>
+				<span class="discount">49% OFF</span>
+			</div>
+			<button class="add-to-cart">Add to Cart</button>
+		</div>
+
+		<div class="newest-item">
+			<div class="newest-badge">New</div>
+			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<h3>Vortexseries - Swift82</h3>
+			<p>Rapid Trigger - Snap Tap - Magnetic</p>
+			<div class="rating">
+				<span class="stars">★★★★☆</span>
+				<span class="ratings">100+ Ratings</span>
+			</div>
+			<div class="price">
+				<span class="current-price">Rp659.000</span>
+				<span class="original-price">Rp1.299.000</span>
+				<span class="discount">49% OFF</span>
+			</div>
+			<button class="add-to-cart">Add to Cart</button>
+		</div>
+	</div>
+</div>
+
+<div class="category-buttons">
+	<a href="keyboards.html" class="category-button">KEYBOARDS</a>
+	<a href="barebones.html" class="category-button">BAREBONES</a>
+	<a href="switches.html" class="category-button">SWITCHES</a>
+	<a href="keycaps.html" class="category-button">KEYCAPS</a>
+	<a href="accessories.html" class="category-button">ACCESSORIES</a>
+	<a href="others.html" class="category-button">OTHERS</a>
+</div>
+
+<div class="vendors-carousel">
+	<h2>OUR VENDORS</h2>
+	<div class="carousel-container">
+		<div class="carousel-track">
+			<img src="http://127.0.0.1:5000/static/assets/AjazzLogo.jpeg" alt="Vendor 1">
+			<img src="http://127.0.0.1:5000/static/assets/Fantech Logo.png" alt="Vendor 2">
+			<img src="http://127.0.0.1:5000/static/assets/gamenLogo.png" alt="Vendor 3">
+			<img src="http://127.0.0.1:5000/static/assets/keyChronLogo.png" alt="Vendor 4">
+			<img src="http://127.0.0.1:5000/static/assets/NoirLogo.webp" alt="Vendor 5">
+			<img src="http://127.0.0.1:5000/static/assets/pressPlayLogo.webp" alt="Vendor 6">
+			<img src="http://127.0.0.1:5000/static/assets/rexuss.webp" alt="Vendor 7">
+		</div>
+	</div>
+</div>
+
+<footer>
+	<div class="footer-container">
+		<div class="footer-column">
+			<h3>Shop by Category</h3>
+			<ul>
+				<li><a href="keyboards.html">Keyboards</a></li>
+				<li><a href="barebones.html">Barebones</a></li>
+				<li><a href="switches.html">Switches</a></li>
+				<li><a href="keycaps.html">Keycaps</a></li>
+				<li><a href="accessories.html">Accessories</a></li>
+				<li><a href="others.html">Others</a></li>
+			</ul>
+		</div>
+		<div class="footer-column">
+			<h3>Community</h3>
+			<ul>
+				<li><a href="#">Reviews</a></li>
+				<li><a href="#">Forums</a></li>
+			</ul>
+		</div>
+		<div class="footer-column">
+			<h3>About Us</h3>
+			<ul>
+				<li><a href="#">Return Policy</a></li>
+				<li><a href="#">Terms of Use</a></li>
+				<li><a href="#">Sitemap</a></li>
+				<li><a href="#">Security</a></li>
+				<li><a href="#">Privacy</a></li>
+				<li><a href="#">EPR Compliance</a></li>
+			</ul>
+		</div>
+		<div class="footer-column">
+			<div class="social-media">
+				<a href="#"><img src="http://127.0.0.1:5000/static/assets/facebook-icon.png" alt="Facebook"></a>
+				<a href="#"><img src="http://127.0.0.1:5000/static/assets/instagram-icon.png" alt="Instagram"></a>
+				<a href="#"><img src="http://127.0.0.1:5000/static/assets/twitter-icon.png" alt="Twitter"></a>
+				<a href="#"><img src="http://127.0.0.1:5000/static/assets/youtube-icon.png" alt="YouTube"></a>
+			</div>
+			<div class="footer-info">
+				<p>Indonesia</p>
+				<p>&copy; 2025 | All Rights Reserved</p>
+				<p class="brand-name">KEYS2KEEB</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script src="http://127.0.0.1:5000/static/main_page.js"></script>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'basic_template.html' %}
+
+{% block head %}
+<title>Profile</title>
+{% endblock %}
+
+
+{% block body %}
+<div class="mx-auto p-2">
+	
+	<h1> {{ username }} </h1>
+	<div>
+		
+		<p>
+			<b>Full Name</b> : {{ full_name }}
+		</p>
+
+		<p>
+			<b>Email</b> : {{ email }}
+		</p>
+
+	</div>
+	
+	<a href="{{ url_for('profile.edit_profile') }}" class="text-reset text-decoration-none">
+		<button type="button" class="btn btn-primary">
+			Edit
+		</button>
+	</a>
+	
+	<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#logout_modal" id="logout_modal_button">
+		Logout
+	</button>
+
+
+
+	<div class="modal fade" id="logout_modal" tabindex="-1" aria-labelledby="logout_modal_label" aria-hidden="true">
+		<div class="modal-dialog">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h1 class="modal-title fs-5" id="logout_modal_label">Modal title</h1>
+			  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				Are you sure you want to logout?
+			</div>
+			<div class="modal-footer">
+				<a href="{{ url_for('profile.logout') }}" class="text-reset text-decoration-none">
+					<button type="button" class="btn btn-danger">Logout</button>
+				</a>
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+			</div>
+		  </div>
+		</div>
+	  </div>	  
+	  
+</div>
+
+{% endblock %}

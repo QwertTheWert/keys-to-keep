@@ -6,8 +6,9 @@ register_bp = Blueprint("register", __name__, template_folder="templates")
 def register_to_app(flask_app, bcrypt):
 	from app import db, request
 	from models import User
-
+	
 	@register_bp.route('/register', methods=["GET", "POST"])
+	@register_bp.route('/register/', methods=["GET", "POST"])
 	def register():
 		message = ""
 		full_name = request.form.get("full_name")

@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for
-from flask_login import login_user, logout_user, current_user, login_required
+from flask_login import login_user, current_user
 
 login_bp = Blueprint("login", __name__, template_folder="templates")
 
@@ -8,6 +8,7 @@ def register_to_app(flask_app, bcrypt):
 	from models import User
 	
 	@login_bp.route('/login', methods=["GET", "POST"])
+	@login_bp.route('/login/', methods=["GET", "POST"])
 	def login():
 		message = ""
 		login_successfully = False
