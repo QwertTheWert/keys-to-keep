@@ -9,7 +9,8 @@
 6. Initialisasi database dengan menjalankan code berikut di terminal, un-comment line 7-9 di file `main.py`, lalu jalankan kode, kemudian comment-kan lagi ketiga line tersebut.
 
 	**Special:** Jika sudah pernah install, coba migrate database ke versi terbaru dan tidak perlu create databsae lagi.
-	```flask db migrate
+	```
+	flask db migrate
 	flask db upgrade
 	```
 	Jika error, hapus `database.db` di folder instance lalu jalankan perintah no. 6
