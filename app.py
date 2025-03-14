@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect,url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -46,31 +46,26 @@ class ProductModel(db.Model):
 def index():
 	return render_template("main_page.html")
 
-
-@app.route('/register')
-def register():
-	return render_template("register.html")
-
 @app.route('/login')
 def login():
 	return render_template("login.html")
 
-@app.route('/register', methods=["POST"])
-def on_register():
-	
+@app.route('/register', methods=["GET", "POST"])
+def register():
+	message = ""
 	full_name = request.form.get("full_name")
 	username = request.form.get("username")
 	email = request.form.get("email")
 	password = request.form.get("password")
 	bank_number = request.form.get("bank_number")
-	
-	if full_name != "" and username != "" and email != "" and password != "" and bank_number != "":
+	if request.method == "POST" and full_name and username and email and password and bank_number:
 		new_user = User(full_name=full_name, username=username, email=email, password=password, bank_number=bank_number)
 		db.session.add(new_user)
 		db.session.commit()
-		return redirect('/')
-	else:
-		return redirect('/register')
+		return redirect(url_for("index"))
+	elif request.method == "POST":
+		message = "Incomplete registration data. Please fill all fields." 
+	return render_template('register.html', message=message)
 
 if __name__ == "__main__":
 	app.run(debug=True)
