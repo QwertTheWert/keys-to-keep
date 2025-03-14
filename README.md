@@ -10,7 +10,8 @@
 
 	**Special:** Jika sudah pernah install, coba migrate database ke versi terbaru dan tidak perlu create databsae lagi.
 	```flask db migrate
-	flask db upgrade``` 
-	* Jika error, hapusa `database.db` di folder instance lalu jalankan perintah no. 6
+	flask db upgrade
+	```
+	Jika error, hapus `database.db` di folder instance lalu jalankan perintah no. 6
 
 That should be it.
