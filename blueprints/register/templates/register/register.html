@@ -1,4 +1,4 @@
-{% extends 'template.html' %}
+{% extends 'basic_template.html' %}
 
 {% block head %}
 <title>Register</title>
@@ -6,7 +6,7 @@
 
 
 {% block body %}
-<form action="{{ url_for('register') }}" method="POST">
+<form action="{{ url_for('register.register') }}" method="POST">
 	{% if message is defined and message %}
 		<div class="alert alert-warning">  <strong>  {{ message }} </strong></div>
 	{% endif %}
