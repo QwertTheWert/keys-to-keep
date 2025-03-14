@@ -6,22 +6,33 @@
 
 
 {% block body %}
-<form>
+<form action="{{ url_for('login.login') }}" method="POST">
+	{% if message is defined and message %}
+		<div class="alert alert-warning">  <strong>  {{ message }} </strong></div>
+	{% endif %}
 	<div class="container border mt-4 p-4">
-0		<h1>Login</h1>
+		<h1>Login</h1>
 		<hr>
 		<div class="mb-3">
 			<label for="exampleInputUsername1" class="form-label">Email or Username</label>
-			<input type="text" class="form-control" id="exampleInputUsername1">
+			<input type="text" class="form-control" name="identifier" required="required" 
+				{% if identifier is defined and identifier %}
+					value={{identifier}}
+				{% endif %}
+			>
 		</div>
 		<div class="mb-3">
 			<label for="exampleInputPassword1" class="form-label">Password</label>
-			<input type="password" class="form-control" id="exampleInputPassword1">
+			<input type="password" class="form-control" name="password" required="required" 
+				{% if password is defined and password %}
+					value={{password}}
+				{% endif %}
+			>
 		</div>
 		<div class="mb-3">
 			<button type="submit" class="btn btn-success">Login</button>
 		</div>
-		<p>Don't have an account? <a href="http://127.0.0.1:5000/register">Sign in</a>.</p>
+		<p>Don't have an account? <a href="{{ url_for('register.register') }}">Sign Up</a>.</p>
 	</div>
 </form>
 {% endblock %}
