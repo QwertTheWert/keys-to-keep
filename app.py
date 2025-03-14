@@ -53,19 +53,23 @@ def login():
 @app.route('/register', methods=["GET", "POST"])
 def register():
 	message = ""
-	full_name = request.form.get("full_name")
-	username = request.form.get("username")
-	email = request.form.get("email")
-	password = request.form.get("password")
-	bank_number = request.form.get("bank_number")
-	if request.method == "POST" and full_name and username and email and password and bank_number:
-		new_user = User(full_name=full_name, username=username, email=email, password=password, bank_number=bank_number)
-		db.session.add(new_user)
-		db.session.commit()
-		return redirect(url_for("index"))
+	f_nm = request.form.get("full_name")
+	usrnm = request.form.get("username")
+	eml = request.form.get("email")
+	pwd = request.form.get("password")
+	bk_nbr = request.form.get("bank_number")
+	result = db.session.execute(db.select(User).filter_by(username=usrnm))
+	if request.method == "POST" and f_nm and usrnm and eml and pwd and bk_nbr:
+		if result.first() is None:
+			new_user = User(full_name=f_nm, username=usrnm, email=eml, password=pwd, bank_number=bk_nbr)
+			db.session.add(new_user)
+			db.session.commit()
+			return redirect(url_for("index"))
+		else:
+			message = "Username is taken. Please use another one."
 	elif request.method == "POST":
 		message = "Incomplete registration data. Please fill all fields." 
-	return render_template('register.html', message=message)
+	return render_template('register.html', message=message, full_name=f_nm, username=usrnm, email=eml, password=pwd, bank_number=bk_nbr)
 
 if __name__ == "__main__":
 	app.run(debug=True)
