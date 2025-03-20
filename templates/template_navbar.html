@@ -1,0 +1,80 @@
+{% extends 'basic_template.html' %}
+<!-- 
+{% block head %}
+<title>Keys 2 Keep</title>
+<link rel="stylesheet" href="http://127.0.0.1:5000/static/main_page.css">
+{% endblock %} -->
+
+{% block body %}
+<nav class="navbar">
+	<div class="logo">KEYS2KEEB</div>
+	<ul class="nav-links">
+		<li><a href="#">Keyboards</a></li>
+		<li><a href="#">Accessories</a></li>
+		<li><a href="#">Community</a></li>
+		<li><a href="#">Support</a></li>
+		<li><a href="#">About Us</a></li>
+		<li class="search-bar">
+			<input type="text" placeholder="Search">
+		</li>
+		<li><img src="http://127.0.0.1:5000/static/assets/cart-icon.png" alt="Cart" class="icon"></li>
+		<li><a href= "{% if current_user.is_authenticated %} {{ url_for('profile.profile')}} {% else %} {{ url_for('login.login')}} {% endif %}">
+			
+			{% if current_user.is_authenticated %} Profile {% else %} Login {% endif %}
+			
+		</a></li>
+		
+	</ul>
+</nav>
+
+{% block content %}{% endblock %}
+
+<footer>
+	<div class="footer-container">
+		<div class="footer-column">
+			<h3>Shop by Category</h3>
+			<ul>
+				<li><a href="keyboards.html">Keyboards</a></li>
+				<li><a href="barebones.html">Barebones</a></li>
+				<li><a href="switches.html">Switches</a></li>
+				<li><a href="keycaps.html">Keycaps</a></li>
+				<li><a href="accessories.html">Accessories</a></li>
+				<li><a href="others.html">Others</a></li>
+			</ul>
+		</div>
+		<div class="footer-column">
+			<h3>Community</h3>
+			<ul>
+				<li><a href="#">Reviews</a></li>
+				<li><a href="#">Forums</a></li>
+			</ul>
+		</div>
+		<div class="footer-column">
+			<h3>About Us</h3>
+			<ul>
+				<li><a href="#">Return Policy</a></li>
+				<li><a href="#">Terms of Use</a></li>
+				<li><a href="#">Sitemap</a></li>
+				<li><a href="#">Security</a></li>
+				<li><a href="#">Privacy</a></li>
+				<li><a href="#">EPR Compliance</a></li>
+			</ul>
+		</div>
+		<div class="footer-column">
+			<div class="social-media">
+				<a href="#"><img src="http://127.0.0.1:5000/static/assets/facebook-icon.png" alt="Facebook"></a>
+				<a href="#"><img src="http://127.0.0.1:5000/static/assets/instagram-icon.png" alt="Instagram"></a>
+				<a href="#"><img src="http://127.0.0.1:5000/static/assets/twitter-icon.png" alt="Twitter"></a>
+				<a href="#"><img src="http://127.0.0.1:5000/static/assets/youtube-icon.png" alt="YouTube"></a>
+			</div>
+			<div class="footer-info">
+				<p>Indonesia</p>
+				<p>&copy; 2025 | All Rights Reserved</p>
+				<p class="brand-name">KEYS2KEEB</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<!-- <script src="http://127.0.0.1:5000/static/main_page.js"></script> -->
+{% endblock %}
