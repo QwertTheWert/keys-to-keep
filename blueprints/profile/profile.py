@@ -16,8 +16,8 @@ def register_to_app(flask_app, bcrypt):
 		else:
 			return redirect(url_for("login.login"))
 
-
 	@profile_bp.route('/profile/edit', methods=["GET", "POST"])
+	@profile_bp.route('/profile/edit/', methods=["GET", "POST"])
 	def edit():
 		if request.method == "POST":
 			current_user.full_name = request.form.get("full_name")
@@ -30,6 +30,7 @@ def register_to_app(flask_app, bcrypt):
 
 
 	@profile_bp.route('/profile/logout')
+	@profile_bp.route('/profile/logout/')
 	def logout():
 		logout_user()
 		return redirect(url_for("login.login"))
