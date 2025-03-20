@@ -6,7 +6,7 @@
 3. Di directory applikasi ini, buatlah virtual environment python (nama bebas, tapi aku pake flask) `python -m venv flask`
 4. Activate environment `flask/Scripts/activate.bat`
 5. Jalankan code ini untuk download library `python -m pip install -r requirements.txt`
-6. Initialisasi database dengan menjalankan code berikut di terminal, un-comment line 7-9 di file `main.py`, lalu jalankan kode, kemudian comment-kan lagi ketiga line tersebut.
+6. Initialisasi database dengan un-comment line 7-9 di file `main.py`, lalu jalankan kode, kemudian comment-kan lagi ketiga line tersebut.
 
 	**Special:** Jika sudah pernah install, coba migrate database ke versi terbaru dan tidak perlu create databsae lagi.
 	```
