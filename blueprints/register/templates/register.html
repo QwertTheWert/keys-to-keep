@@ -1,69 +1,74 @@
-{% extends 'basic_template.html' %}
+{% extends 'template_navbar.html' %}
 
 {% block head %}
 <title>Register</title>
+<link rel="stylesheet" href="http://127.0.0.1:5000/static/register.css">
 <style>
 	input:valid {background-color: palegreen;}
 </style>
 {% endblock %}
 
 
-{% block body %}
-<form action="{{ url_for('register.register') }}" method="POST">
-	{% if message is defined and message %}
-		<div class="alert alert-warning">  <strong>  {{ message }} </strong></div>
-	{% endif %}
-	<div class="container border mt-4 p-4">
-		<h1>Register</h1>
-		<hr>
-		<div class="mb-3">
-			<label class="form-label">Username</label>
-			<input type="text" name="username" class="form-control" required="required" pattern="^((?!@).)*$" 
-				{% if username is defined and username %}
-					value={{username}}
-				{% endif %}
-			>
-			<p class="text-muted fw-lighter">Must not contain an '@'.</p>
+{% block content %}
+<div class="background">
+	<div class="middle-box">
+		<form action="{{ url_for('register.register') }}" method="POST">
+			{% if message is defined and message %}
+				<div class="alert alert-warning">  <strong>  {{ message }} </strong></div>
+			{% endif %}
+			<div class="container border mt-4 p-4">
+				<h1>Register</h1>
+				<hr>
+				<div class="mb-3">
+					<label class="form-label">Username</label>
+					<input type="text" name="username" class="form-control" required="required" pattern="^((?!@).)*$" 
+						{% if username is defined and username %}
+							value={{username}}
+						{% endif %}
+					>
+					<p class="text-muted fw-lighter">Must not contain an '@'.</p>	
 
-		</div>
-		<div class="mb-3">
-			<label class="form-label">Full Name</label>
-			<input type="text" name="full_name" class="form-control" required="required"
-				{% if full_name is defined and full_name %}
-					value={{full_name}}
-				{% endif %}
-			>
-		</div>
-		<div class="mb-3">
-			<label class="form-label">Email address</label>
-			<input type="email" name="email" class="form-control" required="required"
-				{% if email is defined and email %}
-					value={{email}}
-				{% endif %}
-			>
-		</div>
-		<div class="mb-3">
-			<label class="form-label">Password</label>
-			<input type="password" name="password" class="form-control" required="required" minlength="8"
-				{% if password is defined and password %}
-					value={{password}}
-				{% endif %}
-			>
-			<p class="text-muted fw-lighter">Must be at least 8 characters long.</p>
-		</div>
-		<div class="mb-3">
-			<label class="form-label">Bank Number</label>
-			<input type="text" name="bank_number" class="form-control" required="required"
-				{% if bank_number is defined and bank_number %}
-					value={{bank_number}}
-				{% endif %}
-			>
-		</div>
-		<p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-		<div class="mb-3">
-			<button type="submit" class="btn btn-primary">Register</button>
-		</div>
-		<p>Already have an account? <a href="{{ url_for('login.login') }}">Sign in</a>.</p>
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Full Name</label>
+					<input type="text" name="full_name" class="form-control" required="required"
+						{% if full_name is defined and full_name %}
+							value={{full_name}}
+						{% endif %}
+					>
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Email address</label>
+					<input type="email" name="email" class="form-control" required="required"
+						{% if email is defined and email %}
+							value={{email}}
+						{% endif %}
+					>
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Password</label>
+					<input type="password" name="password" class="form-control" required="required" minlength="8"
+						{% if password is defined and password %}
+							value={{password}}
+						{% endif %}
+					>
+					<p class="text-muted fw-lighter">Must be at least 8 characters long.</p>
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Bank Number</label>
+					<input type="text" name="bank_number" class="form-control" required="required"
+						{% if bank_number is defined and bank_number %}
+							value={{bank_number}}
+						{% endif %}
+					>
+				</div>
+				<p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+				<div class="mb-3">
+					<button type="submit" class="btn btn-primary">Register</button>
+				</div>
+				<p>Already have an account? <a href="{{ url_for('login.login') }}">Sign in</a>.</p>
+			</div>
+		</form>
 	</div>
-</form>
+</div>
 {% endblock %}

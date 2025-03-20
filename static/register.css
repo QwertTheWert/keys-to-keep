@@ -77,7 +77,7 @@
     align-items: center; 
     flex-direction: column;
     padding: 5vh 0;
-    min-height: 100vh;  
+    min-height: 100vh; 
     background-image:
         radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 5%, transparent 30%),
         radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 5%, transparent 30%),
@@ -86,6 +86,7 @@
     background-size: cover, cover, cover, 20%;
     background-blend-mode: overlay;
 }
+
 .middle-box {
     position: relative;
     width: 80%;  
@@ -97,25 +98,7 @@
     flex-direction: column;
     height: auto;
     min-height: fit-content;
-}
 
-.middle-box form {
-    width: 100%; 
-}
-
-.middle-box input {
-    width: 100%; 
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.middle-box button {
-    width: 100px; 
-}
-
-.container border mt-4 p-4 {
-    height: 100%;
 }
 
 /* footer */
