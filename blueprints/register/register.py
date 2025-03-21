@@ -8,7 +8,6 @@ def register_to_app(flask_app, bcrypt):
 	from models import User
 	
 	@register_bp.route('/register', methods=["GET", "POST"])
-	@register_bp.route('/register/', methods=["GET", "POST"])
 	def register():
 		message = ""
 		full_name = request.form.get("full_name")

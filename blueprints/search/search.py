@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, request
 from flask_login import current_user
 
 search_bp = Blueprint("search", __name__, template_folder="templates", static_folder="static")
@@ -8,8 +8,8 @@ def register_to_app(flask_app, bcrypt):
 	from models import User
 
 	@search_bp.route('/search')
-	@search_bp.route('/search/')
 	def search():
+		# return request.args
 		return render_template("search.html")
 
 

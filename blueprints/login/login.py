@@ -8,7 +8,6 @@ def register_to_app(flask_app, bcrypt):
 	from models import User
 	
 	@login_bp.route('/login', methods=["GET", "POST"])
-	@login_bp.route('/login/', methods=["GET", "POST"])
 	def login():
 		message = ""
 		login_successfully = False

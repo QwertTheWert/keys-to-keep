@@ -9,7 +9,6 @@ def register_to_app(flask_app, bcrypt):
 	
 
 	@profile_bp.route('/profile')
-	@profile_bp.route('/profile/')
 	def profile():
 		if current_user.is_authenticated:
 			return render_template("profile.html", username=str(current_user.username), full_name=str(current_user.full_name), email=str(current_user.email))
@@ -17,7 +16,6 @@ def register_to_app(flask_app, bcrypt):
 			return redirect(url_for("login.login"))
 
 	@profile_bp.route('/profile/edit', methods=["GET", "POST"])
-	@profile_bp.route('/profile/edit/', methods=["GET", "POST"])
 	def edit():
 		if request.method == "POST":
 			current_user.full_name = request.form.get("full_name")
@@ -30,7 +28,6 @@ def register_to_app(flask_app, bcrypt):
 
 
 	@profile_bp.route('/profile/logout')
-	@profile_bp.route('/profile/logout/')
 	def logout():
 		logout_user()
 		return redirect(url_for("login.login"))
