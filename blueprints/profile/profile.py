@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for
 from flask_login import logout_user, current_user
 
-profile_bp = Blueprint("profile", __name__, template_folder="templates")
+profile_bp = Blueprint("profile", __name__, template_folder="templates", static_folder="static")
 
 def register_to_app(flask_app, bcrypt):
 	from app import db, request

@@ -27,10 +27,13 @@ def create_app():
 	import blueprints.register.register as register
 	import blueprints.login.login as login
 	import blueprints.profile.profile as profile
+	import blueprints.search.search as search
+
 	register.register_to_app(app, bcrypt)
 	login.register_to_app(app, bcrypt)
 	profile.register_to_app(app, bcrypt)
-
+	search.register_to_app(app, bcrypt)
+	
 	@login_manager.user_loader 
 	def load_user(user):
 		return User.query.get(int(user))
