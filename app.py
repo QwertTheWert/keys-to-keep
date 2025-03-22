@@ -25,19 +25,23 @@ def create_app():
 
 	bcrypt = Bcrypt(app)
 	
-	from blueprints.register.register import Register
+	from blueprints.cart.cart import Cart
 	from blueprints.login.login import Login
+	from blueprints.register.register import Register
+	from blueprints.payment.payment import Payment
 	from blueprints.product.product import Product
 	from blueprints.profile.profile import Profile
 	from blueprints.search.search import Search
 	from blueprints.showcase.showcase import Showcase
-	
+
 	Register(app, bcrypt)
 	Login(app, bcrypt)
 	Product(app, bcrypt)
 	Profile(app, bcrypt)
 	Search(app, bcrypt)
 	Showcase(app, bcrypt)
+	Cart(app, bcrypt)
+	Payment(app, bcrypt)
 
 	@login_manager.user_loader 
 	def load_user(user):

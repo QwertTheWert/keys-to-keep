@@ -2,7 +2,8 @@ from flask import Blueprint, render_template, redirect, url_for, request
 from flask_login import current_user
 from app import db, request
 
-class Product:
+class Cart:
+	
 	cart_bp = Blueprint("cart", __name__, template_folder="templates", static_folder="static")
 
 	def __init__(self, flask_app, bcrypt):
