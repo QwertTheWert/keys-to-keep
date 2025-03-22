@@ -1,9 +1,10 @@
 class Register:
 	def __init__(self, flask_app, bcrypt):
 		from flask import Blueprint, render_template, redirect, url_for
-		from flask_login import current_user
+		from flask_login import login_user, current_user
 		from app import db, request
 		from models import User
+		
 		register_bp = Blueprint("register", __name__, template_folder="templates")
 		
 		@register_bp.route('/register', methods=["GET", "POST"])
@@ -21,7 +22,8 @@ class Register:
 				if select_by_username is None and select_by_email is None:
 					new_user = User(full_name=full_name, username=username, email=email, password=hashed_password, bank_number=bank_number)
 					db.session.add(new_user)
-					db.session.commit()				
+					db.session.commit()
+					login_user(new_user)
 					return redirect(url_for("register.index"))
 				elif select_by_username is not None:
 					message = "Username is taken. Please use another one."

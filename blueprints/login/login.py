@@ -4,6 +4,7 @@ class Login:
 		from flask_login import login_user, current_user
 		from app import db, request
 		from models import User
+		
 		login_bp = Blueprint("login", __name__, template_folder="templates", static_folder="static")
 
 		@login_bp.route('/login', methods=["GET", "POST"])
