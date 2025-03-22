@@ -1,13 +1,8 @@
 {% extends 'basic_template.html' %}
-<!-- 
-{% block head %}
-<title>Keys 2 Keep</title>
-<link rel="stylesheet" href="http://127.0.0.1:5000/static/main_page.css">
-{% endblock %} -->
 
 {% block body %}
 <nav class="navbar">
-	<div class="logo">KEYS2KEEB</div>
+	<div class="logo"><a class="text-decoration-none link-dark" href= "{{ url_for('register.index')}}">KEYS2KEEB</a></div>
 	<ul class="nav-links">
 		<li><a href="#">Keyboards</a></li>
 		<li><a href="#">Accessories</a></li>
