@@ -31,28 +31,51 @@
 		Logout
 	</button>
 
+	<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_modal" id="delete_modal_button">
+		Delete Account
+	</button>
 
-
+	<!-- Logout Modal -->
 	<div class="modal fade" id="logout_modal" tabindex="-1" aria-labelledby="logout_modal_label" aria-hidden="true">
 		<div class="modal-dialog">
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <h1 class="modal-title fs-5" id="logout_modal_label">Modal title</h1>
-			  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="logout_modal_label">Modal title</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					Are you sure you want to logout?
+				</div>
+				<div class="modal-footer">
+					<a href="{{ url_for('profile.logout') }}" class="text-reset text-decoration-none">
+						<button type="button" class="btn btn-danger">Logout</button>
+					</a>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+				</div>
 			</div>
-			<div class="modal-body">
-				Are you sure you want to logout?
-			</div>
-			<div class="modal-footer">
-				<a href="{{ url_for('profile.logout') }}" class="text-reset text-decoration-none">
-					<button type="button" class="btn btn-danger">Logout</button>
-				</a>
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-			</div>
-		  </div>
 		</div>
-	  </div>	  
-	  
+	</div>
+
+	<!-- Delete Modal -->
+	<div class="modal fade" id="delete_modal" tabindex="-1" aria-labelledby="delete_modal_label" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="delete_modal_label">Modal title</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					Are you sure you want to delete this account? This action cannot be undone.
+				</div>
+				<div class="modal-footer">
+					<a href="{{ url_for('profile.delete') }}" class="text-reset text-decoration-none">
+						<button type="button" class="btn btn-danger">Delete</button>
+					</a>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 {% endblock %}

@@ -8,6 +8,7 @@ class Register:
 	register_bp = Blueprint("register", __name__, template_folder="templates")
 	
 	def __init__(self, flask_app, bcrypt):
+		
 		@self.register_bp.route('/register', methods=["GET", "POST"])
 		def register():
 			message = ""
