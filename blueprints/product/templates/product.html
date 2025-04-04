@@ -2,12 +2,12 @@
 
 {% block head %}
 <title>Product</title>
-<link rel="stylesheet" href="http://127.0.0.1:5000/static/main_page.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='XXXXX.css') }}">
 {% endblock %}
 
 {% block content %}
 
 
 
-<script src="http://127.0.0.1:5000/static/main_page.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='XXXXX.js') }}">
 {% endblock %}

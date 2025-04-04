@@ -4,7 +4,7 @@ from app import db, request
 
 class Payment:
 
-	payment_bp = Blueprint("payment", __name__, template_folder="templates", static_folder="static")
+	payment_bp = Blueprint("payment", __name__, template_folder="templates", static_folder="static", static_url_path="/payment/static/")
 
 	def __init__(self, flask_app, bcrypt):
 

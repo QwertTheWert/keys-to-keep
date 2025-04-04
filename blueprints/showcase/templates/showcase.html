@@ -2,10 +2,7 @@
 
 {% block head %}
 <title>Showcase</title>
-<link rel="stylesheet" href="http://127.0.0.1:5000/static/main_page.css">
-<link rel="stylesheet" href="static\showcase.css">
-<link rel="stylesheet" href="static\navbar.css">
-<link rel="stylesheet" href="static\footer.css">
+<link rel="stylesheet" href="{{ url_for('showcase.static', filename='showcase.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -28,7 +25,7 @@
    		<div class="row1">
         	<div class="product_container">
             	<div class="product_img_Container">
-                	<img src="static\assets\Vortex series 82.png" alt="">
+                	<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="">
             	</div>
             	<div class="product_text_container">
  	              	<h3>Vortexseries - Swift82</h3>
@@ -48,7 +45,7 @@
 
         	<div class="product_container">
            		<div class="product_img_Container">
-                	<img src="static\assets\Vortex series 82.png" alt="">
+                	<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="">
             	</div>
             	<div class="product_text_container">
                 	<h3>Vortexseries - Swift82</h3>
@@ -68,7 +65,7 @@
 
         	<div class="product_container">
             	<div class="product_img_Container">
-                	<img src="static\assets\Vortex series 82.png" alt="">
+                	<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="">
             	</div>
             	<div class="product_text_container">
                 	<h3>Vortexseries - Swift82</h3>
@@ -88,7 +85,7 @@
 
         	<div class="product_container">
             	<div class="product_img_Container">
-                	<img src="static\assets\Vortex series 82.png" alt="">
+                	<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="">
             	</div>
             	<div class="product_text_container">
                 	<h3>Vortexseries - Swift82</h3>
@@ -111,7 +108,7 @@
 		<div class="row1">
         	<div class="product_container">
             	<div class="product_img_Container">
-                	<img src="static\assets\Vortex series 82.png" alt="">
+                	<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="">
             	</div>
             	<div class="product_text_container">
                 	<h3>Vortexseries - Swift82</h3>
@@ -131,7 +128,7 @@
 
         	<div class="product_container">
             	<div class="product_img_Container">
-               		<img src="static\assets\Vortex series 82.png" alt="">
+               		<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="">
             	</div>
             	<div class="product_text_container">
                 	<h3>Vortexseries - Swift82</h3>
@@ -151,7 +148,7 @@
 
         	<div class="product_container">
             	<div class="product_img_Container">
-                	<img src="static\assets\Vortex series 82.png" alt="">
+                	<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="">
             	</div>
             	<div class="product_text_container">
                 	<h3>Vortexseries - Swift82</h3>
@@ -171,7 +168,7 @@
 
         	<div class="product_container">
             	<div class="product_img_Container">
-                	<img src="static\assets\Vortex series 82.png" alt="">
+                	<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="">
             	</div>
             	<div class="product_text_container">
                 	<h3>Vortexseries - Swift82</h3>
@@ -193,7 +190,7 @@
 		<div class="row1">
         	<div class="product_container">
             	<div class="product_img_Container">
-            	    <img src="static\assets\Vortex series 82.png" alt="">
+            	    <img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="">
             	</div>
             	<div class="product_text_container">
                 	<h3>Vortexseries - Swift82</h3>
@@ -213,7 +210,7 @@
 
         	<div class="product_container">
             	<div class="product_img_Container">
-                	<img src="static\assets\Vortex series 82.png" alt="">
+                	<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="">
             	</div>
             	<div class="product_text_container">
                 	<h3>Vortexseries - Swift82</h3>
@@ -233,7 +230,7 @@
 
         	<div class="product_container">
             	<div class="product_img_Container">
-                	<img src="static\assets\Vortex series 82.png" alt="">
+                	<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="">
             	</div>
             	<div class="product_text_container">
                 	<h3>Vortexseries - Swift82</h3>
@@ -253,7 +250,7 @@
 
         	<div class="product_container">
             	<div class="product_img_Container">
-                	<img src="static\assets\Vortex series 82.png" alt="">
+                	<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="">
             	</div>
             	<div class="product_text_container">
                 	<h3>Vortexseries - Swift82</h3>
@@ -278,6 +275,4 @@
 
     
 </div>
-
-<script src="http://127.0.0.1:5000/static/main_page.js"></script>
 {% endblock %}

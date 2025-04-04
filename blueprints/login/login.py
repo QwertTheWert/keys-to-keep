@@ -5,7 +5,7 @@ from models import User
 
 class Login:
 	
-	login_bp = Blueprint("login", __name__, template_folder="templates", static_folder="static")
+	login_bp = Blueprint("login", __name__, template_folder="templates", static_folder="static", static_url_path="/login/static/")
 
 	def __init__(self, flask_app, bcrypt):
 		@self.login_bp.route('/login', methods=["GET", "POST"])

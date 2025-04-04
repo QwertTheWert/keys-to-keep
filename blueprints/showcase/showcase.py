@@ -5,10 +5,10 @@ class Showcase:
 		from app import db, request
 		from models import User
 		
-		showcase_bp = Blueprint("showcase", __name__, template_folder="templates", static_folder="static")
+		showcase_bp = Blueprint("showcase", __name__, template_folder="templates", static_folder="static", static_url_path="/showcase/static/")
 
-		@showcase_bp.route('/showcase')
-		def search():
+		@showcase_bp.route('/showcase/<category>')
+		def showcase(category):
 			return render_template("showcase.html")
 
 

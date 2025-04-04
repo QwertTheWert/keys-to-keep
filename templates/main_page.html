@@ -2,7 +2,7 @@
 
 {% block head %}
 <title>Keys 2 Keep</title>
-<link rel="stylesheet" href="http://127.0.0.1:5000/static/main_page.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='main_page.css') }}">
 <link rel="stylesheet" href="static\navbar.css">
 <link rel="stylesheet" href="static\footer.css">
 
@@ -14,21 +14,21 @@
 <div class="slider-container">
 	<div class="slider">
 		<div class="slide active">
-			<img src="http://127.0.0.1:5000/static/assets/Noir new.png" alt="Keyboard 1">
+			<img src="{{ url_for('static', filename='assets/Noir new.png') }}" alt="Keyboard 1">
 			<div class="slide-text">
 				<h2>NOIR TIMELESS82 V2</h2>
 				<p>This 75% keyboard features a programmable knob, TFT LCD Screen, gasket mount for a soft typing feel, and supports QMK/VIA for full customization. It also offers multi-layout flexibility.</p>
 			</div>
 		</div>
 		<div class="slide">
-			<img src="http://127.0.0.1:5000/static/assets/keyboard2.jpg" alt="Keyboard 2">
+			<img src="{{ url_for('static', filename='assets/keyboard2.jpg') }}" alt="Keyboard 2">
 			<div class="slide-text">
 				<h2>MECHA65 PRO</h2>
 				<p>A high-end 65% keyboard with a wireless option, aluminum case, and hot-swappable PCB.</p>
 			</div>
 		</div>
 		<div class="slide">
-			<img src="http://127.0.0.1:5000/static/assets/keyboard3.jpg" alt="Keyboard 3">
+			<img src="{{ url_for('static', filename='assets/keyboard3.jpg') }}" alt="Keyboard 3">
 			<div class="slide-text">
 				<h2>LUXURY75 X</h2>
 				<p>Premium 75% keyboard with brass plate, per-key RGB, and ergonomic typing experience.</p>
@@ -56,7 +56,7 @@
 	<div class="trending-items-container">
 		<div class="trending-item">
 			<div class="trending-badge">Trending</div>
-			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
 			<h3>Vortexseries - Swift82</h3>
 			<p>Rapid Trigger - Snap Tap - Magnetic</p>
 			<div class="rating">
@@ -73,7 +73,7 @@
 		<!-- Add more trending items as needed -->
 		<div class="trending-item">
 			<div class="trending-badge">Trending</div>
-			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
 			<h3>Vortexseries - Swift82</h3>
 			<p>Rapid Trigger - Snap Tap - Magnetic</p>
 			<div class="rating">
@@ -90,7 +90,7 @@
 
 		<div class="trending-item">
 			<div class="trending-badge">Trending</div>
-			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
 			<h3>Vortexseries - Swift82</h3>
 			<p>Rapid Trigger - Snap Tap - Magnetic</p>
 			<div class="rating">
@@ -107,7 +107,7 @@
 
 		<div class="trending-item">
 			<div class="trending-badge">Trending</div>
-			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
 			<h3>Vortexseries - Swift82</h3>
 			<p>Rapid Trigger - Snap Tap - Magnetic</p>
 			<div class="rating">
@@ -124,7 +124,7 @@
 
 		<div class="trending-item">
 			<div class="trending-badge">Trending</div>
-			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
 			<h3>Vortexseries - Swift82</h3>
 			<p>Rapid Trigger - Snap Tap - Magnetic</p>
 			<div class="rating">
@@ -141,7 +141,7 @@
 
 		<div class="trending-item">
 			<div class="trending-badge">Trending</div>
-			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
 			<h3>Vortexseries - Swift82</h3>
 			<p>Rapid Trigger - Snap Tap - Magnetic</p>
 			<div class="rating">
@@ -179,7 +179,7 @@
 	<div class="newest-items-container">
 		<div class="newest-item">
 			<div class="newest-badge">New</div>
-			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
 			<h3>Vortexseries - Swift82</h3>
 			<p>Rapid Trigger - Snap Tap - Magnetic</p>
 			<div class="rating">
@@ -196,7 +196,7 @@
 		<!-- Add more newest items as needed -->
 		<div class="newest-item">
 			<div class="newest-badge">New</div>
-			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
 			<h3>Vortexseries - Swift82</h3>
 			<p>Rapid Trigger - Snap Tap - Magnetic</p>
 			<div class="rating">
@@ -213,7 +213,7 @@
 
 		<div class="newest-item">
 			<div class="newest-badge">New</div>
-			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
 			<h3>Vortexseries - Swift82</h3>
 			<p>Rapid Trigger - Snap Tap - Magnetic</p>
 			<div class="rating">
@@ -230,7 +230,7 @@
 
 		<div class="newest-item">
 			<div class="newest-badge">New</div>
-			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
 			<h3>Vortexseries - Swift82</h3>
 			<p>Rapid Trigger - Snap Tap - Magnetic</p>
 			<div class="rating">
@@ -247,7 +247,7 @@
 
 		<div class="newest-item">
 			<div class="newest-badge">New</div>
-			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
 			<h3>Vortexseries - Swift82</h3>
 			<p>Rapid Trigger - Snap Tap - Magnetic</p>
 			<div class="rating">
@@ -264,7 +264,7 @@
 
 		<div class="newest-item">
 			<div class="newest-badge">New</div>
-			<img src="http://127.0.0.1:5000/static/assets/Vortex series 82.png" alt="Vortexseries - Swift82">
+			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
 			<h3>Vortexseries - Swift82</h3>
 			<p>Rapid Trigger - Snap Tap - Magnetic</p>
 			<div class="rating">
@@ -294,18 +294,18 @@
 	<h2>OUR VENDORS</h2>
 	<div class="carousel-container">
 		<div class="carousel-track">
-			<img src="http://127.0.0.1:5000/static/assets/AjazzLogo.jpeg" alt="Vendor 1">
-			<img src="http://127.0.0.1:5000/static/assets/Fantech Logo.png" alt="Vendor 2">
-			<img src="http://127.0.0.1:5000/static/assets/gamenLogo.png" alt="Vendor 3">
-			<img src="http://127.0.0.1:5000/static/assets/keyChronLogo.png" alt="Vendor 4">
-			<img src="http://127.0.0.1:5000/static/assets/NoirLogo.webp" alt="Vendor 5">
-			<img src="http://127.0.0.1:5000/static/assets/pressPlayLogo.webp" alt="Vendor 6">
-			<img src="http://127.0.0.1:5000/static/assets/rexuss.webp" alt="Vendor 7">
+			<img src="{{ url_for('static', filename='assets/AjazzLogo.jpeg') }}" alt="Vendor 1">
+			<img src="{{ url_for('static', filename='assets/Fantech Logo.png') }}" alt="Vendor 2">
+			<img src="{{ url_for('static', filename='assets/gamenLogo.png') }}" alt="Vendor 3">
+			<img src="{{ url_for('static', filename='assets/keyChronLogo.png') }}" alt="Vendor 4">
+			<img src="{{ url_for('static', filename='assets/NoirLogo.webp') }}" alt="Vendor 5">
+			<img src="{{ url_for('static', filename='assets/pressPlayLogo.webp') }}" alt="Vendor 6">
+			<img src="{{ url_for('static', filename='assets/rexuss.webp') }}" alt="Vendor 7">
 		</div>
 	</div>
 </div>
 
 
 
-<script src="http://127.0.0.1:5000/static/main_page.js"></script>
+<script src="{{ url_for('static', filename='main_page.js') }}"></script>
 {% endblock %}

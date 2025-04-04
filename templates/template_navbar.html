@@ -1,18 +1,21 @@
 {% extends 'basic_template.html' %}
 
 {% block body %}
+<link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='footer.css') }}">
+
 <nav class="navbar">
 	<div class="logo"><a class="text-decoration-none link-dark" href= "{{ url_for('register.index')}}">KEYS2KEEB</a></div>
 	<ul class="nav-links">
-		<li><a href="#">Keyboards</a></li>
-		<li><a href="#">Accessories</a></li>
+		<li><a href="{{url_for('showcase.showcase', category='keyboards') }}">Keyboards</a></li>
+		<li><a href="{{url_for('showcase.showcase', category='accessories') }}">Accessories</a></li>
 		<li><a href="#">Community</a></li>
 		<li><a href="#">Support</a></li>
 		<li><a href="#">About Us</a></li>
 		<li class="search-bar">
 			<input type="text" placeholder="Search">
 		</li>
-		<li><img src="http://127.0.0.1:5000/static/assets/cart-icon.png" alt="Cart" class="icon"></li>
+		<li><img src="{{ url_for('static', filename='assets/cart-icon.png') }}" alt="Cart" class="icon"></li>
 		<li><a href= "{% if current_user.is_authenticated %} {{ url_for('profile.profile')}} {% else %} {{ url_for('login.login')}} {% endif %}">
 			
 			{% if current_user.is_authenticated %} Profile {% else %} Login {% endif %}
@@ -57,10 +60,10 @@
 		</div>
 		<div class="footer-column">
 			<div class="social-media">
-				<a href="#"><img src="http://127.0.0.1:5000/static/assets/facebook-icon.png" alt="Facebook"></a>
-				<a href="#"><img src="http://127.0.0.1:5000/static/assets/instagram-icon.png" alt="Instagram"></a>
-				<a href="#"><img src="http://127.0.0.1:5000/static/assets/twitter-icon.png" alt="Twitter"></a>
-				<a href="#"><img src="http://127.0.0.1:5000/static/assets/youtube-icon.png" alt="YouTube"></a>
+				<a href="#"><img src="{{ url_for('static', filename='assets/facebook-icon.png') }}" alt="Facebook"></a>
+				<a href="#"><img src="{{ url_for('static', filename='assets/instagram-icon.png') }}" alt="Instagram"></a>
+				<a href="#"><img src="{{ url_for('static', filename='assets/twitter-icon.png') }}" alt="Twitter"></a>
+				<a href="#"><img src="{{ url_for('static', filename='assets/youtube-icon.png') }}" alt="YouTube"></a>
 			</div>
 			<div class="footer-info">
 				<p>Indonesia</p>
@@ -71,5 +74,5 @@
 	</div>
 </footer>
 
-<!-- <script src="http://127.0.0.1:5000/static/main_page.js"></script> -->
+<link rel="stylesheet" href="{{ url_for('static', filename='XXXXX.js') }}">
 {% endblock %}

@@ -6,7 +6,7 @@ from models import ProductCategory, Product, ProductModel, Cart
 
 class Register:
 	
-	register_bp = Blueprint("register", __name__, template_folder="templates")
+	register_bp = Blueprint("register", __name__, template_folder="templates", static_folder="static", static_url_path="/register/static/")
 	
 	def __init__(self, flask_app, bcrypt):
 		

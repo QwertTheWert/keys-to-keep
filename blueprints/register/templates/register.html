@@ -2,7 +2,7 @@
 
 {% block head %}
 <title>Register</title>
-<link rel="stylesheet" href="http://127.0.0.1:5000/static/register.css">
+<link rel="stylesheet" href="{{ url_for('register.static', filename='register.css') }}">
 <style>
 	input:valid {background-color: palegreen;}
 </style>
