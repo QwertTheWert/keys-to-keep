@@ -23,7 +23,7 @@
 						<p>Rp. {{ data.price }}</p>
 						<div class="quantity">
 							<button>-</button>
-							<input type="text" value="1">
+							<input type="text" value="{{ data.cart.quantity }}">
 							<button>+</button>
 						</div>
 					</div>
@@ -31,20 +31,7 @@
 				</div>
 			{% endfor %}
 
-			<!-- <div class="cart-item">
-				<img src="static\assets\Vortex series 82.png" alt="Product">
-				<div class="item-details">
-					<h3>Vortexseries - Swift82</h3>
-					<p>Rapid Trigger - Snap Tap - Magnetic</p>
-					<p>Rp659.000</p>
-					<div class="quantity">
-						<button>-</button>
-						<input type="text" value="1">
-						<button>+</button>
-					</div>
-				</div>
-				<button class="remove">Remove</button>
-			</div> -->
+			
 		</div>
 
 		<div class="Total_Price_container">
