@@ -13,6 +13,7 @@ class Cart:
 			if current_user.is_authenticated:
 				from models import Cart, ProductModel
 				cart_data = []
+				subtotal = 0
 				carts = db.session.query(Cart).filter(Cart.user_id == current_user.id).all()
 				for cart in carts:
 					product_model = db.session.query(ProductModel).filter(ProductModel.id == cart.product_model_id).first()
@@ -21,7 +22,8 @@ class Cart:
 						"cart" : cart,
 						"price" : '{:,}'.format(product_model.price).replace(',', '.')
 					})
-				return render_template("cart.html", cart_data=cart_data)
+					subtotal += product_model.price * cart.quantity
+				return render_template("cart.html", cart_data=cart_data, subtotal='{:,}'.format(subtotal).replace(',', '.'))
 			else:
 				return redirect(url_for("login.login"))
 		

@@ -9,29 +9,31 @@
 	<div class="page_container">
 		<div class="cart-container">
 			<h2>Shopping Cart</h2>
-			
-			{% for data in cart_data %}
-				<div class="cart-item">
-					<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Product">
-					<div class="item-details">
-						<h3> {{ data.product_model.name }} </h3>
-						<p> {{ data.product_model.slogan }} </p>
-						<p>Rp. {{ data.price }}</p>
-						<div class="quantity">
-							<button>-</button>
-							<input type="text" value="{{ data.cart.quantity }}">
-							<button>+</button>
+			{% if cart_data != {} %}
+				{% for data in cart_data %}
+					<div class="cart-item">
+						<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Product">
+						<div class="item-details">
+							<h3> {{ data.product_model.name }} </h3>
+							<p> {{ data.product_model.slogan }} </p>
+							<p>Rp. {{ data.price }}</p>
+							<div class="quantity">
+								<button>-</button>
+								<input type="text" value="{{ data.cart.quantity }}">
+								<button>+</button>
+							</div>
 						</div>
+						<button class="remove">Remove</button>
 					</div>
-					<button class="remove">Remove</button>
-				</div>
-			{% endfor %}
-
+				{% endfor %}
+			{% else %}
+			<div class="cart-item">Cart is Empty</div>
+			{% endif %}
 			
 		</div>
 
 		<div class="Total_Price_container">
-			<h3>Total: Rp999.999</h3>
+			<h3>Total: Rp. {{ subtotal }}</h3>
 			<button class="checkout">Proceed to Checkout</button>
 		</div>
 		
