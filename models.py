@@ -58,6 +58,9 @@ class Cart(db.Model):
 	def __repr__(self):
 		return '<Cart %r>' % self.id
 	
+	def get_id(self):
+		return self.id
+	
 class Rating(db.Model):
 	__tablename__ = 'rating'
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
