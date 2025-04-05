@@ -1,4 +1,4 @@
-{% extends 'basic_template.html' %}
+{% extends 'base_template.html' %}
 
 {% block body %}
 <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
@@ -7,8 +7,8 @@
 <nav class="navbar">
 	<div class="logo"><a class="text-decoration-none link-dark" href= "{{ url_for('register.index')}}">KEYS2KEEB</a></div>
 	<ul class="nav-links">
-		<li><a href="{{url_for('showcase.showcase', category='keyboards') }}">Keyboards</a></li>
-		<li><a href="{{url_for('showcase.showcase', category='accessories') }}">Accessories</a></li>
+		<li><a href="{{url_for('products.keyboards') }}">Keyboards</a></li>
+		<li><a href="{{url_for('products.accessories') }}">Accessories</a></li>
 		<li><a href="#">Community</a></li>
 		<li><a href="#">Support</a></li>
 		<li><a href="#">About Us</a></li>
@@ -16,7 +16,8 @@
 			<input type="text" placeholder="Search">
 		</li>
 		<li><img src="{{ url_for('static', filename='assets/cart-icon.png') }}" alt="Cart" class="icon"></li>
-		<li><a href= "{% if current_user.is_authenticated %} {{ url_for('profile.profile')}} {% else %} {{ url_for('login.login')}} {% endif %}">
+		<li><a href= "{% if current_user.is_authenticated %} {{ url_for('profile.profile')}} {% else %}
+		 {{ url_for('login.login')}} {% endif %}">
 			
 			{% if current_user.is_authenticated %} Profile {% else %} Login {% endif %}
 			

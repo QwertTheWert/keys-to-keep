@@ -34,14 +34,14 @@ def create_app():
 	from blueprints.product.product import Product
 	from blueprints.profile.profile import Profile
 	from blueprints.search.search import Search
-	from blueprints.showcase.showcase import Showcase
+	from blueprints.products.products import Products
 
 	Register(app, bcrypt)
 	Login(app, bcrypt)
 	Product(app, bcrypt)
 	Profile(app, bcrypt)
 	Search(app, bcrypt)
-	Showcase(app, bcrypt)
+	Products(app, bcrypt)
 	Cart(app, bcrypt)
 	Payment(app, bcrypt)
 
