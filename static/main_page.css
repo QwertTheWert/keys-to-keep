@@ -427,42 +427,56 @@
     background-color: #555;
 }
 
-/* Vendors Carousel */
-.vendors-carousel {
-    background-color: #f0f0f0;
-    padding: 20px 0;
-    text-align: center;
-}
+/* Carousel */
 
-.vendors-carousel h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-.carousel-container {
+@keyframes slide {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  
+  .logos {
     overflow: hidden;
+    padding: 60px 0;
+    background: white;
+    white-space: nowrap;
     position: relative;
-    width: 100%;
-}
-
-.carousel-track {
-    display: flex;
-    animation: scroll 20s linear infinite;
-}
-
-.carousel-track img {
-    width: 200px; /* Updated width */
-    height: 100px; /* Fixed height */
-    object-fit: contain; /* Ensure images fit within the specified dimensions */
-    margin: 0 10px;
-}
-
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%); /* Adjust to half the total width */
-    }
-}
-
+  }
+  
+  .logos:before,
+  .logos:after {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    content: "";
+    z-index: 2;
+  }
+  
+  .logos:before {
+    left: 0;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0), white);
+  }
+  
+  .logos:after {
+    right: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), white);
+  }
+  
+  .logos:hover .logos-slide {
+    animation-play-state: paused;
+  }
+  
+  .logos-slide {
+    display: inline-block;
+    animation: 35s slide infinite linear;
+  }
+  
+  .logos-slide img {
+    height: 100px;
+    margin: 0 40px;
+  }
+  

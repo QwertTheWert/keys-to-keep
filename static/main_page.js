@@ -77,3 +77,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add event listener to reset animation when it ends
     track.addEventListener('animationiteration', resetAnimation);
 });
+
+var copy = document.querySelector(".logos-slide").cloneNode(true);
+document.querySelector(".logos").appendChild(copy);
