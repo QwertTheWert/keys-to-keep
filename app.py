@@ -4,6 +4,7 @@ from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_migrate import Migrate
 
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 db = SQLAlchemy()
 
@@ -13,6 +14,7 @@ def create_app():
 	app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 	app.secret_key = 'SECRET_KEY'
 	app.url_map.strict_slashes = False
+	app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1, x_port=1, x_prefix=1)
 
 	db.init_app(app)
 
