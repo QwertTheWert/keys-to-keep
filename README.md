@@ -8,7 +8,7 @@
 5. Jalankan code ini untuk download library `python -m pip install -r requirements.txt`
 6. Jika belum ada database, ketik py di console lalu lalukan perintah ini:
 ```
-from app import db, create_app, create_dummy_data
+from app import db, create_app
 new_app = create_app()
 new_app.app_context().push()
 db.create_all()

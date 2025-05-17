@@ -16,43 +16,58 @@ class User(db.Model, UserMixin):
 	def get_id(self):
 		return self.id
 
-class ProductCategory(db.Model):
-	__tablename__ = 'product_category'
+class SwitchType(db.Model):
+	__tablename__ = 'switch_type'	
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	name = db.Column(db.String(200), nullable=False)
-	
 	def __repr__(self):
-		return '<ProductCategory %r>' % self.id
+		return '<SwitchType %r>' % self.id
 
-class Product(db.Model):
-	__tablename__ = 'product'
+class Keycaps(db.Model):
+	__tablename__ = 'keycaps'
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-	category_id = db.Column(db.Integer, db.ForeignKey('product_category.id'), nullable=False)
 	name = db.Column(db.String(200), nullable=False)
-	slogan = db.Column(db.String(200), nullable=True)
-	description = db.Column(db.String(1024), nullable=True)
+	def __repr__(self):
+		return '<Keycaps %r>' % self.id
+
+class Keyboard(db.Model):
+	__tablename__ = 'keyboard'
+	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+	name = db.Column(db.String(200), nullable=False)
+	subtitle = db.Column(db.String(200))
+	description = db.Column(db.String(1024))
+	switch_type = db.Column(db.Integer, db.ForeignKey('switch_type.id'))
+	keycaps = db.Column(db.Integer, db.ForeignKey('keycaps.id'))
 	discount = db.Column(db.Integer, nullable=False, default=0)
 	sold = db.Column(db.Integer, nullable=False, default=0)
-
-	def __repr__(self):
-		return '<Product %r>' % self.name
-
-class ProductModel(db.Model):
-	__tablename__ = 'product_model'
-	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-	product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
-	name = db.Column(db.String(200), nullable=False)
 	price = db.Column(db.Integer, nullable=False)
 	quantity = db.Column(db.Integer, nullable=False)
 
 	def __repr__(self):
-		return '<ProductModel %r>' % self.id
+		return '<Keyboard %r>' % self.name
+
+
+class Color(db.Model):
+	__tablename__ = 'color'
+	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+	name = db.Column(db.String(200), nullable=False)
+	keyboard_id = db.Column(db.Integer, db.ForeignKey('keyboard.id'), nullable=False)
+	def __repr__(self):
+		return '<Color %r>' % self.id
+
+class Switch(db.Model):
+	__tablename__ = 'switch'
+	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+	name = db.Column(db.String(200), nullable=False)
+	keyboard_id = db.Column(db.Integer, db.ForeignKey('keyboard.id'), nullable=False)
+	def __repr__(self):
+		return '<Color %r>' % self.id
 
 class Cart(db.Model):
 	__tablename__ = 'cart'
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-	product_model_id = db.Column(db.Integer, db.ForeignKey('product_model.id'), nullable=False)
+	keyboard_id = db.Column(db.Integer, db.ForeignKey('keyboard.id'), nullable=False)
 	quantity = db.Column(db.Integer, nullable=False)
 
 	def __repr__(self):
@@ -65,7 +80,7 @@ class Rating(db.Model):
 	__tablename__ = 'rating'
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-	product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
+	keyboard_id = db.Column(db.Integer, db.ForeignKey('keyboard.id'), nullable=False)
 	rating = db.Column(db.Integer, nullable=False)
 	description = db.Column(db.String(1024), nullable=True)
 

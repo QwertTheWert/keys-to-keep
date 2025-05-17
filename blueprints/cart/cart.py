@@ -1,13 +1,13 @@
 from flask import Blueprint, render_template, redirect, url_for, request, jsonify
 from flask_login import current_user
 from app import db, request
-from models import Cart, Product, ProductModel
+from models import Cart, Keyboard, ProductModel
 
 class Cart:
 	cart_bp = Blueprint("cart", __name__, template_folder="templates", static_folder="static", static_url_path="/cart/static/")
 
 	def __init__(self, flask_app, bcrypt):
-		from models import Cart, Product, ProductModel
+		from models import Cart, Keyboard, ProductModel
 
 		@self.cart_bp.route('/cart')		
 		def cart():
@@ -17,7 +17,7 @@ class Cart:
 				carts = db.session.query(Cart).filter(Cart.user_id == current_user.id).all()
 				for cart in carts:
 					product_model = db.session.query(ProductModel).filter(ProductModel.id == cart.product_model_id).first()
-					product = db.session.query(Product).filter(Product.id == product_model.product_id).first()
+					product = db.session.query(Keyboard).filter(Keyboard.id == product_model.product_id).first()
 					price_after_discount =  int(product_model.price * (product.discount / 100))
 					subtotal = price_after_discount * cart.quantity
 					cart_data.append({
@@ -46,7 +46,7 @@ class Cart:
 			data = request.get_json()
 			cart = db.session.query(Cart).filter(Cart.id == data["cart_id"]).first()
 			product_model = db.session.query(ProductModel).filter(ProductModel.id == cart.product_model_id).first()
-			product = db.session.query(Product).filter(Product.id == product_model.product_id).first()
+			product = db.session.query(Keyboard).filter(Keyboard.id == product_model.product_id).first()
 
 			substotal = int((product_model.price * (product.discount / 100)) * cart.quantity)
 			new_total = int(data["total"]) - substotal
@@ -57,10 +57,10 @@ class Cart:
 		flask_app.register_blueprint(self.cart_bp)
 
 	def update_quantity(self, data, type):
-		from models import Cart, Product, ProductModel
+		from models import Cart, Keyboard, ProductModel
 		cart = db.session.query(Cart).filter(Cart.id == data["cart_id"]).first()
 		product_model = db.session.query(ProductModel).filter(ProductModel.id == cart.product_model_id).first()
-		product = db.session.query(Product).filter(Product.id == product_model.product_id).first()
+		product = db.session.query(Keyboard).filter(Keyboard.id == product_model.product_id).first()
 
 		old_quantity = cart.quantity
 		if type == "increment":
