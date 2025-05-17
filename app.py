@@ -50,11 +50,6 @@ def create_app():
 		return User.query.get(int(user))
 
 	migrate = Migrate(app, db)
-
-	# app.app_context().push()
-	# create_dummy_data()
- 
-
 	return app
 
 def create_dummy_data():
