@@ -2,7 +2,7 @@ from app import db, request
 from flask_login import login_user, current_user
 from flask import Blueprint, render_template, redirect, url_for
 from models import User 
-from models import ProductCategory, Keyboard, ProductModel, Cart
+from models import Keyboard, Cart
 
 class Register:
 	

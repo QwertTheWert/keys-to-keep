@@ -1,4 +1,4 @@
-from app import create_app, create_dummy_data
+from app import create_app
 
 flask_app = create_app()
 

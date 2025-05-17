@@ -39,8 +39,11 @@ class Keyboard(Item):
 	keycaps = db.Column(db.Integer, db.ForeignKey('keycaps.id'))
 	discount = db.Column(db.Integer, nullable=False, default=0)
 	sold = db.Column(db.Integer, nullable=False, default=0)
-	price = db.Column(db.Integer, nullable=False)
-	quantity = db.Column(db.Integer, nullable=False)
+	price = db.Column(db.Integer, nullable=False, default=0)
+	quantity = db.Column(db.Integer, nullable=False, default=0)
+
+	def get_discounted_price(self):
+		return int(self.price * (self.discount / 100))
 
 	def __repr__(self):
 		return '<Keyboard %r>' % self.name
@@ -59,11 +62,13 @@ class Switch(Variant):
 	def __repr__(self):
 		return '<Color %r>' % self.id
 
-class Cart(Variant):
+class Cart(db.Model):
 	__tablename__ = 'cart'
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	keyboard_id = db.Column(db.Integer, db.ForeignKey('keyboard.id'), nullable=False)
+	color_id = db.Column(db.Integer, db.ForeignKey('color.id'), nullable=False)
+	switch_id = db.Column(db.Integer, db.ForeignKey('switch.id'), nullable=False)
 	quantity = db.Column(db.Integer, nullable=False)
 
 	def __repr__(self):
