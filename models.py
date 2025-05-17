@@ -16,24 +16,23 @@ class User(db.Model, UserMixin):
 	def get_id(self):
 		return self.id
 
-class SwitchType(db.Model):
-	__tablename__ = 'switch_type'	
+class Item(db.Model):
+	__abstract__ = True
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	name = db.Column(db.String(200), nullable=False)
+
+class SwitchType(Item):
+	__tablename__ = 'switch_type'
 	def __repr__(self):
 		return '<SwitchType %r>' % self.id
 
-class Keycaps(db.Model):
+class Keycaps(Item):
 	__tablename__ = 'keycaps'
-	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-	name = db.Column(db.String(200), nullable=False)
 	def __repr__(self):
 		return '<Keycaps %r>' % self.id
 
-class Keyboard(db.Model):
+class Keyboard(Item):
 	__tablename__ = 'keyboard'
-	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-	name = db.Column(db.String(200), nullable=False)
 	subtitle = db.Column(db.String(200))
 	description = db.Column(db.String(1024))
 	switch_type = db.Column(db.Integer, db.ForeignKey('switch_type.id'))
@@ -46,24 +45,21 @@ class Keyboard(db.Model):
 	def __repr__(self):
 		return '<Keyboard %r>' % self.name
 
+class Variant(Item):
+	__abstract__ = True
+	keyboard_id = db.Column(db.Integer, db.ForeignKey('keyboard.id'), nullable=False)
 
-class Color(db.Model):
+class Color(Variant):
 	__tablename__ = 'color'
-	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-	name = db.Column(db.String(200), nullable=False)
-	keyboard_id = db.Column(db.Integer, db.ForeignKey('keyboard.id'), nullable=False)
 	def __repr__(self):
 		return '<Color %r>' % self.id
 
-class Switch(db.Model):
+class Switch(Variant):
 	__tablename__ = 'switch'
-	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-	name = db.Column(db.String(200), nullable=False)
-	keyboard_id = db.Column(db.Integer, db.ForeignKey('keyboard.id'), nullable=False)
 	def __repr__(self):
 		return '<Color %r>' % self.id
 
-class Cart(db.Model):
+class Cart(Variant):
 	__tablename__ = 'cart'
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
