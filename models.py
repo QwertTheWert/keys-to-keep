@@ -32,9 +32,10 @@ class Product(db.Model):
 	slogan = db.Column(db.String(200), nullable=True)
 	description = db.Column(db.String(1024), nullable=True)
 	discount = db.Column(db.Integer, nullable=False, default=0)
+	sold = db.Column(db.Integer, nullable=False, default=0)
 
 	def __repr__(self):
-		return '<Product %r>' % self.id
+		return '<Product %r>' % self.name
 
 class ProductModel(db.Model):
 	__tablename__ = 'product_model'
@@ -43,7 +44,6 @@ class ProductModel(db.Model):
 	name = db.Column(db.String(200), nullable=False)
 	price = db.Column(db.Integer, nullable=False)
 	quantity = db.Column(db.Integer, nullable=False)
-	description = db.Column(db.String(1024), nullable=True)
 
 	def __repr__(self):
 		return '<ProductModel %r>' % self.id

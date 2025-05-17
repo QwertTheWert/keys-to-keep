@@ -15,7 +15,11 @@
 		<li class="search-bar">
 			<input type="text" placeholder="Search">
 		</li>
-		<li><img src="{{ url_for('static', filename='assets/cart-icon.png') }}" alt="Cart" class="icon"></li>
+		<li>
+			<a href= "{{ url_for('cart.cart')}}">
+				<img src="{{ url_for('static', filename='assets/shopping-cart.png') }}" alt="Cart" class="icon">
+			</a>
+		</li>
 		<li><a href= "{% if current_user.is_authenticated %} {{ url_for('profile.profile')}} {% else %}
 		 {{ url_for('login.login')}} {% endif %}">
 			
