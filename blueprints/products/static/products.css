@@ -1,4 +1,4 @@
-.main_block {
+.main-block {
     display: flex;
     flex-direction: column;
     align-items: center; 
@@ -14,7 +14,7 @@
 
 
 
-.row1 {
+.row {
     display: flex;
     flex-wrap: wrap;
     justify-content: left;
@@ -25,7 +25,7 @@
 }
 
 
-.product_container {
+.product-container {
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -40,7 +40,7 @@
     position: relative;
 }
 
-.product_img_Container {
+.product-img-container {
     width: 100%;
     height: 300px; 
     display: flex;
@@ -49,7 +49,7 @@
     overflow: hidden;
 }
 
-.product_img_Container img {
+.product-img-container img {
     width: 100%;
     height: 100%;
     object-fit: contain; 

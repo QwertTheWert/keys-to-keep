@@ -33,14 +33,12 @@ def create_app():
 	from blueprints.payment.payment import Payment
 	from blueprints.product.product import Product
 	from blueprints.profile.profile import Profile
-	from blueprints.search.search import Search
 	from blueprints.products.products import Products
 
 	Register(app, bcrypt)
 	Login(app, bcrypt)
 	Product(app, bcrypt)
 	Profile(app, bcrypt)
-	Search(app, bcrypt)
 	Products(app, bcrypt)
 	Cart(app, bcrypt)
 	Payment(app, bcrypt)
@@ -51,6 +49,10 @@ def create_app():
 
 	migrate = Migrate(app, db)
 	return app
+
+def add_and_commit(db_class):
+	db.session.add(db_class)
+	db.session.commit()
 
 def format_money(value):
 		return '{:,}'.format(value).replace(',', '.')

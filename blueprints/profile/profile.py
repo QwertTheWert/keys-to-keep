@@ -11,20 +11,17 @@ class Profile:
 		@self.profile_bp.route('/profile', methods=["GET", "POST"])
 		def profile():
 			if current_user.is_authenticated:
-				return render_template("profile.html", username=str(current_user.username), full_name=str(current_user.full_name), email=str(current_user.email))
+				return render_template("profile.html", user=current_user, username=str(current_user.username), full_name=str(current_user.full_name), email=str(current_user.email))
 			else:
 				return redirect(url_for("login.login"))
 
 		@self.profile_bp.route('/profile/edit', methods=["GET", "POST"])
 		def edit():
 			if request.method == "POST":
-				current_user.full_name = request.form.get("full_name")
-				current_user.email = request.form.get("email")
-				current_user.bank_number = request.form.get("bank_number")
-				db.session.commit()
+				current_user.update(request.form.get("full_name"), request.form.get("email"), request.form.get("bank_number"))
 				return redirect(url_for("profile.profile"))
 			else:
-				return render_template("edit_profile.html", full_name=str(current_user.full_name), email=str(current_user.email), bank_number=str(current_user.bank_number))
+				return render_template("edit_profile.html", user=current_user, full_name=str(current_user.full_name), email=str(current_user.email), bank_number=str(current_user.bank_number))
 
 
 		@self.profile_bp.route('/profile/logout')
@@ -36,8 +33,7 @@ class Profile:
 		def delete():
 			user_to_delete = User.query.filter(User.id == current_user.id).first()
 			logout_user()
-			db.session.delete(user_to_delete)
-			db.session.commit()
+			user_to_delete.delete()
 			return redirect(url_for("register.index"))
 
 

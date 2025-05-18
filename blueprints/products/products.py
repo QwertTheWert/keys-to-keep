@@ -1,14 +1,24 @@
 from flask import Blueprint, render_template, redirect, url_for, request
 from flask_login import current_user
-from app import db, request
+from app import db, request, format_money
 
 class Products:
 	def __init__(self, flask_app, bcrypt):		
+		from models import Keyboard
 		products_bp = Blueprint("products", __name__, template_folder="templates", static_folder="static", static_url_path="/showcase/static/")
 
 		@products_bp.route('/keyboards')
 		def keyboards():
-			return render_template("keyboards.html")
+			keyboards = db.session.query(Keyboard).all()
+			data = []
+			for keyboard in keyboards:
+				data.append({
+					"keyboard" : keyboard,
+					"price" : format_money(keyboard.price),
+					"discounted_price": format_money(keyboard.get_discounted_price()),
+				})
+			print(data)
+			return render_template("keyboards.html", keyboard_data=data)
 		
 		@products_bp.route('/accessories')
 		def accessories():

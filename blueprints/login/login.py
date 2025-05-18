@@ -25,7 +25,7 @@ class Login:
 		flask_app.register_blueprint(self.login_bp)
 
 	def validate_login(self, identifier, password, bcrypt):
-		user = (User.query.filter(User.email == identifier) if "@" in identifier else User.query.filter(User.username == identifier)).first()
+		user = (User.get_by_email(identifier) if "@" in identifier else User.get_by_username(identifier)).first()
 		if user is not None:
 			if bcrypt.check_password_hash(user.password, password):
 				login_user(user)

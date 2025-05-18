@@ -31,34 +31,31 @@
 
 	</div>
 
-
-	<div class="main_block">
-   		<div class="row1">
-        	<div class="product_container">
-            	<div class="product_img_Container">
-                	<img src="{{ url_for('static', filename='assets/xera87.jpg') }}" alt="">
-            	</div>
-            	<div class="product_text_container">
- 	              	<h3>Brand - Name</h3>
-			    	<p>Size - Dual Tone Color - 5 Pin</p>
-			    	<div class="rating">
-			    		<span class="stars">★★★★☆</span>
-			    		<span class="ratings">100+ Ratings</span>
-			    	</div>
-				    <div class="price">
-				    	<span class="current-price">Rp Current Price</span>
-				    </div>
-         	       	<button class="add-to-cart">Add to Cart</button>
-         	   </div>
-       		</div>
-
-
-        	
-    	</div>
-
-		
-
-
+	<div class="main-block">
+   		<div class="row">
+				{% for data in keyboard_data %}
+				<div class="product-container">
+					<div class="product-img-container">
+						<img src="{{ url_for('static', filename='assets/xera87.jpg') }}" alt="">
+					</div>
+					<div class="product_text_container">
+						<h3> {{ data.keyboard.name }} </h3>
+						<p> {{ data.keyboard.subtitle }} </p>
+						<div class="rating">
+							<span class="stars">★★★★☆</span>
+							<span class="ratings">100+ Ratings</span>
+						</div>
+						<div class="price">
+							<span class="current-price">Rp. {{ data.discounted_price }} (-{{ data.keyboard.discount }}%) </span>
+						</div>
+						<div class="price">
+							<span class="original-price">Rp. {{ data.price }} </span>
+						</div>
+						<button class="add-to-cart">Add to Cart</button>
+				</div>
+				</div>
+				
+				{% endfor %}
     	</div>
 	</div>
     

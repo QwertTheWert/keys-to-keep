@@ -14,10 +14,9 @@ class Cart:
 			if current_user.is_authenticated:
 				cart_data = []
 				total = 0
-				carts = db.session.query(Cart).filter(Cart.user_id == current_user.id).all()
+				carts = current_user.get_carts()
 				for cart in carts:
-					keyboard : Keyboard = db.session.query(Keyboard).filter(keyboard.id == cart.keyboard_id).first()
-
+					keyboard : Keyboard = cart.get_keyboard()
 					price_after_discount =  keyboard.get_discounted_price()
 					subtotal = price_after_discount * cart.quantity
 					cart_data.append({
@@ -43,22 +42,21 @@ class Cart:
 		@self.cart_bp.route('/cart/remove', methods=['POST'])
 		def remove():
 			data = request.get_json()
-			cart = db.session.query(Cart).filter(Cart.id == data["cart_id"]).first()
-			keyboard = db.session.query(Keyboard).filter(keyboard.id == cart.keyboard_id).first()
+			cart = Cart.get_by_id(data["cart_id"])
+			keyboard = cart.get_keyboard()
 
 			price_after_discount =  keyboard.get_discounted_price()
 			subtotal = price_after_discount * cart.quantity
 			new_total = int(data["total"]) - subtotal
 
-			db.session.delete(cart)
-			db.session.commit()
+			cart.delete()
 			return jsonify({"new_total" : format_money(new_total)})
 		
 		flask_app.register_blueprint(self.cart_bp)
 
 def update_quantity(data, type):
-	cart = db.session.query(Cart).filter(Cart.id == data["cart_id"]).first()
-	keyboard = db.session.query(Keyboard).filter(keyboard.id == cart.keyboard_id).first()
+	cart = Cart.get_cart_by_id(data["cart_id"])
+	keyboard = cart.get_keyboard()
 
 	old_quantity = cart.quantity
 	if type == "increment":
