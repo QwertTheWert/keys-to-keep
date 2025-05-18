@@ -74,7 +74,7 @@ class Keyboard(Item):
 		keyboards = db.session.query(Keyboard).order_by(Keyboard.price.asc() if is_ascending else Keyboard.price.desc()).all()
 		data = []
 		for keyboard in keyboards:
-			ratings =  keyboard.get_ratings()
+			ratings =  keyboard.get_reviews()
 			data.append({
 				"keyboard" : keyboard,
 				"price" : format_money(keyboard.price),
@@ -89,7 +89,7 @@ class Keyboard(Item):
 		return db.session.query(Keyboard).filter(Keyboard.id == query_id).first()
 
 	def add_rating(self, user, rating, description):
-		new_rating = Rating(user_id=user.id, keyboard_id=self.id, rating=rating, description=description)
+		new_rating = Review(user_id=user.id, keyboard_id=self.id, rating=rating, description=description)
 		add_and_commit(new_rating)
 
 	def add_variant(self, variant_type, name):
@@ -99,8 +99,8 @@ class Keyboard(Item):
 	def get_discounted_price(self):
 		return int(self.price - self.price * (self.discount / 100))
 	
-	def get_ratings(self):
-		ratings = db.session.query(Rating).filter(Rating.id == self.id).all()
+	def get_reviews(self):
+		ratings = db.session.query(Review).filter(Review.id == self.id).all()
 		count = len(ratings)
 		sum = 0
 		for rating in ratings: sum += rating.rating
@@ -156,7 +156,7 @@ class Cart(db.Model):
 	def __repr__(self):
 		return '<Cart %r>' % self.id
 	
-class Rating(db.Model):
+class Review(db.Model):
 	__tablename__ = 'rating'
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)

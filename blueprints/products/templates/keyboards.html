@@ -28,7 +28,7 @@
 					<div class="product-img-container">
 						<img src="{{ url_for('static', filename='assets/xera87.jpg') }}" alt="">
 					</div>
-					<a href="{{ url_for('products.products_details') }}" class="text-reset text-decoration-none">
+					<a href="{{ url_for('keyboard.keyboard_details', keyboard_id=data.keyboard.id) }}" class="text-reset text-decoration-none">
 					<div class="product_text_container">
 						<h3> {{ data.keyboard.name }} </h3>
 						<p> {{ data.keyboard.subtitle }} </p>
