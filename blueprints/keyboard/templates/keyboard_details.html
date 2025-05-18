@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>{{ data.keyboard.name }}</title>
-	<link rel="stylesheet" href="{{ url_for('products.static', filename='products_details.css') }}">
-</head>
+{% extends 'navbar_template.html' %}
+
+{% block head %}
+<title>{{ data.keyboard.name }}</title>
+{% endblock %}
+
+{% block content %}
+
 <body>
 	<div class="product-container">
 		<div class="product-image">
@@ -68,18 +68,27 @@
 	<div class="product-reviews">
 		<h2>Ulasan</h2>
 		<div class="rating-summary">
-			<span class="rating-score">{{ data.reviews.average }}/5.0</span>
-			<span class="rating-count">({{ data.reviews.count }} ratings)</span>
+			{% if data.reviews.count != 0 %}
+				<span class="rating-score">{{ data.reviews.average }}/5.0</span>
+				<span class="rating-count">({{ data.reviews.count }} ratings)</span>
+			{% else %}
+				<span class="rating-count">(No ratings)</span>
+			{% endif %}
 		</div>
 
 		<div class="review-list">
-			{% for review in data.reviews %}
+			{% for i in range(data.reviews.count) %}
 			<div class="review-item">
-				<p class="review-stars">{{ review.sum }} bintang</p>
-				<p class="review-text">{{ review.description }}</p>
+				<p class="review-stars">{{ data.reviews.reviewers[i].name }}</p>
+				<p class="review-stars">{{ data.reviews.reviews[i].sum }} bintang</p>
+				<p class="review-stars">No reviews yet</p>
+				<p class="review-text">{{ data.reviews.reviews[i].description }}</p>
 			</div>
 			{% endfor %}
 		</div>
 	</div>
 </body>
 </html>
+
+
+{% endblock %}

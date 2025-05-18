@@ -28,8 +28,8 @@
 					<div class="product-img-container">
 						<img src="{{ url_for('static', filename='assets/xera87.jpg') }}" alt="">
 					</div>
-					<a href="{{ url_for('keyboard.keyboard_details', keyboard_id=data.keyboard.id) }}" class="text-reset text-decoration-none">
 					<div class="product_text_container">
+						<a href="{{ url_for('keyboard.keyboard_details', keyboard_id=data.keyboard.id) }}" class="text-reset text-decoration-none">
 						<h3> {{ data.keyboard.name }} </h3>
 						<p> {{ data.keyboard.subtitle }} </p>
 						<div class="rating">
@@ -46,12 +46,12 @@
 								<span class="original-price">Rp. {{ data.price }} </span>
 							</div>
 						{% endif %}
+						</a>
 						<button class="add-to-cart open-modal" id="cart-btn-{{ data.keyboard.id }}" data-id="{{ data.keyboard.id }}"
 							data-bs-toggle="modal" data-bs-target="#cart_modal" id="cart_modal_button">
 							Add to Cart
 						</button>
 					</div>
-					</a>
 				</div>
 				{% endfor %}
     	</div>

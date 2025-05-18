@@ -80,7 +80,7 @@ class Keyboard(Item):
 				"price" : format_money(keyboard.price),
 				"discounted_price": format_money(keyboard.get_discounted_price()),
 				"number_of_ratings" : str(ratings["count"]) if ratings["count"] < 100 else (str(round(ratings["count"], -2)) + "+"),
-				"stars" : ('★' * ratings["average"]) + ('☆' * (5 - ratings["average"])) if ratings["average"] != -1 else "",
+				"stars" : ('★' * int(ratings["average"])) + ('☆' * (5 - int(ratings["average"]))) if int(ratings["average"]) != -1 else "",
 			})
 		return data
 
@@ -100,14 +100,16 @@ class Keyboard(Item):
 		return int(self.price - self.price * (self.discount / 100))
 	
 	def get_reviews(self):
-		ratings = db.session.query(Review).filter(Review.id == self.id).all()
-		count = len(ratings)
+		reviews = db.session.query(Review).filter(Review.id == self.id).all()
+		reviwers = [review.get_reviewer() for review in reviews]
+		count = len(reviews)
 		sum = 0
-		for rating in ratings: sum += rating.rating
+		for rating in reviews: sum += rating.rating
 		return {
-			"ratings" : ratings,
+			"reviews" : reviews,
+			"reviewers" : reviwers,
 			"count" : count,
-			"average" : int(round((sum / count) if count > 0 else -1, 1)),
+			"average" : round((sum / count) if count > 0 else -1, 1),
 		}
 
 	def get_variants(self, variant_type):
@@ -166,3 +168,6 @@ class Review(db.Model):
 
 	def __repr__(self):
 		return '<Rating %r>' % self.id
+
+	def get_reviewer(self):
+		return db.session.query(User).filter(User.id == self.user_id).first()
