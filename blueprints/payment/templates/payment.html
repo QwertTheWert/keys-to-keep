@@ -2,10 +2,67 @@
 
 {% block head %}
 <title>Payment</title>
-<link rel="stylesheet" href="{{ url_for('payment.static', filename='XXXXX.css') }}">
+<link rel="stylesheet" href="{{ url_for('payment.static', filename='payment.css') }}">
 {% endblock %}
 
 {% block content %}
+<div class="Page_container">
+    <div class="Main_Block">
+        <div class="Inner_Text">
+            <h3>Seller Name</h3>
+
+            <div class="Preview_Container">
+                <img src="static\assets\xera87.jpg" alt="" class="Image_Preview">
+                <div>
+                    <p>PREVIEW NAME PRODUCT</p>
+                    <p>PREVIEW MODEL</p>
+                    <p>PREVIEW PRICE (PRICE X NUMBER OF ITEMS)</p>
+                </div>
+            </div>
+
+            <div>
+                <select class="Time_Option">
+                    <option>-- Delivery time --</option>
+                    <option>Instant (1-2 hr)</option>
+                    <option>Regular (1-3 days)</option>
+                    <option>Economic (3-7 days)</option>
+                </select>
+            </div>
+
+            <p>PREVIEW ADDRESS: City, State, road name, house number</p>
+        </div>
+    </div>
+
+    <div class="Side_Block">
+        <div class="Inner_Text">
+            <h3>Payment Options</h3>
+                <form class="Payment_Options">
+                    <label>
+                    <input type="radio" name="PaymentOptions" value="1">
+                    BCA
+                    </label><br>
+                
+                    <label>
+                    <input type="radio" name="PaymentOptions" value="2">
+                    BNI
+                    </label><br>
+                
+                    <label>
+                    <input type="radio" name="PaymentOptions" value="3">
+                    Mandiri
+                    </label><br>
+                
+                    <label>
+                    <input type="radio" name="PaymentOptions" value="4">
+                    CIMB
+                    </label>
+                </form>
+            <p>Total: Rp.1000000</p>
+            <button class="Purchase_button">Purchase</button>
+              
+        </div>
+    </div>
+</div>
 
 
 <link rel="stylesheet" href="{{ url_for('payment.static', filename='XXXXX.js') }}">
