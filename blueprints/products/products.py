@@ -10,17 +10,27 @@ class Products:
 
 		@self.products_bp.route('/keyboards')
 		def keyboards():
-			return render_template("keyboards.html", keyboard_data=Keyboard.get_data_all())
+			is_ascending = request.args.get("asc", "true") == "true"
+			return render_template("keyboards.html", keyboard_data=Keyboard.get_data_all(is_ascending))
 		
-		@self.products_bp.route('/keyboards/add_to_cart', methods=['POST'])
+		@self.products_bp.route('/keyboards/get_variants', methods=['POST'])
 		def get_variants():
-			keyboard = Keyboard.get_by_id(request.get_json()["keyboard_id"])
-			return jsonify({'colors': keyboard.get_variants(Color), 'switches' : keyboard.get_variants(Switch)})
+			data = request.get_json()
+			keyboard_id = int(data["keyboard_id"])
+			keyboard = Keyboard.get_by_id(keyboard_id)
+			colors = [color.to_dict() for color in keyboard.get_variants(Color)]
+			switches = [switch.to_dict() for switch in keyboard.get_variants(Switch)]
+			print(colors, switches)
+			return jsonify({'colors': colors, 'switches' : switches})
 
 		@self.products_bp.route('/keyboards/add_to_cart', methods=['POST'])
 		def add_to_cart():
-			keyboard = Keyboard.get_by_id(request.get_json()["keyboard_id"])
-			current_user.add_to_cart(keyboard)
+			data = request.get_json()
+			keyboard_id = int(data["keyboard_id"])
+			keyboard = Keyboard.get_by_id(keyboard_id)
+			color_id = int(data["variant_info"]["color"])
+			switch_id = int(data["variant_info"]["switch"])
+			current_user.add_to_cart(keyboard, color_id, switch_id, 1)
 			return jsonify({'keyboard_name': keyboard.name})
 		
 		@self.products_bp.route('/accessories')

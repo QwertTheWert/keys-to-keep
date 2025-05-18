@@ -21,8 +21,8 @@ class User(db.Model, UserMixin):
 	def get_by_username(username_query):
 		return db.session.query(User).filter(User.username == username_query).first()
 
-	def add_to_cart(self, keyboard):
-		new_cart = Cart(user_id=self.id, keyboard_id=keyboard.id)
+	def add_to_cart(self, keyboard, color_id, switch_id, quantity):
+		new_cart = Cart(user_id=self.id, keyboard_id=keyboard.id, color_id=color_id, switch_id=switch_id, quantity=quantity)
 		add_and_commit(new_cart)
 	
 	def update(self, new_full_name, new_email, new_bank_number):
@@ -70,8 +70,8 @@ class Keyboard(Item):
 	quantity = db.Column(db.Integer, nullable=False, default=0)
 
 	@staticmethod
-	def get_data_all():
-		keyboards = db.session.query(Keyboard).all()
+	def get_data_all(is_ascending):
+		keyboards = db.session.query(Keyboard).order_by(Keyboard.price.asc() if is_ascending else Keyboard.price.desc()).all()
 		data = []
 		for keyboard in keyboards:
 			ratings =  keyboard.get_ratings()
@@ -111,7 +111,7 @@ class Keyboard(Item):
 		}
 
 	def get_variants(self, variant_type):
-		return db.session.query(variant_type).filter(variant_type.id == self.id).all()
+		return db.session.query(variant_type).filter(variant_type.keyboard_id == self.id).all()
 
 	def __repr__(self):
 		return '<Keyboard %r>' % self.name
@@ -119,6 +119,13 @@ class Keyboard(Item):
 class Variant(Item):
 	__abstract__ = True
 	keyboard_id = db.Column(db.Integer, db.ForeignKey('keyboard.id'), nullable=False)
+
+	def to_dict(self):
+		return {
+			'id': self.id,
+			'name': self.name,
+			'keyboard_id': self.keyboard_id
+		}
 
 class Color(Variant):
 	__tablename__ = 'color'

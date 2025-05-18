@@ -27,7 +27,7 @@ def create_app():
 
 	bcrypt = Bcrypt(app)
 	
-	from blueprints.cart.cart import Cart
+	from blueprints.cart.cart import CartPage
 	from blueprints.login.login import Login
 	from blueprints.register.register import Register
 	from blueprints.payment.payment import Payment
@@ -40,7 +40,7 @@ def create_app():
 	Product(app, bcrypt)
 	Profile(app, bcrypt)
 	Products(app, bcrypt)
-	Cart(app, bcrypt)
+	CartPage(app, bcrypt)
 	Payment(app, bcrypt)
 
 	@login_manager.user_loader 

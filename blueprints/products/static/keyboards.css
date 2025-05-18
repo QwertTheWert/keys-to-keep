@@ -118,6 +118,10 @@
     background-color: #e67e22;
 }
 
+.add-to-cart:disabled {
+    background-color: #e67e227A;
+}
+
 
 .page_container {
     display: flex;
@@ -132,4 +136,27 @@
 .Menu_Name{
     font-size: 48px;
     color: #00C69E;
+}
+
+
+.product-options label {
+  font-weight: bold;
+  display: block;
+  margin: 10px 0 5px;
+}
+
+.color-options button,
+.switch-options button {
+  margin: 5px 8px 5px 0;
+  padding: 8px 14px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.color-options button:hover,
+.switch-options button:hover {
+  border-color: #000;
 }

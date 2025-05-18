@@ -1,8 +1,8 @@
 {% extends 'navbar_template.html' %}
 
 {% block head %}
-<title>Keyboard</title>
-<link rel="stylesheet" href="{{ url_for('products.static', filename='products.css') }}">
+<title>Keyboards</title>
+<link rel="stylesheet" href="{{ url_for('products.static', filename='keyboards.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -13,12 +13,10 @@
 
 <div class="page_container">
 	<div class="price-selector-container">
-		<span>
-			Sort by Price:
-		</span>
-		<select id="price-selector">
-			<option value="descending">Descending</option>
-			<option value="ascending">Ascending</option>
+		<select id="price-selector" class="form-select w-auto" data-base-url="{{ url_for('products.keyboards') }}">
+			<option>-- Sort by Price --</option>
+			<option value="true">Ascending</option>
+			<option value="false">Descending</option>
 		</select>
 
 	</div>
@@ -30,6 +28,7 @@
 					<div class="product-img-container">
 						<img src="{{ url_for('static', filename='assets/xera87.jpg') }}" alt="">
 					</div>
+					<a href="{{ url_for('products.products_details') }}" class="text-reset text-decoration-none">
 					<div class="product_text_container">
 						<h3> {{ data.keyboard.name }} </h3>
 						<p> {{ data.keyboard.subtitle }} </p>
@@ -40,24 +39,26 @@
 							<span class="ratings">{{ data.number_of_ratings }} Ratings</span>
 						</div>
 						<div class="price">
-							<span class="current-price">Rp. {{ data.discounted_price }} (-{{ data.keyboard.discount }}%) </span>
+							<span class="current-price">Rp. {{ data.discounted_price }} {% if data.keyboard.discount > 0 %} (-{{ data.keyboard.discount }} %) {% endif %} </span>
 						</div>
-						<div class="price">
-							<span class="original-price">Rp. {{ data.price }} </span>
-						</div>
-						<button class="add-to-cart" id="cart-btn-{{ data.keyboard.id }}" data-id="{{ data.keyboard.id }}"
+						{% if data.keyboard.discount > 0 %}
+							<div class="price">
+								<span class="original-price">Rp. {{ data.price }} </span>
+							</div>
+						{% endif %}
+						<button class="add-to-cart open-modal" id="cart-btn-{{ data.keyboard.id }}" data-id="{{ data.keyboard.id }}"
 							data-bs-toggle="modal" data-bs-target="#cart_modal" id="cart_modal_button">
 							Add to Cart
 						</button>
+					</div>
+					</a>
 				</div>
-				</div>
-				
 				{% endfor %}
     	</div>
 	</div>
 </div>
 
-<!-- Logout Modal -->
+<!-- Variant Modal -->
 <div class="modal fade" id="cart_modal" tabindex="-1" aria-labelledby="cart_modal_label" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -66,41 +67,23 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				Are you sure you want to logout?
+				<div class="product-options">
+					<label>Warna:</label>
+					<div class="color-options btn-group-toggle" data-toggle="buttons" id="color-options">
+					</div>
+					<label>Switch:</label>
+					<div class="switch-options btn-group-toggle" id="switch-options">
+					</div>
+				</div>
 			</div>
+			
 			<div class="modal-footer">
-				<a href="{{ url_for('profile.logout') }}" class="text-reset text-decoration-none">
-					<button type="button" class="add-to-cart">Add to Cart</button>
-				</a>
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+				<button type="button" class="add-to-cart" id="finalize" data-bs-dismiss="modal">Add to Cart</button>
 			</div>
 		</div>
 	</div>
 </div>
 
+<script src="{{ url_for('products.static', filename='keyboards.js') }}"></script>
 
-<script>
-	// document.querySelectorAll('.add-to-cart').forEach(btn => 
-	// 	btn.addEventListener('click', function () {
-	// 		const keyboardId = this.dataset.id;
-	// 		const alertBox = document.getElementById('alert');
-	// 		const productNameText = document.getElementById('product-name');
-
-	// 		fetch(`keyboards/add_to_cart`, {
-	// 			method: 'POST',
-	// 			headers: {
-	// 				'Content-Type': 'application/json',
-	// 			},
-	// 			body: JSON.stringify({ keyboard_id: keyboardId }),
-	// 		})
-	// 		.then(response => response.json())
-	// 		.then(data => {
-	// 			alertBox.classList.remove('d-none');
-	// 			alertBox.classList.add('show');
-	// 			productNameText.textContent = data.keyboard_name;
-				
-	// 		});
-	// 	})
-	// );
-</script>
 {% endblock %}
