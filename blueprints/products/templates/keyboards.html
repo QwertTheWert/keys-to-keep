@@ -7,19 +7,11 @@
 
 {% block content %}
 
-<div class="page_container">
+<div id="alert" class="alert alert-success alert-dismissible fade d-none mt-3" role="alert">
+	<strong id="product-name"></strong> was added to your cart.
+</div>
 
-	<!-- <div class="sidebar_menu">
-		<h3 class="Menu_Name">KEYBOARDS</h3>
-		<ul>
-			<li><a href="#">Keyboard layout</a></li>
-			<li><a href="#">Brand</a></li>
-			<li><a href="#">Switch Type</a></li>
-			<li><a href="#">Case material</a></li>
-			<li><a href="#">Connectivity</a></li>
-			<li><a href="#">Price</a></li>
-		</ul>
-	</div> -->
+<div class="page_container">
 	<div class="price-selector-container">
 		<span>
 			Sort by Price:
@@ -34,7 +26,7 @@
 	<div class="main-block">
    		<div class="row">
 				{% for data in keyboard_data %}
-				<div class="product-container">
+				<div class="product-container" id="container-{{ data.keyboard.id }}">
 					<div class="product-img-container">
 						<img src="{{ url_for('static', filename='assets/xera87.jpg') }}" alt="">
 					</div>
@@ -42,8 +34,10 @@
 						<h3> {{ data.keyboard.name }} </h3>
 						<p> {{ data.keyboard.subtitle }} </p>
 						<div class="rating">
-							<span class="stars">★★★★☆</span>
-							<span class="ratings">100+ Ratings</span>
+							{% if data.stars != "" %}
+								<span class="stars">{{ data.stars }}</span>
+							{% endif %}
+							<span class="ratings">{{ data.number_of_ratings }} Ratings</span>
 						</div>
 						<div class="price">
 							<span class="current-price">Rp. {{ data.discounted_price }} (-{{ data.keyboard.discount }}%) </span>
@@ -51,17 +45,62 @@
 						<div class="price">
 							<span class="original-price">Rp. {{ data.price }} </span>
 						</div>
-						<button class="add-to-cart">Add to Cart</button>
+						<button class="add-to-cart" id="cart-btn-{{ data.keyboard.id }}" data-id="{{ data.keyboard.id }}"
+							data-bs-toggle="modal" data-bs-target="#cart_modal" id="cart_modal_button">
+							Add to Cart
+						</button>
 				</div>
 				</div>
 				
 				{% endfor %}
     	</div>
 	</div>
-    
-
-    
-
-    
 </div>
+
+<!-- Logout Modal -->
+<div class="modal fade" id="cart_modal" tabindex="-1" aria-labelledby="cart_modal_label" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="cart_modal_label">Select Variant</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				Are you sure you want to logout?
+			</div>
+			<div class="modal-footer">
+				<a href="{{ url_for('profile.logout') }}" class="text-reset text-decoration-none">
+					<button type="button" class="add-to-cart">Add to Cart</button>
+				</a>
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	// document.querySelectorAll('.add-to-cart').forEach(btn => 
+	// 	btn.addEventListener('click', function () {
+	// 		const keyboardId = this.dataset.id;
+	// 		const alertBox = document.getElementById('alert');
+	// 		const productNameText = document.getElementById('product-name');
+
+	// 		fetch(`keyboards/add_to_cart`, {
+	// 			method: 'POST',
+	// 			headers: {
+	// 				'Content-Type': 'application/json',
+	// 			},
+	// 			body: JSON.stringify({ keyboard_id: keyboardId }),
+	// 		})
+	// 		.then(response => response.json())
+	// 		.then(data => {
+	// 			alertBox.classList.remove('d-none');
+	// 			alertBox.classList.add('show');
+	// 			productNameText.textContent = data.keyboard_name;
+				
+	// 		});
+	// 	})
+	// );
+</script>
 {% endblock %}

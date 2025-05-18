@@ -1,30 +1,33 @@
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import Blueprint, render_template, redirect, url_for, request, jsonify
 from flask_login import current_user
-from app import db, request, format_money
+from app import db, request
 
 class Products:
+	products_bp = Blueprint("products", __name__, template_folder="templates", static_folder="static", static_url_path="/showcase/static/")
+	
 	def __init__(self, flask_app, bcrypt):		
-		from models import Keyboard
-		products_bp = Blueprint("products", __name__, template_folder="templates", static_folder="static", static_url_path="/showcase/static/")
+		from models import Keyboard, Color, Switch
 
-		@products_bp.route('/keyboards')
+		@self.products_bp.route('/keyboards')
 		def keyboards():
-			keyboards = db.session.query(Keyboard).all()
-			data = []
-			for keyboard in keyboards:
-				data.append({
-					"keyboard" : keyboard,
-					"price" : format_money(keyboard.price),
-					"discounted_price": format_money(keyboard.get_discounted_price()),
-				})
-			print(data)
-			return render_template("keyboards.html", keyboard_data=data)
+			return render_template("keyboards.html", keyboard_data=Keyboard.get_data_all())
 		
-		@products_bp.route('/accessories')
+		@self.products_bp.route('/keyboards/add_to_cart', methods=['POST'])
+		def get_variants():
+			keyboard = Keyboard.get_by_id(request.get_json()["keyboard_id"])
+			return jsonify({'colors': keyboard.get_variants(Color), 'switches' : keyboard.get_variants(Switch)})
+
+		@self.products_bp.route('/keyboards/add_to_cart', methods=['POST'])
+		def add_to_cart():
+			keyboard = Keyboard.get_by_id(request.get_json()["keyboard_id"])
+			current_user.add_to_cart(keyboard)
+			return jsonify({'keyboard_name': keyboard.name})
+		
+		@self.products_bp.route('/accessories')
 		def accessories():
 			return render_template("keyboards.html")
 		
-		@products_bp.route('/products_details')
+		@self.products_bp.route('/products_details')
 		def products_details():
 			# Mock data for testing
 			product = {
@@ -50,4 +53,4 @@ class Products:
 			}
 			return render_template("products_details.html", product=product)
 
-		flask_app.register_blueprint(products_bp)
+		flask_app.register_blueprint(self.products_bp)

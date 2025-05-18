@@ -1,5 +1,5 @@
 from flask_login import UserMixin
-from app import db, add_and_commit
+from app import db, add_and_commit, format_money
 
 class User(db.Model, UserMixin):
 	__tablename__ = 'user'
@@ -69,6 +69,25 @@ class Keyboard(Item):
 	price = db.Column(db.Integer, nullable=False, default=0)
 	quantity = db.Column(db.Integer, nullable=False, default=0)
 
+	@staticmethod
+	def get_data_all():
+		keyboards = db.session.query(Keyboard).all()
+		data = []
+		for keyboard in keyboards:
+			ratings =  keyboard.get_ratings()
+			data.append({
+				"keyboard" : keyboard,
+				"price" : format_money(keyboard.price),
+				"discounted_price": format_money(keyboard.get_discounted_price()),
+				"number_of_ratings" : str(ratings["count"]) if ratings["count"] < 100 else (str(round(ratings["count"], -2)) + "+"),
+				"stars" : ('★' * ratings["average"]) + ('☆' * (5 - ratings["average"])) if ratings["average"] != -1 else "",
+			})
+		return data
+
+	@staticmethod
+	def get_by_id(query_id):
+		return db.session.query(Keyboard).filter(Keyboard.id == query_id).first()
+
 	def add_rating(self, user, rating, description):
 		new_rating = Rating(user_id=user.id, keyboard_id=self.id, rating=rating, description=description)
 		add_and_commit(new_rating)
@@ -88,7 +107,7 @@ class Keyboard(Item):
 		return {
 			"ratings" : ratings,
 			"count" : count,
-			"average" : round(sum / count, 1),
+			"average" : int(round((sum / count) if count > 0 else -1, 1)),
 		}
 
 	def get_variants(self, variant_type):
