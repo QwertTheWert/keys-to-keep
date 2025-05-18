@@ -27,19 +27,21 @@ def create_app():
 
 	bcrypt = Bcrypt(app)
 	
+	from blueprints.main_page.main_page import MainPage
 	from blueprints.cart.cart import CartPage
 	from blueprints.login.login import Login
 	from blueprints.register.register import Register
 	from blueprints.payment.payment import Payment
-	from blueprints.product.product import Product
+	from blueprints.keyboard.keyboard import KeyboardPage
 	from blueprints.profile.profile import Profile
-	from blueprints.products.products import Products
+	from blueprints.products.products import ProductsPage
 
+	MainPage(app, bcrypt)
 	Register(app, bcrypt)
 	Login(app, bcrypt)
-	Product(app, bcrypt)
+	KeyboardPage(app, bcrypt)
 	Profile(app, bcrypt)
-	Products(app, bcrypt)
+	ProductsPage(app, bcrypt)
 	CartPage(app, bcrypt)
 	Payment(app, bcrypt)
 
@@ -58,7 +60,7 @@ def format_money(value):
 		return '{:,}'.format(value).replace(',', '.')
 
 def create_dummy_data():
-	from models import db, User, SwitchType, Keycaps, Keyboard, Switch, Color, Cart, Rating
+	from models import db, User, SwitchType, Keycaps, Keyboard, Switch, Color, Cart, Review
 	import random
 	
 	user1 = User(
@@ -128,8 +130,8 @@ def create_dummy_data():
 	db.session.add_all([cart1, cart2])
 	db.session.commit()
 	
-	rating1 = Rating(user_id=1, keyboard_id=1, rating=5, description='Great keyboard with responsive keys.')
-	rating2 = Rating(user_id=2, keyboard_id=2, rating=4, description='Feels great, but could use more clicking noises settings.')
+	rating1 = Review(user_id=1, keyboard_id=1, rating=5, description='Great keyboard with responsive keys.')
+	rating2 = Review(user_id=2, keyboard_id=2, rating=4, description='Feels great, but could use more clicking noises settings.')
 	db.session.add_all([rating1, rating2])
 
 	db.session.commit() 

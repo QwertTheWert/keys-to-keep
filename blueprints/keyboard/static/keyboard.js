@@ -1,0 +1,45 @@
+const quantityField = document.getElementById('qty-field');
+const addToCartBtn = document.getElementById('add-to-cart-btn');
+const buyNowBtn = document.getElementById('by-now-btn');
+const alertBox = document.getElementById("alert");
+
+let variantInfo;
+let keyboardId;
+
+
+document.addEventListener('DOMContentLoaded', () => {
+	variantInfo = {
+		"color" : document.body.dataset.color,
+		"switch" : document.body.dataset.switch,
+	}
+	keyboardId = document.body.dataset.id;
+});
+
+function onVariantBtnClick(btn, variantType)  {
+	const buttons = document.querySelectorAll("." + variantType + '-btn');
+	buttons.forEach(otherBtn => otherBtn.classList.remove('active'));
+	btn.classList.add('active');
+	variantInfo[variantType] = btn.dataset.id;
+}
+
+function onAddtoCartClick() {
+	fetch(`/keyboard/add_to_cart`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ keyboard_id: keyboardId, variant_info : variantInfo, quantity : quantityField.value }),
+	})
+	.then(response => response.json())
+	.then(data => {
+		if (data.success) {
+			alertBox.classList.remove('d-none');
+			alertBox.classList.add('show');
+		} else {
+			window.location.href = '/login';
+		}
+	});
+}
+
+function onBuyNowtClick() {
+}

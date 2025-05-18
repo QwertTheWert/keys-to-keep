@@ -44,6 +44,10 @@ class Item(db.Model):
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	name = db.Column(db.String(200), nullable=False)
 
+	@staticmethod
+	def get(class_name, query_id):
+		return db.session.query(class_name).filter(class_name.id == query_id).first()
+
 	def delete(self):
 		db.session.delete(self)
 		db.session.commit()
@@ -72,42 +76,50 @@ class Keyboard(Item):
 	@staticmethod
 	def get_data_all(is_ascending):
 		keyboards = db.session.query(Keyboard).order_by(Keyboard.price.asc() if is_ascending else Keyboard.price.desc()).all()
-		data = []
-		for keyboard in keyboards:
-			ratings =  keyboard.get_ratings()
-			data.append({
-				"keyboard" : keyboard,
-				"price" : format_money(keyboard.price),
-				"discounted_price": format_money(keyboard.get_discounted_price()),
-				"number_of_ratings" : str(ratings["count"]) if ratings["count"] < 100 else (str(round(ratings["count"], -2)) + "+"),
-				"stars" : ('★' * ratings["average"]) + ('☆' * (5 - ratings["average"])) if ratings["average"] != -1 else "",
-			})
-		return data
+		return [keyboard.get_data() for keyboard in keyboards]
 
 	@staticmethod
 	def get_by_id(query_id):
 		return db.session.query(Keyboard).filter(Keyboard.id == query_id).first()
 
 	def add_rating(self, user, rating, description):
-		new_rating = Rating(user_id=user.id, keyboard_id=self.id, rating=rating, description=description)
+		new_rating = Review(user_id=user.id, keyboard_id=self.id, rating=rating, description=description)
 		add_and_commit(new_rating)
 
 	def add_variant(self, variant_type, name):
 		new_variant = variant_type(keyboard_id=self.id, name=name)
 		add_and_commit(new_variant)
 
+	def get_data(self):
+		reviews =  self.get_reviews()
+		return {
+			"keyboard" : self,
+			"keycaps" : Item.get(Keycaps, self.keycaps),
+			"switch_type" : Item.get(SwitchType, self.switch_type),
+			"reviews" : reviews,
+			"price" : format_money(self.price),
+			"discounted_price": format_money(self.get_discounted_price()),
+			"number_of_reviews" : str(reviews["count"]) if reviews["count"] < 100 else (str(round(reviews["count"], -2)) + "+"),
+			"switches" : self.get_variants(Switch),
+			"colors" : self.get_variants(Color),
+			"stars" : ('★' * int(reviews["average"])) + ('☆' * (5 - int(reviews["average"]))) if int(reviews["average"]) != -1 else "",
+		}
+
 	def get_discounted_price(self):
 		return int(self.price - self.price * (self.discount / 100))
 	
-	def get_ratings(self):
-		ratings = db.session.query(Rating).filter(Rating.id == self.id).all()
-		count = len(ratings)
+	def get_reviews(self):
+		reviews = db.session.query(Review).filter(Review.id == self.id).all()
+		reviewers = [review.get_reviewer() for review in reviews]
+		count = len(reviews)
 		sum = 0
-		for rating in ratings: sum += rating.rating
+		for rating in reviews: sum += rating.rating
 		return {
-			"ratings" : ratings,
+			"reviews" : reviews,
+			"reviewers" : reviewers,
+			"stars" : [review.get_stars() for review in reviews],
 			"count" : count,
-			"average" : int(round((sum / count) if count > 0 else -1, 1)),
+			"average" : round((sum / count) if count > 0 else -1, 1),
 		}
 
 	def get_variants(self, variant_type):
@@ -156,13 +168,20 @@ class Cart(db.Model):
 	def __repr__(self):
 		return '<Cart %r>' % self.id
 	
-class Rating(db.Model):
-	__tablename__ = 'rating'
+class Review(db.Model):
+	__tablename__ = 'review'
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	keyboard_id = db.Column(db.Integer, db.ForeignKey('keyboard.id'), nullable=False)
-	rating = db.Column(db.Integer, nullable=False)
-	description = db.Column(db.String(1024), nullable=True)
+	rating = db.Column(db.Integer)
+	description = db.Column(db.String(1024))
 
 	def __repr__(self):
 		return '<Rating %r>' % self.id
+
+	def get_stars(self):
+		return ('★' * self.rating) + ('☆' * (5 - self.rating)) if self.rating != -1 else ""
+
+
+	def get_reviewer(self):
+		return db.session.query(User).filter(User.id == self.user_id).first()
