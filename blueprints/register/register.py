@@ -28,13 +28,6 @@ class Register:
 					message = validation_results["reason"]
 			return render_template('register.html', message=message, full_name=full_name, username=username, email=email, password=password, bank_number=bank_number)
 
-		@self.register_bp.route('/')
-		def index():
-			if current_user.is_authenticated:
-				print(str(current_user.username))
-
-			return render_template("main_page.html")
-
 		flask_app.register_blueprint(self.register_bp)
 	
 	

@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, request, jsonif
 from flask_login import current_user
 from app import db, request
 
-class Products:
+class ProductsPage:
 	products_bp = Blueprint("products", __name__, template_folder="templates", static_folder="static", static_url_path="/showcase/static/")
 	
 	def __init__(self, flask_app, bcrypt):		

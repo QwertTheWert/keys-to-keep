@@ -2,7 +2,7 @@
 
 {% block head %}
 <title>Keys 2 Keep</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='main_page.css') }}">
+<link rel="stylesheet" href="{{ url_for('main_page.static', filename='main_page.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -269,14 +269,14 @@
 	</div>
 </div>
 
-<div class="category-buttons">
+<!-- <div class="category-buttons">
 	<a href="keyboards.html" class="category-button">KEYBOARDS</a>
 	<a href="barebones.html" class="category-button">BAREBONES</a>
 	<a href="switches.html" class="category-button">SWITCHES</a>
 	<a href="keycaps.html" class="category-button">KEYCAPS</a>
 	<a href="accessories.html" class="category-button">ACCESSORIES</a>
 	<a href="others.html" class="category-button">OTHERS</a>
-</div>
+</div> -->
 
 <div class="logos">
 	<div class="logos-slide">
@@ -293,5 +293,5 @@
 
 
 
-<script src="{{ url_for('static', filename='main_page.js') }}"></script>
+<script src="{{ url_for('main_page.static', filename='main_page.js') }}"></script>
 {% endblock %}

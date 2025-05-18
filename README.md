@@ -6,7 +6,7 @@
 3. Di directory applikasi ini, buatlah virtual environment python (nama bebas, tapi aku pake flask) `python -m venv flask`
 4. Activate environment `flask/Scripts/activate.bat`
 5. Jalankan code ini untuk download library `python -m pip install -r requirements.txt`
-6. Jika belum ada database, ketik py di console lalu lalukan perintah ini:
+6. Jika belum ada database, ketik `py` di console untuk buka Python lalu lalukan perintah ini:
 ```
 from app import db, create_app, create_dummy_data
 new_app = create_app()

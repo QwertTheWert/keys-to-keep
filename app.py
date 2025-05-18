@@ -27,19 +27,21 @@ def create_app():
 
 	bcrypt = Bcrypt(app)
 	
+	from blueprints.main_page.main_page import MainPage
 	from blueprints.cart.cart import CartPage
 	from blueprints.login.login import Login
 	from blueprints.register.register import Register
 	from blueprints.payment.payment import Payment
 	from blueprints.product.product import Product
 	from blueprints.profile.profile import Profile
-	from blueprints.products.products import Products
+	from blueprints.products.products import ProductsPage
 
+	MainPage(app, bcrypt)
 	Register(app, bcrypt)
 	Login(app, bcrypt)
 	Product(app, bcrypt)
 	Profile(app, bcrypt)
-	Products(app, bcrypt)
+	ProductsPage(app, bcrypt)
 	CartPage(app, bcrypt)
 	Payment(app, bcrypt)
 
