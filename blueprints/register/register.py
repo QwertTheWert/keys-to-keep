@@ -23,7 +23,7 @@ class Register:
 				validation_results = self.validate_data(username, email)
 				if validation_results["valid"]:
 					self.create_user(full_name, username, email, hashed_password, bank_number)
-					return redirect(url_for("register.index"))
+					return redirect(url_for("main_page.main_page"))
 				else:
 					message = validation_results["reason"]
 			return render_template('register.html', message=message, full_name=full_name, username=username, email=email, password=password, bank_number=bank_number)

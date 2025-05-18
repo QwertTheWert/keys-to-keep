@@ -44,6 +44,10 @@ class Item(db.Model):
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	name = db.Column(db.String(200), nullable=False)
 
+	@staticmethod
+	def get(class_name, query_id):
+		return db.session.query(class_name).filter(class_name.id == query_id).first()
+
 	def delete(self):
 		db.session.delete(self)
 		db.session.commit()
@@ -90,6 +94,8 @@ class Keyboard(Item):
 		reviews =  self.get_reviews()
 		return {
 			"keyboard" : self,
+			"keycaps" : Item.get(Keycaps, self.keycaps),
+			"switch_type" : Item.get(SwitchType, self.switch_type),
 			"reviews" : reviews,
 			"price" : format_money(self.price),
 			"discounted_price": format_money(self.get_discounted_price()),
@@ -111,6 +117,7 @@ class Keyboard(Item):
 		return {
 			"reviews" : reviews,
 			"reviewers" : reviewers,
+			"stars" : [review.get_stars() for review in reviews],
 			"count" : count,
 			"average" : round((sum / count) if count > 0 else -1, 1),
 		}
@@ -171,6 +178,10 @@ class Review(db.Model):
 
 	def __repr__(self):
 		return '<Rating %r>' % self.id
+
+	def get_stars(self):
+		return ('★' * self.rating) + ('☆' * (5 - self.rating)) if self.rating != -1 else ""
+
 
 	def get_reviewer(self):
 		return db.session.query(User).filter(User.id == self.user_id).first()

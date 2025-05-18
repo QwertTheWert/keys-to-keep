@@ -15,13 +15,15 @@ class ProductsPage:
 		
 		@self.products_bp.route('/keyboards/get_variants', methods=['POST'])
 		def get_variants():
-			data = request.get_json()
-			keyboard_id = int(data["keyboard_id"])
-			keyboard = Keyboard.get_by_id(keyboard_id)
-			colors = [color.to_dict() for color in keyboard.get_variants(Color)]
-			switches = [switch.to_dict() for switch in keyboard.get_variants(Switch)]
-			print(colors, switches)
-			return jsonify({'colors': colors, 'switches' : switches})
+			if current_user.is_authenticated:
+				data = request.get_json()
+				keyboard_id = int(data["keyboard_id"])
+				keyboard = Keyboard.get_by_id(keyboard_id)
+				colors = [color.to_dict() for color in keyboard.get_variants(Color)]
+				switches = [switch.to_dict() for switch in keyboard.get_variants(Switch)]
+				return jsonify({'success' : True, 'colors': colors, 'switches' : switches})
+			else:
+				return jsonify({'success' : False})
 
 		@self.products_bp.route('/keyboards/add_to_cart', methods=['POST'])
 		def add_to_cart():
@@ -32,7 +34,7 @@ class ProductsPage:
 			switch_id = int(data["variant_info"]["switch"])
 			current_user.add_to_cart(keyboard, color_id, switch_id, 1)
 			return jsonify({'keyboard_name': keyboard.name})
-		
+				
 		@self.products_bp.route('/accessories')
 		def accessories():
 			return render_template("keyboards.html")

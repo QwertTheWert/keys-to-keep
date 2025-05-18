@@ -7,7 +7,13 @@
 
 {% block content %}
 
-<body>
+
+<div id="alert" class="alert alert-success alert-dismissible fade d-none mt-3" role="alert">
+	<strong id="product-name"> {{ data.keyboard.name }} </strong> was added to your cart.
+</div>
+
+
+<body data-color="{{ data.colors[0].id }}" data-switch="{{ data.switches[0].id }}"" data-id="{{ data.keyboard.id }}">
 	<div class="product-container">
 		<div class="product-image">
 			<img src="{{ url_for('static', filename='assets/xera87.jpg') }}" alt="{{ data.keyboard.name }}" />
@@ -26,22 +32,37 @@
 				<div class="product-options">
 					<div class="color-options">
 						<label>Warna:</label>
-						{% for color in data.colors %}
-						<button>{{ color.name }}</button>
+						{% for i in range(data.colors | length) %}
+						<button 
+							class="btn btn-outline-secondary color-btn {% if i == 0 %} active {% endif %}" 
+							id="color-btn-{ data.colors[i].id }" 
+							data-id="{{ data.colors[i].id }}" 
+							onclick="onVariantBtnClick(this, 'color')"
+						>
+							{{ data.colors[i].name }}
+						</button>
 						{% endfor %}
 					</div>
 	
 					<div class="switch-options">
 						<label>Switch:</label>
-						{% for switch in data.switches %}
-						<button>{{ switch.name }}</button>
+						{% for i in range(data.switches | length) %}
+						<button 
+							class="btn btn-outline-secondary switch-btn {% if i == 0 %} active {% endif %}" 
+							id="switch-btn-{ data.colors[i].id }" 
+							data-id="{{ data.colors[i].id }}" 
+							onclick="onVariantBtnClick(this, 'switch')"
+						>
+							{{ data.switches[i].name }}
+						</button>
 						{% endfor %}
 					</div>
 				</div>
 				<div class="product-action">
-					<input type="number" value="1" min="1" />
-					<button>Tambah ke Keranjang</button>
-					<button class="buy-now">Beli Sekarang</button>
+					<input id="qty-field" type="number" value="1" min="1" max="{{ data.keyboard.quantity }}"/>
+					<span> Stock: {{ data.keyboard.quantity }} </span>
+					<button id="add-to-cart-btn" onclick="onAddtoCartClick()">Tambah ke Keranjang</button>
+					<button class="buy-now" id="buy-now-btn" onclick="onBuyNowClick()">Beli Sekarang</button>
 				</div>
 			</div>
 
@@ -49,10 +70,10 @@
 				<h2>specification</h2>
 				<div class="spec-list">
 					<div class="spec-item">
-						<strong>Keycaps:</strong> {{ data.keyboard.keycaps }}
+						<strong>Keycaps:</strong> {{ data.keycaps.name }}
 					</div>
 					<div class="spec-item">
-						<strong>Switch Type:</strong> {{ data.keyboard.switch_type }}
+						<strong>Switch Type:</strong> {{ data.switch_type.name }}
 					</div>
 				</div>
 			</div>
@@ -76,7 +97,7 @@
 		<div class="review-list">
 			{% for i in range(data.reviews.count) %}
 			<div class="review-item">
-				<p class="review-stars">{{ data.reviews.reviewers[i].username }}</p>
+				<p class="review-stars">{{ data.reviews.reviewers[i].username }} {{ data.reviews.stars[i] }}</p>
 				<p class="review-text">{{ data.reviews.reviews[i].description }}</p>
 			</div>
 			{% endfor %}
@@ -85,5 +106,6 @@
 </body>
 </html>
 
+<script src="{{ url_for('keyboard.static', filename='keyboard.js') }}"></script>
 
 {% endblock %}

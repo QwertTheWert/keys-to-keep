@@ -34,7 +34,7 @@ class Profile:
 			user_to_delete = User.query.filter(User.id == current_user.id).first()
 			logout_user()
 			user_to_delete.delete()
-			return redirect(url_for("register.index"))
+			return redirect(url_for("main_page.main_page"))
 
 
 		flask_app.register_blueprint(self.profile_bp)

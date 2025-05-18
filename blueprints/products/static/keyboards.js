@@ -1,6 +1,7 @@
 const colorContainer = document.getElementById("color-options");
 const switchContainer = document.getElementById("switch-options");
 const finalizeBtn = document.getElementById("finalize");	
+const alertBox = document.getElementById("alert");
 
 let currentKeyboardId;
 let variantInfo;
@@ -24,11 +25,16 @@ document.querySelectorAll('.open-modal').forEach(btn =>
 		})
 		.then(response => response.json())
 		.then(data => {
-			colorContainer.innerHTML = "";
-			switchContainer.innerHTML = "";
-			finalizeBtn.disabled = true;
-			data.colors.forEach(e => {addButton(e.name, e.id, "color", colorContainer);});
-			data.switches.forEach(e => {addButton(e.name, e.id, "switch", switchContainer);});
+			console.log(data);
+			if (data.success) {
+				colorContainer.innerHTML = "";
+				switchContainer.innerHTML = "";
+				finalizeBtn.disabled = true;
+				data.colors.forEach(e => {addButton(e.name, e.id, "color", colorContainer);});
+				data.switches.forEach(e => {addButton(e.name, e.id, "switch", switchContainer);});
+			}  else {
+				window.location.href = '/login';
+			}
 		});
 	})
 );
@@ -62,7 +68,6 @@ function addButton(text, id, variantType, container) {
 		newBtn.classList.add('active');
 		variantInfo[variantType] = id;
 		finalizeBtn.disabled = variantInfo["switch"] == null || variantInfo["color"] == null;
-		
 	}
 	container.appendChild(newBtn);
 }

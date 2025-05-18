@@ -16,7 +16,7 @@ class Login:
 				identifier = request.form.get("identifier")
 				password = request.form.get("password")
 				if self.validate_login(identifier, password, bcrypt):
-					return redirect(url_for("register.index"))
+					return redirect(url_for("main_page.main_page"))
 				else:
 					message = "Invalid username or password."		
 			return render_template('login.html', message=message)
@@ -25,7 +25,7 @@ class Login:
 		flask_app.register_blueprint(self.login_bp)
 
 	def validate_login(self, identifier, password, bcrypt):
-		user = (User.get_by_email(identifier) if "@" in identifier else User.get_by_username(identifier)).first()
+		user = (User.get_by_email(identifier) if "@" in identifier else User.get_by_username(identifier))
 		if user is not None:
 			if bcrypt.check_password_hash(user.password, password):
 				login_user(user)
