@@ -72,17 +72,7 @@ class Keyboard(Item):
 	@staticmethod
 	def get_data_all(is_ascending):
 		keyboards = db.session.query(Keyboard).order_by(Keyboard.price.asc() if is_ascending else Keyboard.price.desc()).all()
-		data = []
-		for keyboard in keyboards:
-			ratings =  keyboard.get_reviews()
-			data.append({
-				"keyboard" : keyboard,
-				"price" : format_money(keyboard.price),
-				"discounted_price": format_money(keyboard.get_discounted_price()),
-				"number_of_ratings" : str(ratings["count"]) if ratings["count"] < 100 else (str(round(ratings["count"], -2)) + "+"),
-				"stars" : ('★' * int(ratings["average"])) + ('☆' * (5 - int(ratings["average"]))) if int(ratings["average"]) != -1 else "",
-			})
-		return data
+		return [keyboard.get_data() for keyboard in keyboards]
 
 	@staticmethod
 	def get_by_id(query_id):
@@ -96,18 +86,31 @@ class Keyboard(Item):
 		new_variant = variant_type(keyboard_id=self.id, name=name)
 		add_and_commit(new_variant)
 
+	def get_data(self):
+		reviews =  self.get_reviews()
+		return {
+			"keyboard" : self,
+			"reviews" : reviews,
+			"price" : format_money(self.price),
+			"discounted_price": format_money(self.get_discounted_price()),
+			"number_of_reviews" : str(reviews["count"]) if reviews["count"] < 100 else (str(round(reviews["count"], -2)) + "+"),
+			"switches" : self.get_variants(Switch),
+			"colors" : self.get_variants(Color),
+			"stars" : ('★' * int(reviews["average"])) + ('☆' * (5 - int(reviews["average"]))) if int(reviews["average"]) != -1 else "",
+		}
+
 	def get_discounted_price(self):
 		return int(self.price - self.price * (self.discount / 100))
 	
 	def get_reviews(self):
 		reviews = db.session.query(Review).filter(Review.id == self.id).all()
-		reviwers = [review.get_reviewer() for review in reviews]
+		reviewers = [review.get_reviewer() for review in reviews]
 		count = len(reviews)
 		sum = 0
 		for rating in reviews: sum += rating.rating
 		return {
 			"reviews" : reviews,
-			"reviewers" : reviwers,
+			"reviewers" : reviewers,
 			"count" : count,
 			"average" : round((sum / count) if count > 0 else -1, 1),
 		}
