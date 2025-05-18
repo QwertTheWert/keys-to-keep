@@ -169,12 +169,12 @@ class Cart(db.Model):
 		return '<Cart %r>' % self.id
 	
 class Review(db.Model):
-	__tablename__ = 'rating'
+	__tablename__ = 'review'
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	keyboard_id = db.Column(db.Integer, db.ForeignKey('keyboard.id'), nullable=False)
-	rating = db.Column(db.Integer, nullable=False)
-	description = db.Column(db.String(1024), nullable=True)
+	rating = db.Column(db.Integer)
+	description = db.Column(db.String(1024))
 
 	def __repr__(self):
 		return '<Rating %r>' % self.id
