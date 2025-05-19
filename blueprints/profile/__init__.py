@@ -3,7 +3,7 @@ from flask_login import logout_user, current_user
 from app import db, request
 from models import User
 
-class Profile:
+class ProfilePage:
 	profile_bp = Blueprint("profile", __name__, template_folder="templates", static_folder="static", static_url_path="/profile/static/")
 
 	def __init__(self, flask_app, bcrypt):

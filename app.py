@@ -29,18 +29,18 @@ def create_app():
 	
 	from blueprints.main_page import MainPage
 	from blueprints.cart import CartPage
-	from blueprints.login import Login
-	from blueprints.register import Register
+	from blueprints.login import LoginPage
+	from blueprints.register import RegisterPage
 	from blueprints.payment import PaymentPage
 	from blueprints.keyboard import KeyboardPage
-	from blueprints.profile import Profile
+	from blueprints.profile import ProfilePage
 	from blueprints.products import ProductsPage
 
 	MainPage(app, bcrypt)
-	Register(app, bcrypt)
-	Login(app, bcrypt)
+	RegisterPage(app, bcrypt)
+	LoginPage(app, bcrypt)
 	KeyboardPage(app, bcrypt)
-	Profile(app, bcrypt)
+	ProfilePage(app, bcrypt)
 	ProductsPage(app, bcrypt)
 	CartPage(app, bcrypt)
 	PaymentPage(app, bcrypt)

@@ -3,7 +3,7 @@ from flask_login import login_user
 from app import request
 from models import User
 
-class Login:
+class LoginPage:
 	
 	login_bp = Blueprint("login", __name__, template_folder="templates", static_folder="static", static_url_path="/login/static/")
 
