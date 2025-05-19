@@ -27,14 +27,14 @@ def create_app():
 
 	bcrypt = Bcrypt(app)
 	
-	from blueprints.main_page.main_page import MainPage
-	from blueprints.cart.cart import CartPage
-	from blueprints.login.login import Login
-	from blueprints.register.register import Register
-	from blueprints.payment.payment import Payment
-	from blueprints.keyboard.keyboard import KeyboardPage
-	from blueprints.profile.profile import Profile
-	from blueprints.products.products import ProductsPage
+	from blueprints.main_page import MainPage
+	from blueprints.cart import CartPage
+	from blueprints.login import Login
+	from blueprints.register import Register
+	from blueprints.payment import PaymentPage
+	from blueprints.keyboard import KeyboardPage
+	from blueprints.profile import Profile
+	from blueprints.products import ProductsPage
 
 	MainPage(app, bcrypt)
 	Register(app, bcrypt)
@@ -43,7 +43,7 @@ def create_app():
 	Profile(app, bcrypt)
 	ProductsPage(app, bcrypt)
 	CartPage(app, bcrypt)
-	Payment(app, bcrypt)
+	PaymentPage(app, bcrypt)
 
 	@login_manager.user_loader 
 	def load_user(user):

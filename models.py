@@ -8,7 +8,7 @@ class User(db.Model, UserMixin):
 	full_name = db.Column(db.String(200), nullable=False)
 	email = db.Column(db.String(200), nullable=False, unique=True)
 	password = db.Column(db.String(200), nullable=False)
-	bank_number = db.Column(db.String(200), nullable=False)
+	address = db.Column(db.String(200), nullable=False)
 		
 	def __repr__(self):
 		return '<User %r>' % self.id

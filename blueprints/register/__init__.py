@@ -17,16 +17,16 @@ class Register:
 			username = request.form.get("username")
 			email = request.form.get("email")
 			password = request.form.get("password")
-			bank_number = request.form.get("bank_number")
+			address = request.form.get("address")
 			hashed_password = bcrypt.generate_password_hash(password) if password else ""
 			if request.method == "POST":
 				validation_results = self.validate_data(username, email)
 				if validation_results["valid"]:
-					self.create_user(full_name, username, email, hashed_password, bank_number)
+					self.create_user(full_name, username, email, hashed_password, address)
 					return redirect(url_for("main_page.main_page"))
 				else:
 					message = validation_results["reason"]
-			return render_template('register.html', message=message, full_name=full_name, username=username, email=email, password=password, bank_number=bank_number)
+			return render_template('register.html', message=message, full_name=full_name, username=username, email=email, password=password, address=address)
 
 		flask_app.register_blueprint(self.register_bp)
 	
@@ -42,7 +42,7 @@ class Register:
 			return_json["reason"] = "Username is taken. Please use another one." if select_by_username is not None else "Email is taken. Please use another one."
 		return return_json
 
-	def create_user(self, full_name, username, email, password, bank_number):
-		new_user = User(full_name=full_name, username=username, email=email, password=password, bank_number=bank_number)
+	def create_user(self, full_name, username, email, password, address):
+		new_user = User(full_name=full_name, username=username, email=email, password=password, address=address)
 		add_and_commit(new_user)
 		login_user(new_user)
