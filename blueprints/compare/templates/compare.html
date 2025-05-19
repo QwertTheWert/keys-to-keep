@@ -1,0 +1,16 @@
+{% extends 'navbar_template.html' %}
+
+{% block head %}
+<title>Compare Keyboards</title>
+<link rel="stylesheet" href="{{ url_for('compare.static', filename='compare.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Your compare page content goes here -->
+    <h1>Compare Keyboards</h1>
+    <!-- Add your comparison content here -->
+</div>
+
+<script src="{{ url_for('compare.static', filename='compare.js') }}"></script>
+{% endblock %}
