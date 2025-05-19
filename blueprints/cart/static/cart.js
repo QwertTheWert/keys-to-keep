@@ -77,3 +77,7 @@ function update_price_display(data, cartID) {
 	document.getElementById(`qty-down-${cartID}`).disabled = (data.status == "min");
 	document.getElementById(`qty-up-${cartID}`).disabled = (data.status == "max");
 }
+
+function onCheckoutBtnClick() {
+	document.location.href = "/payment";
+}

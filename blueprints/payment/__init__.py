@@ -9,6 +9,8 @@ class PaymentPage:
 
 		@self.payment_bp.route('/payment')
 		def payment():
-			return render_template("payment.html")
+			if current_user.is_authenticated:
+				carts = current_user.get_carts()
+			return render_template("payment.html", carts=carts, user=current_user)
 
 		flask_app.register_blueprint(self.payment_bp)

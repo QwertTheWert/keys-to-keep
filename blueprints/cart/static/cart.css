@@ -87,11 +87,7 @@
 }
 
 .checkout {
-    background: green;
-    color: white;
-    border: none;
     padding: 10px 15px;
-    cursor: pointer;
     width: 100%;
     padding: 10px;
     font-size: 16px;    

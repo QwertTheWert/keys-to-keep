@@ -16,7 +16,7 @@ document.querySelectorAll('.open-modal').forEach(btn =>
 	btn.addEventListener('click', function () {
 		currentKeyboardId = this.dataset.id;
 		variantInfo = {};
-		fetch(`keyboards/get_variants`, {
+		fetch(`marketplace/get_variants`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ document.querySelectorAll('.open-modal').forEach(btn =>
 );
 
 finalizeBtn.addEventListener('click', function () {
-	fetch(`keyboards/add_to_cart`, {
+	fetch(`marketplace/add_to_cart`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',

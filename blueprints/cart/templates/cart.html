@@ -51,7 +51,7 @@
 
 		<div class="Total_Price_container">
 			<h3>Total: Rp. <span id="total">{{ total }}</span></h3>
-			<button class="checkout" id="checkout" {% if cart_data %} disabled="true" {% endif %}>Proceed to Checkout</button>
+			<button class="checkout btn btn-success" id="checkout" {% if cart_data | length == 0 %} disabled="true" {% endif %} onclick="onCheckoutBtnClick()">Proceed to Checkout</button>
 		</div>
 		
 	</div>
