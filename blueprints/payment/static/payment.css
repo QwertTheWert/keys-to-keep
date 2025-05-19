@@ -1,4 +1,4 @@
-.Page_container {
+.page-container {
     display: flex;
     align-items: flex-start;
     flex-direction: row;
@@ -12,7 +12,7 @@
     background-color: green;
 }
 
-.Main_Block{
+.main-block{
     width: 70em;
     max-height: 45em;
     min-height: 19.1em;
@@ -30,7 +30,7 @@
     border-radius: 13px;
 }
 
-.Inner_Text{
+.inner-text{
   margin: 20px 10px 10px 20px;  
 }
 

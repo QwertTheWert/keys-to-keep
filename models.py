@@ -62,6 +62,7 @@ class Keycaps(Item):
 	def __repr__(self):
 		return '<Keycaps %r>' % self.id
 
+
 class Keyboard(Item):
 	__tablename__ = 'keyboard'
 	subtitle = db.Column(db.String(200))

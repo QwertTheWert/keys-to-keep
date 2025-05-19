@@ -6,20 +6,35 @@
 {% endblock %}
 
 {% block content %}
-<div class="Page_container">
-    <div class="Main_Block">
-        <div class="Inner_Text">
-            <h3>Seller Name</h3>
+<div class="page-container">
+    <div class="main-block">
+        {% for i in range(data.carts | length) %}
+            <div class="inner-text">
+                <h3> {{ data.keyboards[i].keyboard.name }} </h3>
+                <div class="Preview_Container">
+                    <img src="static\assets\xera87.jpg" alt="" class="Image_Preview">
+                    <div>
+                        <p>{{ data.keyboards[i].keyboard.subtitle }}</p>
+                        <p>
+                            <b>Color:</b> {{ data.color[i].name }} |
+                            <b>Switch: </b>{{ data.switch[i].name }}
+                        </p>
+                        <p>
+                            Rp. 
+                            {{ data.keyboards[i].discounted_price}}
+                            ×
+                            {{ data.carts[i].quantity }}
+                            = Rp. 
+                            {{ data.subtotal[i] }}
 
-            <div class="Preview_Container">
-                <img src="static\assets\xera87.jpg" alt="" class="Image_Preview">
-                <div>
-                    <p>PREVIEW NAME PRODUCT</p>
-                    <p>PREVIEW MODEL</p>
-                    <p>PREVIEW PRICE (PRICE X NUMBER OF ITEMS)</p>
-                </div>
+                        </p>
+                    </div>
+                </div>    
             </div>
+            <hr>
+        {%  endfor %}
 
+        <div class="inner-text">
             <div>
                 <select class="Time_Option">
                     <option>-- Delivery time --</option>
@@ -28,13 +43,12 @@
                     <option>Economic (3-7 days)</option>
                 </select>
             </div>
-
             <p>PREVIEW ADDRESS: City, State, road name, house number</p>
         </div>
     </div>
 
     <div class="Side_Block">
-        <div class="Inner_Text">
+        <div class="inner-text">
             <h3>Payment Options</h3>
                 <form class="Payment_Options">
                     <label>
@@ -57,7 +71,7 @@
                     CIMB
                     </label>
                 </form>
-            <p>Total: Rp.1000000</p>
+            <p>Total: Rp. {{ data.total }}</p>
             <button class="Purchase_button">Purchase</button>
               
         </div>
