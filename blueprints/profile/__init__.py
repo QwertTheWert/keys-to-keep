@@ -18,10 +18,10 @@ class ProfilePage:
 		@self.profile_bp.route('/profile/edit', methods=["GET", "POST"])
 		def edit():
 			if request.method == "POST":
-				current_user.update(request.form.get("full_name"), request.form.get("email"), request.form.get("bank_number"))
+				current_user.update(request.form.get("full_name"), request.form.get("email"), request.form.get("address"))
 				return redirect(url_for("profile.profile"))
 			else:
-				return render_template("edit_profile.html", user=current_user, full_name=str(current_user.full_name), email=str(current_user.email), bank_number=str(current_user.bank_number))
+				return render_template("edit_profile.html", user=current_user, full_name=str(current_user.full_name), email=str(current_user.email), address=str(current_user.address))
 
 
 		@self.profile_bp.route('/profile/logout')
