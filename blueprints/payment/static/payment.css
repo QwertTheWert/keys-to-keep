@@ -48,13 +48,13 @@
     border-radius: 13px;
 }
 
-.Time_Option{
+.delivery-option{
     border-width: 1px;   
     border-radius: 6px;       
     background: none;      
     font-size: 16px;
     padding: 5px;
-    width: 200px;
+    /* width: 200px; */
     cursor: pointer;
     margin: 0px 0px 10px 0px;
 }

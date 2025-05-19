@@ -36,7 +36,7 @@ class CartPage:
 				status = "min"
 
 			new_cart_data = cart.get_data()
-			return jsonify({'new_quantity': cart.quantity, "new_subtotal" : new_cart_data["subtotal"], "new_total" : current_user.get_total(), "status": status})
+			return jsonify({'new_quantity': cart.quantity, "new_subtotal" : new_cart_data["subtotal"], "new_total" : format_money(current_user.get_total()), "status": status})
 		
 		@self.cart_bp.route('/cart/remove', methods=['POST'])
 		def remove():
@@ -44,6 +44,6 @@ class CartPage:
 			cart = Cart.get_by_id(data["cart_id"])
 			db.session.delete(cart)
 			db.session.commit()
-			return jsonify({"new_total" : current_user.get_total()})
+			return jsonify({"new_total" : format_money(current_user.get_total())})
 		
 		flask_app.register_blueprint(self.cart_bp)

@@ -7,77 +7,82 @@
 
 {% block content %}
 <div class="page-container">
-    <div class="main-block">
-        {% for i in range(data.carts | length) %}
-            <div class="inner-text">
-                <h3> {{ data.keyboards[i].keyboard.name }} </h3>
-                <div class="Preview_Container">
-                    <img src="static\assets\xera87.jpg" alt="" class="Image_Preview">
-                    <div>
-                        <p>{{ data.keyboards[i].keyboard.subtitle }}</p>
-                        <p>
-                            <b>Color:</b> {{ data.color[i].name }} |
-                            <b>Switch: </b>{{ data.switch[i].name }}
-                        </p>
-                        <p>
-                            Rp. 
-                            {{ data.keyboards[i].discounted_price}}
-                            ×
-                            {{ data.carts[i].quantity }}
-                            = Rp. 
-                            {{ data.subtotal[i] }}
+	<div class="main-block">
+		{% for cart_datum in data.cart_data %}
+			<div class="inner-text">
+				<h3> {{ cart_datum.keyboard_data.keyboard.name }} </h3>
+				<div class="Preview_Container">
+					<img src="static\assets\xera87.jpg" alt="" class="Image_Preview">
+					<div>
+						<p>{{ cart_datum.keyboard_data.keyboard.subtitle }}</p>
+						<p>
+							<b>Color:</b> {{ cart_datum.color.name }} |
+							<b>Switch: </b>{{ cart_datum.switch.name }}
+						</p>
+						<p>
+							Rp. 
+							{{ cart_datum.keyboard_data.discounted_price }}
+							×
+							{{ cart_datum.cart.quantity }}
+							= Rp. 
+							{{ cart_datum.subtotal }}
 
-                        </p>
-                    </div>
-                </div>    
-            </div>
-            <hr>
-        {%  endfor %}
+						</p>
+					</div>
+				</div>    
+			</div>
+			<hr>
+		{%  endfor %}
 
-        <div class="inner-text">
-            <div>
-                <select class="Time_Option">
-                    <option>-- Delivery time --</option>
-                    <option>Instant (1-2 hr)</option>
-                    <option>Regular (1-3 days)</option>
-                    <option>Economic (3-7 days)</option>
-                </select>
-            </div>
-            <p><b>Address:</b> {{ user.address }}</p>
-        </div>
-    </div>
+		<div class="inner-text">
+			<div>
+				<select class="delivery-option" id="delivery-option" onchange="onDeliverySelect(this.value)">
+					<option value="" disabled selected>-- Select your Delivery Service --</option>
+					{% for d in delivery_services %}
+	p					<option value="{{ d.id }}"> {{ d.name }} </option>
+					{% endfor %}
+				</select>
+				<p>
+					<b>Delivery Fee:</b> <span id="delivery-fee">-</span>
+				</p>
+			</div>
+			<p><b>Address:</b> {{ user.address }}</p>
+			
+		</div>
+	</div>
 
-    <div class="Side_Block">
-        <div class="inner-text">
-            <h3>Payment Options</h3>
-                <form class="Payment_Options">
-                    <label>
-                    <input type="radio" name="PaymentOptions" value="1">
-                    BCA
-                    </label><br>
-                
-                    <label>
-                    <input type="radio" name="PaymentOptions" value="2">
-                    BNI
-                    </label><br>
-                
-                    <label>
-                    <input type="radio" name="PaymentOptions" value="3">
-                    Mandiri
-                    </label><br>
-                
-                    <label>
-                    <input type="radio" name="PaymentOptions" value="4">
-                    CIMB
-                    </label>
-                </form>
-            <p>Total: Rp. {{ data.total }}</p>
-            <button class="Purchase_button">Purchase</button>
-              
-        </div>
-    </div>
+	<div class="Side_Block">
+		<div class="inner-text">
+			<h3>Payment Options</h3>
+				<form class="Payment_Options">
+					<label>
+					<input type="radio" name="PaymentOptions" value="1">
+					BCA
+					</label><br>
+				
+					<label>
+					<input type="radio" name="PaymentOptions" value="2">
+					BNI
+					</label><br>
+				
+					<label>
+					<input type="radio" name="PaymentOptions" value="3">
+					Mandiri
+					</label><br>
+
+					<label>
+					<input type="radio" name="PaymentOptions" value="4">
+					CIMB
+					</label>
+				</form>
+			<p>Total: <span id="total-price" data-total="{{ data.total_int }}" > Rp. {{ data.total }}</span></p>
+			<button class="Purchase_button">Purchase</button>
+			  
+		</div>
+	</div>
 </div>
 
 
-<link rel="stylesheet" href="{{ url_for('payment.static', filename='XXXXX.js') }}">
+<script src="{{ url_for('payment.static', filename='payment.js') }}"></script>
+
 {% endblock %}

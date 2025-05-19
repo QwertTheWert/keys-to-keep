@@ -39,7 +39,7 @@ class User(db.Model, UserMixin):
 	def get_total(self, cart_data=None):
 		if cart_data == None:
 			cart_data = [cart.get_data() for cart in db.session.query(Cart).filter(Cart.user_id == self.id).all()]
-		return format_money(sum([cart_datum["subtotal_int"] for cart_datum in cart_data]))
+		return sum([cart_datum["subtotal_int"] for cart_datum in cart_data])
 
 	def get_carts(self):
 		carts = db.session.query(Cart).filter(Cart.user_id == self.id).all()
@@ -47,7 +47,8 @@ class User(db.Model, UserMixin):
 		total = self.get_total(cart_data)
 		return {
 			"cart_data": cart_data,
-			"total": total,
+			"total": format_money(total),
+			"total_int": total,
 		}
 
 
@@ -170,6 +171,7 @@ class Cart(db.Model):
 	keyboard_id = db.Column(db.Integer, db.ForeignKey('keyboard.id'), nullable=False)
 	color_id = db.Column(db.Integer, db.ForeignKey('color.id'), nullable=False)
 	switch_id = db.Column(db.Integer, db.ForeignKey('switch.id'), nullable=False)
+	transaction_id = db.Column(db.Integer, db.ForeignKey('transaction.id'))
 	quantity = db.Column(db.Integer, nullable=False)
 
 	@staticmethod
@@ -208,6 +210,30 @@ class Review(db.Model):
 	def get_stars(self):
 		return ('★' * self.rating) + ('☆' * (5 - self.rating)) if self.rating != -1 else ""
 
-
 	def get_reviewer(self):
 		return db.session.query(User).filter(User.id == self.user_id).first()
+
+
+class DeliveryService(Item):
+	__tablename__ = 'delivery_service'
+	price = db.Column(db.Integer, nullable=False)
+
+	@staticmethod
+	def get_all():
+		return db.session.query(DeliveryService).all()
+
+	@staticmethod
+	def get_price(query_id):
+		return db.session.query(DeliveryService).filter(DeliveryService.id == query_id).first()
+
+	def __repr__(self):
+		return '<Delivery Service -- %r>' % self.name
+	
+
+class Transaction(db.Model):
+	__tablename__ = 'transaction'
+	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+	delivery_id = db.Column(db.Integer, db.ForeignKey('transaction.id'), nullable=False)
+
+	def __repr__(self):
+		return '<Transaction %r>' % self.id

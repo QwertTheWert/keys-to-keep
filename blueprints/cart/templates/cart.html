@@ -12,9 +12,13 @@
 			{% if data.cart_data | length > 0 %}
 				{% for cart_datum in data.cart_data %}
 					<div class="cart-item" id="cart-item-{{ cart_datum.cart.id }}">
-						<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Product">
+						<a href="{{ url_for('keyboard.keyboard_details', keyboard_id=cart_datum.keyboard_data.keyboard.id) }}" class="text-reset text-decoration-none">
+							<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Product">
+						</a>
 						<div class="item-details">
-							<h3> {{cart_datum.keyboard_data.keyboard.name}}
+							<a href="{{ url_for('keyboard.keyboard_details', keyboard_id=cart_datum.keyboard_data.keyboard.id) }}" class="text-reset text-decoration-none">
+								<h3> {{cart_datum.keyboard_data.keyboard.name}}
+							</a>
 							</h3>
 							<p> {{ cart_datum.keyboard_data.keyboard.subtitle }} </p>
 							<p >

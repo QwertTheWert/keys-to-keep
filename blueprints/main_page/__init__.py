@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import Blueprint, render_template, redirect, url_for, request, session
 from flask_login import current_user
 from app import db, request
 from models import User
@@ -9,6 +9,7 @@ class MainPage:
 	def __init__(self, flask_app, bcrypt):
 		@self.main_page_bp.route('/')
 		def main_page():
+
 			return render_template("main_page.html")
 
 
