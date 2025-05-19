@@ -1,7 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request, session
-from flask_login import current_user
-from app import db, request
-from models import User
+from flask import Blueprint, render_template
 
 class MainPage:
 	main_page_bp = Blueprint("main_page", __name__, template_folder="templates", static_folder="static", static_url_path="/main_page/static/")

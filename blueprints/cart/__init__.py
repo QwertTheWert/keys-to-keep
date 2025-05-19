@@ -1,14 +1,13 @@
 from flask import Blueprint, render_template, redirect, url_for, request, jsonify
 from flask_login import current_user
 from app import db, request, format_money
-from models import Cart
 
 class CartPage:
 	cart_bp = Blueprint("cart", __name__, template_folder="templates", static_folder="static", static_url_path="/cart/static/")
 
 	def __init__(self, flask_app, bcrypt):
-		from models import Cart, Keyboard
-
+		from models import Cart
+		
 		@self.cart_bp.route('/cart')		
 		def cart():
 			if current_user.is_authenticated:
