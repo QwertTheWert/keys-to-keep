@@ -14,43 +14,62 @@
         flex-wrap: wrap;
         justify-content: center;
     }
+
+    .slider-container {
+        aspect-ratio: 16 / 9;
+    }
+
+    .slide img {
+        height: 100%;
+    }
+
+    .compare-text {
+        font-size: 1.2rem;
+    }
+
+    .compare-arrows {
+        font-size: 1.2rem;
+    }
 }
 
-/* Slider Container */
+/* Responsive Slider */
 .slider-container {
-    width: 1920;
-    height: 540px;
+    width: 100vw;
+    max-width: 100%;
+    aspect-ratio: 16 / 4.5; /* Keeps similar ratio as 1920x540 */
+    height: auto;
     overflow: hidden;
     position: relative;
     background-color: black;
+    margin: 0 auto;
 }
 
-/* Slider */
 .slider {
     display: flex;
+    height: 100%;
+    width: 100%;
     transition: transform 0.5s ease-in-out;
     background-color: black;
 }
 
-/* Individual Slides */
 .slide {
     display: flex;
     align-items: center;
-    min-width: 100%;
+    min-width: 100vw;
+    height: 100%;
     flex-shrink: 0;
     position: relative;
+    justify-content: center;
 }
 
-/* Slide Images */
-/* .slide img {
-    width: 40%;
-    max-height: 450px;
-    margin-left: 50px;
-    object-fit: contain;
-    transition: transform 0.3s ease-in-out;
-} */
+.slide img {
+    width: 100vw;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
 
-/* Slide Text */
+/* Slider Text */
 .slide-text {
     color: white;
     max-width: 30%;
@@ -145,8 +164,15 @@
 
 .trending-items-container {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
     gap: 20px;
+    scroll-behavior: smooth;
+    cursor: grab;
+    /* Optional: show scrollbar always on mobile */
+    scrollbar-width: thin;
+    scrollbar-color: #ccc #f9f9f9;
+    padding-bottom: 10px;
 }
 
 .trending-item {
@@ -154,7 +180,9 @@
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 15px;
-    width: 18rem; /* Set a fixed width for the card */
+    min-width: 260px;
+    max-width: 300px;
+    flex: 0 0 auto;
     position: relative;
     text-align: center;
 }
@@ -244,6 +272,18 @@
     background-color: #e67e22;
 }
 
+/* Optional: Style scrollbar for Webkit browsers */
+.trending-items-container::-webkit-scrollbar {
+    height: 8px;
+}
+.trending-items-container::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+.trending-items-container::-webkit-scrollbar-track {
+    background: #f9f9f9;
+}
+
 /* Newest Items */
 .newest-items {
     padding: 20px;
@@ -270,8 +310,15 @@
 
 .newest-items-container {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
     gap: 20px;
+    scroll-behavior: smooth;
+    cursor: grab;
+    /* Optional: show scrollbar always on mobile */
+    scrollbar-width: thin;
+    scrollbar-color: #ccc #f9f9f9;
+    padding-bottom: 10px;
 }
 
 .newest-item {
@@ -279,7 +326,9 @@
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 15px;
-    width: 18rem; /* Set a fixed width for the card */
+    min-width: 260px;
+    max-width: 300px;
+    flex: 0 0 auto;
     position: relative;
     text-align: center;
 }
@@ -369,35 +418,48 @@
     background-color: #e67e22;
 }
 
+/* Optional: Style scrollbar for Webkit browsers */
+.newest-items-container::-webkit-scrollbar {
+    height: 8px;
+}
+.newest-items-container::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+.newest-items-container::-webkit-scrollbar-track {
+    background: #f9f9f9;
+}
+
 /* Compare Section */
 .compare-section {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: 20px;
+    width: 100vw;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px 0;
+    background: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .compare-link {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     text-decoration: none;
-    color: white;
 }
 
 .compare-text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: bold;
+    color: #222;
+    margin-right: 20px;
 }
 
 .compare-arrows {
-    display: flex;
-    gap: 10px;
     font-size: 2rem;
+    color: #222;
 }
 
 /* Category Buttons */
@@ -479,4 +541,13 @@
     height: 100px;
     margin: 0 40px;
   }
-  
+
+/* Responsive Footer */
+.footer {
+    width: 100vw;
+    max-width: 100%;
+    background: #222;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
