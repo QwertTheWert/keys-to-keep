@@ -1,83 +1,67 @@
+const totalLabel = document.getElementById("total");
+const cartContainer = document.getElementById("cart-container");
+
 document.querySelectorAll('.qty-field').forEach(field => {
-	field.addEventListener('keydown', function (event) {
-		if (event.key === "Enter") {
-			
-			onQuantityFieldSet(this);
-		}
-	});
+	field.addEventListener('input', () => {
+		field.value = field.value.replace(/(?!^-)-|[^-0-9]/g, '');
+		updateQuantity({ cart_id: field.dataset.id, value: field.value, type: "set" });
+	})
 });
 
 document.querySelectorAll('.qty-btn').forEach(btn => {
 	btn.addEventListener('click', function() {
-		const action = this.dataset.action;
-		const cartID = this.dataset.id;
-		const total = document.getElementById("total").textContent.replace(/\./g, '');
-
-		fetch(`cart/increment_quantity`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({ cart_id: cartID, action: action, total : total }),
-		})
-		.then(response => response.json())
-		.then(data => {
-			update_price_display(data, cartID);
-		});
+		updateQuantity({ cart_id: this.dataset.id, action: this.dataset.action, type: "increment" });
 	});
 });
 
 document.querySelectorAll('.remove').forEach(remove_btn => {
 	remove_btn.addEventListener('click', function () {
-	const cartID = this.dataset.id;
-	const total = document.getElementById("total").textContent.replace(/\./g, '');
+		const cartID = this.dataset.id;
+		fetch(`cart/remove`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ cart_id: parseInt(cartID) }),
+		})
+		.then(response => response.json())
+		.then(data => {
+			document.getElementById(`cart-item-${cartID}`).remove();
+			totalLabel.textContent  = data.new_total;
+			if (document.getElementsByClassName('cart-item').length == 0) {
+				document.getElementById("checkout").disabled = true;
+				const emptyLabel = document.createElement('div');
+				emptyLabel.className = "cart-item"
+				emptyLabel.textContent = "Cart is Empty"
+				cartContainer.appendChild(emptyLabel);
+			}
+		});
+	});
+});
 
-	fetch(`cart/remove`, {
+function updateQuantity(body_data) {
+	fetch(`cart/update_quantity`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ cart_id: this.dataset.id, total : total }),
+		body: JSON.stringify(body_data),
 	})
 	.then(response => response.json())
 	.then(data => {
-		document.getElementById(`cart-item-${cartID}`).remove();
-		document.getElementById(`total`).textContent  = data.new_total;
-		if (document.getElementsByClassName('.cart-item').length == 0) {
-			document.getElementById("checkout").disabled = true;
-		}
+		updatePriceDisplay(data, body_data.cart_id);
 	});
-});
-});
-
-function onQuantityFieldSet(field) {
-	const value = field.value;
-	const cartID = field.dataset.id;
-	const total = document.getElementById("total").textContent.replace(/\./g, '');
-
-	
-	fetch(`cart/set_quantity`, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({ cart_id: cartID, value: value, total : total }),
-	})
-	.then(response => response.json())
-	.then(data => {
-		update_price_display(data, cartID);
-	});
-}
-
-function update_price_display(data, cartID) {
-	document.getElementById(`qty-${cartID}`).value = data.new_quantity;
-	document.getElementById(`price-qty-${cartID}`).textContent  = data.new_quantity;
-	document.getElementById(`subtotal-${cartID}`).textContent  = data.new_subtotal;
-	document.getElementById(`total`).textContent  = data.new_total;
-	document.getElementById(`qty-down-${cartID}`).disabled = (data.status == "min");
-	document.getElementById(`qty-up-${cartID}`).disabled = (data.status == "max");
 }
 
 function onCheckoutBtnClick() {
 	document.location.href = "/payment";
+}
+
+function updatePriceDisplay(data, cartID) {
+	document.getElementById(`qty-${cartID}`).value = data.new_quantity;
+	document.getElementById(`price-qty-${cartID}`).textContent  = data.new_quantity;
+	document.getElementById(`subtotal-${cartID}`).textContent  = data.new_subtotal;
+	document.getElementById(`qty-down-${cartID}`).disabled = (data.status == "min");
+	document.getElementById(`qty-up-${cartID}`).disabled = (data.status == "max");
+	totalLabel.textContent  = data.new_total;
 }

@@ -25,6 +25,7 @@ class User(db.Model, UserMixin):
 		new_cart = Cart(user_id=self.id, keyboard_id=keyboard.id, color_id=color_id, switch_id=switch_id, quantity=quantity)
 		add_and_commit(new_cart)
 	
+
 	def update(self, new_full_name, new_email, new_bank_number):
 		self.full_name = new_full_name 
 		self.email = new_email
@@ -35,8 +36,19 @@ class User(db.Model, UserMixin):
 		db.session.delete(self)
 		db.session.commit()
 
+	def get_total(self, cart_data=None):
+		if cart_data == None:
+			cart_data = [cart.get_data() for cart in db.session.query(Cart).filter(Cart.user_id == self.id).all()]
+		return format_money(sum([cart_datum["subtotal_int"] for cart_datum in cart_data]))
+
 	def get_carts(self):
-		return db.session.query(Cart).filter(Cart.user_id == self.id).all()
+		carts = db.session.query(Cart).filter(Cart.user_id == self.id).all()
+		cart_data = [cart.get_data() for cart in carts]
+		total = self.get_total(cart_data)
+		return {
+			"cart_data": cart_data,
+			"total": total,
+		}
 
 
 class Item(db.Model):
@@ -100,6 +112,7 @@ class Keyboard(Item):
 			"reviews" : reviews,
 			"price" : format_money(self.price),
 			"discounted_price": format_money(self.get_discounted_price()),
+			"discounted_price_int": self.get_discounted_price(),
 			"number_of_reviews" : str(reviews["count"]) if reviews["count"] < 100 else (str(round(reviews["count"], -2)) + "+"),
 			"switches" : self.get_variants(Switch),
 			"colors" : self.get_variants(Color),
@@ -162,9 +175,21 @@ class Cart(db.Model):
 	@staticmethod
 	def get_by_id(cart_id):
 		return db.session.query(Cart).filter(Cart.id == cart_id).first()
+	
+	def get_data(self):
+		keyboard_data = self.get_keyboard_data()
+		subtotal = keyboard_data["keyboard"].get_discounted_price() * self.quantity
+		return {
+			"cart": self,
+			"keyboard_data": keyboard_data,
+			"color": Item.get(Color, self.color_id),
+			"switch": Item.get(Switch, self.switch_id),
+			"subtotal" : format_money(subtotal),
+			"subtotal_int" : subtotal,
+		}
 
-	def get_keyboard(self):
-		return db.session.query(Keyboard).filter(Keyboard.id == self.keyboard_id).first() 
+	def get_keyboard_data(self):
+		return db.session.query(Keyboard).filter(Keyboard.id == self.keyboard_id).first().get_data()
 
 	def __repr__(self):
 		return '<Cart %r>' % self.id
