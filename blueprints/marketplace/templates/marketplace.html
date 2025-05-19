@@ -2,7 +2,7 @@
 
 {% block head %}
 <title>Keyboards</title>
-<link rel="stylesheet" href="{{ url_for('products.static', filename='keyboards.css') }}">
+<link rel="stylesheet" href="{{ url_for('marketplace.static', filename='keyboards.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -13,7 +13,7 @@
 
 <div class="page_container">
 	<div class="price-selector-container">
-		<select id="price-selector" class="form-select w-auto" data-base-url="{{ url_for('products.keyboards') }}">
+		<select id="price-selector" class="form-select w-auto" data-base-url="{{ url_for('marketplace.marketplace') }}">
 			<option>-- Sort by Price --</option>
 			<option value="true">Ascending</option>
 			<option value="false">Descending</option>
@@ -84,6 +84,6 @@
 	</div>
 </div>
 
-<script src="{{ url_for('products.static', filename='keyboards.js') }}"></script>
+<script src="{{ url_for('marketplace.static', filename='keyboards.js') }}"></script>
 
 {% endblock %}

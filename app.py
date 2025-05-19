@@ -34,14 +34,14 @@ def create_app():
 	from blueprints.payment import PaymentPage
 	from blueprints.keyboard import KeyboardPage
 	from blueprints.profile import ProfilePage
-	from blueprints.products import ProductsPage
+	from blueprints.marketplace import MarketplacePage
 
 	MainPage(app, bcrypt)
 	RegisterPage(app, bcrypt)
 	LoginPage(app, bcrypt)
 	KeyboardPage(app, bcrypt)
 	ProfilePage(app, bcrypt)
-	ProductsPage(app, bcrypt)
+	MarketplacePage(app, bcrypt)
 	CartPage(app, bcrypt)
 	PaymentPage(app, bcrypt)
 
@@ -68,14 +68,14 @@ def create_dummy_data():
 		full_name='John Doe',
 		email='john.doe@example.com',
 		password='password123',
-		bank_number='1234567890'
+		address='Home Street, 123'
 	)
 	user2 = User(
 		username='jane_smith',
 		full_name='Jane Smith',
 		email='jane.smith@example.com',
 		password='password456',
-		bank_number='0987654321'
+		address='West Land, 456'
 	)
 	db.session.add_all([user1, user2])
 	db.session.commit() 

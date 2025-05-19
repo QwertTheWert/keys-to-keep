@@ -2,18 +2,18 @@ from flask import Blueprint, render_template, redirect, url_for, request, jsonif
 from flask_login import current_user
 from app import db, request
 
-class ProductsPage:
-	products_bp = Blueprint("products", __name__, template_folder="templates", static_folder="static", static_url_path="/showcase/static/")
+class MarketplacePage:
+	marketplace_bp = Blueprint("marketplace", __name__, template_folder="templates", static_folder="static", static_url_path="/showcase/static/")
 	
 	def __init__(self, flask_app, bcrypt):		
 		from models import Keyboard, Color, Switch
 
-		@self.products_bp.route('/keyboards')
-		def keyboards():
+		@self.marketplace_bp.route('/marketplace')
+		def marketplace():
 			is_ascending = request.args.get("asc", "true") == "true"
-			return render_template("keyboards.html", keyboard_data=Keyboard.get_data_all(is_ascending))
+			return render_template("marketplace.html", keyboard_data=Keyboard.get_data_all(is_ascending))
 		
-		@self.products_bp.route('/keyboards/get_variants', methods=['POST'])
+		@self.marketplace_bp.route('/marketplace/get_variants', methods=['POST'])
 		def get_variants():
 			if current_user.is_authenticated:
 				data = request.get_json()
@@ -25,7 +25,7 @@ class ProductsPage:
 			else:
 				return jsonify({'success' : False})
 
-		@self.products_bp.route('/keyboards/add_to_cart', methods=['POST'])
+		@self.marketplace_bp.route('/marketplace/add_to_cart', methods=['POST'])
 		def add_to_cart():
 			data = request.get_json()
 			keyboard_id = int(data["keyboard_id"])
@@ -35,8 +35,8 @@ class ProductsPage:
 			current_user.add_to_cart(keyboard, color_id, switch_id, 1)
 			return jsonify({'keyboard_name': keyboard.name})
 				
-		@self.products_bp.route('/accessories')
+		@self.marketplace_bp.route('/accessories')
 		def accessories():
-			return render_template("keyboards.html")
+			return render_template("marketplace.html")
 
-		flask_app.register_blueprint(self.products_bp)
+		flask_app.register_blueprint(self.marketplace_bp)
