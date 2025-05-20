@@ -9,46 +9,61 @@
 <div class="compare-container">
     <h1 class="compare-title">Compare Keyboards</h1>
     
-    <div class="select-container">
-        <input type="text" data-side="1" class="product-id-input" placeholder="Enter Product ID">
-        <input type="text" data-side="2" class="product-id-input" placeholder="Enter Product ID">
-    </div>
-
-    <!-- Products at the top -->
-    <div class="products-container">
-        <div class="product-card" id="product-1">
-            <img class="product-image" id="img-1" src="{{ url_for('static', filename='assets/placeholder.png') }}" alt="">
-            <h3 class="product-name" id="name-1">-</h3>
-            <p class="product-price" id="price-1">-</p>
+    <div class="comparison-layout">
+        <!-- Left Product Section -->
+        <div class="product-section">
+            <input type="text" data-side="1" class="product-id-input" placeholder="Enter Product ID">
+            <div class="product-card" id="product-1">
+                <img class="product-image" id="img-1" src="{{ url_for('static', filename='assets/placeholder.png') }}" alt="">
+                <h3 class="product-name" id="name-1">-</h3>
+            </div>
+            <div class="specs-list" id="specs-1">
+                <div class="spec-item">
+                    <span class="spec-label">Switch Type:</span>
+                    <span class="spec-value" id="switch-type-1">-</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Connection:</span>
+                    <span class="spec-value" id="connection-1">-</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Keycaps Profile:</span>
+                    <span class="spec-value" id="keycaps-profile-1">-</span>
+                </div>
+                <!-- Add more specs as needed -->
+            </div>
         </div>
 
-        <div class="product-card" id="product2">
-            <img class="product-image" id="img-2" src="{{ url_for('static', filename='assets/placeholder.png') }}" alt="">
-            <h3 class="product-name" id="name-2">-</h3>
-            <p class="product-price" id="price-2">-</p>
+        <!-- Center Comparison Arrows -->
+        <div class="comparison-arrows">
+            <div class="arrow">←</div>
+            <div class="arrow">→</div>
+        </div>
+
+        <!-- Right Product Section -->
+        <div class="product-section">
+            <input type="text" data-side="2" class="product-id-input" placeholder="Enter Product ID">
+            <div class="product-card" id="product-2">
+                <img class="product-image" id="img-2" src="{{ url_for('static', filename='assets/placeholder.png') }}" alt="">
+                <h3 class="product-name" id="name-2">-</h3>
+            </div>
+            <div class="specs-list" id="specs-2">
+                <div class="spec-item">
+                    <span class="spec-label">Switch Type:</span>
+                    <span class="spec-value" id="switch-type-2">-</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Connection:</span>
+                    <span class="spec-value" id="connection-2">-</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Keycaps Profile:</span>
+                    <span class="spec-value" id="keycaps-profile-2">-</span>
+                </div>
+                <!-- Add more specs as needed -->
+            </div>
         </div>
     </div>
-
-    <!-- Comparison table below -->
-    <div class="comparison-table">
-		<div class="comparison-row">
-			<div class="value" id="switch-type-1">-</div>
-			<div class="label">Switch Type</div>
-			<div class="value" id="switch-type-2">-</div>
-		</div>
-
-		<div class="comparison-row">
-			<div class="value" id="keycaps-1">-</div>
-			<div class="label">Keycaps</div>
-			<div class="value" id="keycaps-2">-</div>
-		</div>
-
-		<div class="comparison-row">
-			<div class="value" id="rating-1">-</div>
-			<div class="label">Ratings</div>
-			<div class="value" id="rating-2">-</div>
-		</div>
-	</div>
 </div>
 
 <script src="{{ url_for('compare.static', filename='compare.js') }}"></script>
