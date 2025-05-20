@@ -6,10 +6,54 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <!-- Your compare page content goes here -->
-    <h1>Compare Keyboards</h1>
-    <!-- Add your comparison content here -->
+<div class="compare-container">
+    <h1 class="compare-title">Compare Keyboards</h1>
+    
+    <!-- Products container -->
+    <div class="products-container">
+        <div class="product-card" id="product1">
+            <div id="product1-placeholder" class="product-placeholder">
+                <a href="/marketplace" class="select-product-btn">
+                    Select First Product
+                </a>
+            </div>
+        </div>
+
+        <div class="product-card" id="product2">
+            <div id="product2-placeholder" class="product-placeholder">
+                <a href="/marketplace" class="select-product-btn">
+                    Select Second Product
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparison table -->
+    <div class="comparison-table">
+        <div class="comparison-row">
+            <div class="value" id="layout1">-</div>
+            <div class="label">Layout</div>
+            <div class="value" id="layout2">-</div>
+        </div>
+
+        <div class="comparison-row">
+            <div class="value" id="connection1">-</div>
+            <div class="label">Connection</div>
+            <div class="value" id="connection2">-</div>
+        </div>
+
+        <div class="comparison-row">
+            <div class="value" id="material1">-</div>
+            <div class="label">Case Material</div>
+            <div class="value" id="material2">-</div>
+        </div>
+
+        <div class="comparison-row">
+            <div class="value" id="switches1">-</div>
+            <div class="label">Switch Options</div>
+            <div class="value" id="switches2">-</div>
+        </div>
+    </div>
 </div>
 
 <script src="{{ url_for('compare.static', filename='compare.js') }}"></script>
