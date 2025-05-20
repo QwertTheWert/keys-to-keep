@@ -7,35 +7,30 @@
 
 {% block content %}
 <div class="compare-container">
-	<h1 class="compare-title">Compare Keyboards</h1>
-	
-	<!-- Products container -->
-	<div class="products-container">
-		<div class="product-card" id="product1">
-			<div id="product1-placeholder" class="product-placeholder">
-				<div class="product-input-container">
-					<input type="text" data-side="1" class="product-id-input" placeholder="Enter Product ID">
-				</div>
-			</div>
-		</div>
+    <h1 class="compare-title">Compare Keyboards</h1>
+    
+    <div class="select-container">
+        <input type="text" data-side="1" class="product-id-input" placeholder="Enter Product ID">
+        <input type="text" data-side="2" class="product-id-input" placeholder="Enter Product ID">
+    </div>
 
-		<div class="product-card" id="product2">
-			<div id="product2-placeholder" class="product-placeholder">
-				<div class="product-input-container">
-					<input type="text" data-side="2" class="product-id-input" placeholder="Enter Product ID">
-				</div>
-			</div>
-		</div>
-	</div>
+    <!-- Products at the top -->
+    <div class="products-container">
+        <div class="product-card" id="product-1">
+            <img class="product-image" id="img-1" src="{{ url_for('static', filename='assets/placeholder.png') }}" alt="">
+            <h3 class="product-name" id="name-1">-</h3>
+            <p class="product-price" id="price-1">-</p>
+        </div>
 
-	<!-- Comparison table -->
-	<div class="comparison-table">
-		<div class="comparison-row">
-			<div class="value" id="price-1">-</div>
-			<div class="label">Price</div>
-			<div class="value" id="price-2">-</div>
-		</div>
+        <div class="product-card" id="product2">
+            <img class="product-image" id="img-2" src="{{ url_for('static', filename='assets/placeholder.png') }}" alt="">
+            <h3 class="product-name" id="name-2">-</h3>
+            <p class="product-price" id="price-2">-</p>
+        </div>
+    </div>
 
+    <!-- Comparison table below -->
+    <div class="comparison-table">
 		<div class="comparison-row">
 			<div class="value" id="switch-type-1">-</div>
 			<div class="label">Switch Type</div>
