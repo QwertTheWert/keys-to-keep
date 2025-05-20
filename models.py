@@ -142,7 +142,7 @@ class Keyboard(Item):
 		reviewers = [review.get_reviewer() for review in reviews]
 		count = len(reviews)
 		sum = 0
-		for rating in reviews: sum += rating.rating
+		for rating in reviews: sum += rating.rating if rating.rating else 0
 		return {
 			"reviews" : reviews,
 			"reviewers" : reviewers,
@@ -185,7 +185,6 @@ class Cart(db.Model):
 	keyboard_id = db.Column(db.Integer, db.ForeignKey('keyboard.id'), nullable=False)
 	color_id = db.Column(db.Integer, db.ForeignKey('color.id'), nullable=False)
 	switch_id = db.Column(db.Integer, db.ForeignKey('switch.id'), nullable=False)
-	transaction_id = db.Column(db.Integer, db.ForeignKey('transaction.id'))
 	quantity = db.Column(db.Integer, nullable=False)
 
 	@staticmethod
@@ -215,14 +214,24 @@ class Review(db.Model):
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	keyboard_id = db.Column(db.Integer, db.ForeignKey('keyboard.id'), nullable=False)
+	transaction_id = db.Column(db.Integer, db.ForeignKey('transaction.id'))
+	color_id = db.Column(db.Integer, db.ForeignKey('color.id'), nullable=False)
+	switch_id = db.Column(db.Integer, db.ForeignKey('switch.id'), nullable=False)
 	rating = db.Column(db.Integer)
 	description = db.Column(db.String(1024))
 
+	@staticmethod
+	def create(cart):
+		review = Review(user_id=cart.user_id, keyboard_id=cart.keyboard_id, color_id=cart.color_id, switch_id=cart.switch_id)
+		add_and_commit(review)
+
 	def __repr__(self):
 		return '<Rating %r>' % self.id
+	
 
 	def get_stars(self):
-		return ('★' * self.rating) + ('☆' * (5 - self.rating)) if self.rating != -1 else ""
+		rating_int = self.rating if self.rating else 0
+		return ('★' * rating_int) + ('☆' * (5 - rating_int)) if rating_int != -1 else ""
 
 	def get_reviewer(self):
 		return db.session.query(User).filter(User.id == self.user_id).first()
@@ -248,6 +257,7 @@ class Transaction(db.Model):
 	__tablename__ = 'transaction'
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	delivery_id = db.Column(db.Integer, db.ForeignKey('transaction.id'), nullable=False)
+	user_id = db.Column(db.Integer, db.ForeignKey('transaction.id'), nullable=False)
 
 	def __repr__(self):
 		return '<Transaction %r>' % self.id

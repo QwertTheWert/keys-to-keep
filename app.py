@@ -85,7 +85,16 @@ def create_dummy_data():
 		password='password456',
 		address='West Land, 456'
 	)
-	db.session.add_all([user1, user2])
+
+	user3 = User(
+		username='Bob',
+		full_name='Bob Smith',
+		email='Bob@Bob.com',
+		password='$2b$12$vXRNQvdIOG2f4G03Bx77qerhCe8chHqq1HdFxpn9ABhTF0KBEqb8e',
+		address='Bob Road to the west of the Road Land, 456'
+	)
+
+	db.session.add_all([user1, user2, user3])
 
 	switch_data = [SwitchType(name="Switch A"), SwitchType(name="Switch B"), SwitchType(name="Switch C")]
 	db.session.add_all(switch_data)
@@ -143,10 +152,10 @@ def create_dummy_data():
 		db.session.add_all([switch1, switch2, switch3])	
 
 
-		rev1 = Review(user_id=1, keyboard_id=i+1, rating=5, description='Great keyboard with responsive keys.')
-		rev2 = Review(user_id=2, keyboard_id=i+1, rating=4, description='Feels great, but could use more clicking noises settings.')
-		rev3 = Review(user_id=1, keyboard_id=i+1, rating=3, description='Eh, its mid, but it works.')
-		rev4 = Review(user_id=2, keyboard_id=i+1, rating=1, description='This is Horrible! Dont buy it!!!')
+		rev1 = Review(user_id=1, keyboard_id=i+1, switch_id=randint(1,3), color_id=randint(1,3), rating=5, description='Great keyboard with responsive keys.')
+		rev2 = Review(user_id=2, keyboard_id=i+1, switch_id=randint(1,3), color_id=randint(1,3), rating=4, description='Feels great, but could use more clicking noises settings.')
+		rev3 = Review(user_id=1, keyboard_id=i+1, switch_id=randint(1,3), color_id=randint(1,3), rating=3, description='Eh, its mid, but it works.')
+		rev4 = Review(user_id=2, keyboard_id=i+1, switch_id=randint(1,3), color_id=randint(1,3), rating=1, description='This is Horrible! Dont buy it!!!')
 		db.session.add_all([rev1 if randint(1,2) == 1 else rev3, rev2 if randint(1,2) == 1 else rev4])
 
 	# Create Cart entries

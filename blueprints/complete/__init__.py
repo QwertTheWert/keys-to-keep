@@ -7,8 +7,10 @@ class CompletePage:
 
 	def __init__(self, flask_app, bcrypt):
 
-		@self.complete_bp.route('/complete/<cart>', methods=['POST'])
-		def complete(cart):
-			return "Test"
+		@self.complete_bp.route('/complete/', methods=['POST'])
+		def complete():
+			transaction_id = request.form.get("transaction_id")
+			
+			return render_template('complete.html')
 		
 		flask_app.register_blueprint(self.complete_bp)
