@@ -7,63 +7,9 @@
 
 {% block content %}
 <div class="compare-container">
-    <h1 class="compare-title">Compare Keyboards</h1>
-    
-    <div class="comparison-layout">
-        <!-- Left Product Section -->
-        <div class="product-section">
-            <input type="text" data-side="1" class="product-id-input" placeholder="Enter Product ID">
-            <div class="product-card" id="product-1">
-                <img class="product-image" id="img-1" src="{{ url_for('static', filename='assets/placeholder.png') }}" alt="">
-                <h3 class="product-name" id="name-1">-</h3>
-            </div>
-            <div class="specs-list" id="specs-1">
-                <div class="spec-item">
-                    <span class="spec-label">Switch Type:</span>
-                    <span class="spec-value" id="switch-type-1">-</span>
-                </div>
-                <div class="spec-item">
-                    <span class="spec-label">Connection:</span>
-                    <span class="spec-value" id="connection-1">-</span>
-                </div>
-                <div class="spec-item">
-                    <span class="spec-label">Keycaps Profile:</span>
-                    <span class="spec-value" id="keycaps-profile-1">-</span>
-                </div>
-                <!-- Add more specs as needed -->
-            </div>
-        </div>
 
-        <!-- Center Comparison Arrows -->
-        <div class="comparison-arrows">
-            <div class="arrow">←</div>
-            <div class="arrow">→</div>
-        </div>
 
-        <!-- Right Product Section -->
-        <div class="product-section">
-            <input type="text" data-side="2" class="product-id-input" placeholder="Enter Product ID">
-            <div class="product-card" id="product-2">
-                <img class="product-image" id="img-2" src="{{ url_for('static', filename='assets/placeholder.png') }}" alt="">
-                <h3 class="product-name" id="name-2">-</h3>
-            </div>
-            <div class="specs-list" id="specs-2">
-                <div class="spec-item">
-                    <span class="spec-label">Switch Type:</span>
-                    <span class="spec-value" id="switch-type-2">-</span>
-                </div>
-                <div class="spec-item">
-                    <span class="spec-label">Connection:</span>
-                    <span class="spec-value" id="connection-2">-</span>
-                </div>
-                <div class="spec-item">
-                    <span class="spec-label">Keycaps Profile:</span>
-                    <span class="spec-value" id="keycaps-profile-2">-</span>
-                </div>
-                <!-- Add more specs as needed -->
-            </div>
-        </div>
-    </div>
+
 </div>
 
 <script src="{{ url_for('compare.static', filename='compare.js') }}"></script>
