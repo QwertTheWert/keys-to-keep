@@ -26,7 +26,7 @@ class ComparePage:
 					"switch_type" : keyboard_data["switch_type"].name,
 					"keycaps" : keyboard_data["keycaps"].name,
 					"price" : keyboard_data["discounted_price"],
-					"rating" : keyboard_data["reviews"]["average"],
+					"rating" : keyboard_data["stars"],
 				}
 			else:
 				return jsonify({"valid": False})
