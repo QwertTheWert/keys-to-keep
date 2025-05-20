@@ -1,0 +1,11 @@
+{% extends 'navbar_template.html' %}
+
+{% block head %}
+<title>Purchase Completed</title>
+<link rel="stylesheet" href="{{ url_for('complete.static', filename='complete.css') }}">
+{% endblock %}
+
+{% block content %}
+<script src="{{ url_for('complete.static', filename='complete.js') }}"></script>
+
+{% endblock %}
