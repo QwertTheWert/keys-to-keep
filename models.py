@@ -1,5 +1,7 @@
 from flask_login import UserMixin
 from app import db, add_and_commit, format_money
+from datetime import datetime, timezone
+
 
 class User(db.Model, UserMixin):
 	__tablename__ = 'user'
@@ -83,6 +85,7 @@ class Keyboard(Item):
 	switch_type = db.Column(db.Integer, db.ForeignKey('switch_type.id'))
 	keycaps = db.Column(db.Integer, db.ForeignKey('keycaps.id'))
 	discount = db.Column(db.Integer, nullable=False, default=0)
+	date_added = db.Column(db.DateTime, default=datetime.now(timezone.utc))
 	sold = db.Column(db.Integer, nullable=False, default=0)
 	price = db.Column(db.Integer, nullable=False, default=0)
 	quantity = db.Column(db.Integer, nullable=False, default=0)
@@ -91,12 +94,22 @@ class Keyboard(Item):
 	def get_data_all(is_ascending):
 		keyboards = db.session.query(Keyboard).order_by(Keyboard.price.asc() if is_ascending else Keyboard.price.desc()).all()
 		return [keyboard.get_data() for keyboard in keyboards]
+	
+	@staticmethod
+	def get_trending():
+		keyboards = db.session.query(Keyboard).order_by(Keyboard.sold.desc()).limit(6).all()
+		return [keyboard.get_data() for keyboard in keyboards]
+
+	@staticmethod
+	def get_newest():
+		keyboards = db.session.query(Keyboard).order_by(Keyboard.date_added.desc()).limit(6).all()
+		return [keyboard.get_data() for keyboard in keyboards]
 
 	@staticmethod
 	def get_by_id(query_id):
 		return db.session.query(Keyboard).filter(Keyboard.id == query_id).first()
 
-	def add_rating(self, user, rating, description):
+	def add_review(self, user, rating, description):
 		new_rating = Review(user_id=user.id, keyboard_id=self.id, rating=rating, description=description)
 		add_and_commit(new_rating)
 
@@ -124,7 +137,7 @@ class Keyboard(Item):
 		return int(self.price - self.price * (self.discount / 100))
 	
 	def get_reviews(self):
-		reviews = db.session.query(Review).filter(Review.id == self.id).all()
+		reviews = db.session.query(Review).filter(Review.keyboard_id == self.id).all()
 		reviewers = [review.get_reviewer() for review in reviews]
 		count = len(reviews)
 		sum = 0
