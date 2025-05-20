@@ -1,0 +1,68 @@
+{% extends 'navbar_template.html' %}
+
+{% block head %}
+<title>Compare Keyboards</title>
+<link rel="stylesheet" href="{{ url_for('compare.static', filename='compare.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="compare-container">
+    <h1 class="compare-title">Compare Keyboards</h1>
+    
+    <!-- Products container -->
+    <div class="products-container">
+        <div class="product-card" id="product1">
+            <div id="product1-placeholder" class="product-placeholder">
+                <div class="product-input-container">
+                    <input type="text" id="product1-id" class="product-id-input" placeholder="Enter Product ID">
+                    <button class="compare-btn" onclick="loadProduct(1)">Load Product</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card" id="product2">
+            <div id="product2-placeholder" class="product-placeholder">
+                <div class="product-input-container">
+                    <input type="text" id="product2-id" class="product-id-input" placeholder="Enter Product ID">
+                    <button class="compare-btn" onclick="loadProduct(2)">Load Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparison table -->
+    <div class="comparison-table">
+        <div class="comparison-row">
+            <div class="value" id="layout1">-</div>
+            <div class="label">Layout</div>
+            <div class="value" id="layout2">-</div>
+        </div>
+
+        <div class="comparison-row">
+            <div class="value" id="connection1">-</div>
+            <div class="label">Connection</div>
+            <div class="value" id="connection2">-</div>
+        </div>
+
+        <div class="comparison-row">
+            <div class="value" id="material1">-</div>
+            <div class="label">Case Material</div>
+            <div class="value" id="material2">-</div>
+        </div>
+
+        <div class="comparison-row">
+            <div class="value" id="switches1">-</div>
+            <div class="label">Switch Options</div>
+            <div class="value" id="switches2">-</div>
+        </div>
+    </div>
+</div>
+
+<script>
+function setCompareSlot(slot) {
+    sessionStorage.setItem('compareSlot', slot);
+}
+</script>
+
+<script src="{{ url_for('compare.static', filename='compare.js') }}"></script>
+{% endblock %}

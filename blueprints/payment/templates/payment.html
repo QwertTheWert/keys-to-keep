@@ -12,7 +12,7 @@
 			<div class="inner-text">
 				<h3> {{ cart_datum.keyboard_data.keyboard.name }} </h3>
 				<div class="Preview_Container">
-					<img src="static\assets\xera87.jpg" alt="" class="Image_Preview">
+					<img src="{{ url_for('static', filename=cart_datum.keyboard_data.keyboard.image_url) }}" alt="{{ cart_datum.keyboard_data.keyboard.name }}" class="Image_Preview">
 					<div>
 						<p>{{ cart_datum.keyboard_data.keyboard.subtitle }}</p>
 						<p>
@@ -76,7 +76,14 @@
 					</label>
 				</form>
 			<p>Total: <span id="total-price" data-total="{{ data.total_int }}" > Rp. {{ data.total }}</span></p>
-			<button class="Purchase_button">Purchase</button>
+				<button 
+					class="btn btn-success btn-lg btn-block" 
+					id="purchase-button" 
+					disabled="true" 
+					onclick="onPurchaseClick()" 
+				>
+					Purchase
+				</button>
 			  
 		</div>
 	</div>

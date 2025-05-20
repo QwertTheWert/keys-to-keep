@@ -13,7 +13,7 @@
 				{% for cart_datum in data.cart_data %}
 					<div class="cart-item" id="cart-item-{{ cart_datum.cart.id }}">
 						<a href="{{ url_for('keyboard.keyboard_details', keyboard_id=cart_datum.keyboard_data.keyboard.id) }}" class="text-reset text-decoration-none">
-							<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Product">
+							<img src="{{ url_for('static', filename=cart_datum.keyboard_data.keyboard.image_url) }}" alt="{{ cart_datum.keyboard_data.keyboard.name }}">
 						</a>
 						<div class="item-details">
 							<a href="{{ url_for('keyboard.keyboard_details', keyboard_id=cart_datum.keyboard_data.keyboard.id) }}" class="text-reset text-decoration-none">
@@ -55,7 +55,7 @@
 
 		<div class="Total_Price_container">
 			<h3>Total: Rp. <span id="total">{{ data.total }}</span></h3>
-			<button class="checkout btn btn-success" id="checkout" {% if data | length == 0 %} disabled="true" {% endif %} onclick="onCheckoutBtnClick()">Proceed to Checkout</button>
+			<button class="checkout btn btn-success" id="checkout" {% if data.cart_data | length == 0 %} disabled="true" {% endif %} onclick="onCheckoutBtnClick()">Proceed to Checkout</button>
 		</div>
 		
 	</div>

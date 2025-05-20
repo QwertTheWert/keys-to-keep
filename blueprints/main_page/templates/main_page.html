@@ -17,9 +17,6 @@
 			<img src="{{ url_for('static', filename='assets/Property 1=Slide 2.png') }}" alt="Keyboard 2">
 		</div>
 		<div class="slide">
-			<img src="{{ url_for('static', filename='assets/Property 1=Slide 3.png') }}" alt="Keyboard 3">
-		</div>
-		<div class="slide">
 			<img src="{{ url_for('static', filename='assets/Property 1=Slide 4.png') }}" alt="Keyboard 4">
 		</div>
 	</div>
@@ -42,112 +39,36 @@
 		<a href="#" class="view-all">View All &gt;</a>
 	</div>
 	<div class="trending-items-container">
-		<div class="trending-item">
-			<div class="trending-badge">Trending</div>
-			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
-			<h3>Vortexseries - Swift82</h3>
-			<p>Rapid Trigger - Snap Tap - Magnetic</p>
-			<div class="rating">
-				<span class="stars">★★★★☆</span>
-				<span class="ratings">100+ Ratings</span>
-			</div>
-			<div class="price">
-				<span class="current-price">Rp659.000</span>
-				<span class="original-price">Rp1.299.000</span>
-				<span class="discount">49% OFF</span>
-			</div>
-			<button class="add-to-cart">Add to Cart</button>
-		</div>
-		<!-- Add more trending items as needed -->
-		<div class="trending-item">
-			<div class="trending-badge">Trending</div>
-			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
-			<h3>Vortexseries - Swift82</h3>
-			<p>Rapid Trigger - Snap Tap - Magnetic</p>
-			<div class="rating">
-				<span class="stars">★★★★☆</span>
-				<span class="ratings">100+ Ratings</span>
-			</div>
-			<div class="price">
-				<span class="current-price">Rp659.000</span>
-				<span class="original-price">Rp1.299.000</span>
-				<span class="discount">49% OFF</span>
-			</div>
-			<button class="add-to-cart">Add to Cart</button>
-		</div>
 
+		{% for data in trending %}
 		<div class="trending-item">
+			<a href="{{ url_for('keyboard.keyboard_details', keyboard_id=data.keyboard.id) }}" class="text-reset text-decoration-none">
 			<div class="trending-badge">Trending</div>
-			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
-			<h3>Vortexseries - Swift82</h3>
-			<p>Rapid Trigger - Snap Tap - Magnetic</p>
+				<img src="{{ url_for('static', filename=data.keyboard.image_url) }}" alt="{{ data.keyboard.name }}">
+			<h3> {{ data.keyboard.name }} </h3>
+			<p>{{ data.keyboard.subtitle }}</p>
 			<div class="rating">
-				<span class="stars">★★★★☆</span>
-				<span class="ratings">100+ Ratings</span>
+				<span class="stars">{{ data.stars }}</span>
+				<span class="ratings">{{ data.reviews.count }} Ratings</span>
 			</div>
 			<div class="price">
-				<span class="current-price">Rp659.000</span>
-				<span class="original-price">Rp1.299.000</span>
-				<span class="discount">49% OFF</span>
-			</div>
-			<button class="add-to-cart">Add to Cart</button>
-		</div>
+				<span class="current-price">Rp. {{ data.discounted_price }}</span>
+				{% if data.keyboard.discount > 0 %}
+					<span class="original-price">Rp. {{ data.price }} </span>
+					<span class="discount"> {{ data.keyboard.discount }}% OFF </span>
+				{% endif %}
 
-		<div class="trending-item">
-			<div class="trending-badge">Trending</div>
-			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
-			<h3>Vortexseries - Swift82</h3>
-			<p>Rapid Trigger - Snap Tap - Magnetic</p>
-			<div class="rating">
-				<span class="stars">★★★★☆</span>
-				<span class="ratings">100+ Ratings</span>
 			</div>
-			<div class="price">
-				<span class="current-price">Rp659.000</span>
-				<span class="original-price">Rp1.299.000</span>
-				<span class="discount">49% OFF</span>
-			</div>
+			</a>
 			<button class="add-to-cart">Add to Cart</button>
 		</div>
-
-		<div class="trending-item">
-			<div class="trending-badge">Trending</div>
-			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
-			<h3>Vortexseries - Swift82</h3>
-			<p>Rapid Trigger - Snap Tap - Magnetic</p>
-			<div class="rating">
-				<span class="stars">★★★★☆</span>
-				<span class="ratings">100+ Ratings</span>
-			</div>
-			<div class="price">
-				<span class="current-price">Rp659.000</span>
-				<span class="original-price">Rp1.299.000</span>
-				<span class="discount">49% OFF</span>
-			</div>
-			<button class="add-to-cart">Add to Cart</button>
-		</div>
-
-		<div class="trending-item">
-			<div class="trending-badge">Trending</div>
-			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
-			<h3>Vortexseries - Swift82</h3>
-			<p>Rapid Trigger - Snap Tap - Magnetic</p>
-			<div class="rating">
-				<span class="stars">★★★★☆</span>
-				<span class="ratings">100+ Ratings</span>
-			</div>
-			<div class="price">
-				<span class="current-price">Rp659.000</span>
-				<span class="original-price">Rp1.299.000</span>
-				<span class="discount">49% OFF</span>
-			</div>
-			<button class="add-to-cart">Add to Cart</button>
-		</div>
+		{% endfor %}
+		
 	</div>
 </div>
 
 <div class="compare-section">
-	<a href="compare.html" class="compare-link">
+	<a href="{{ url_for('compare.compare') }}" class="compare-link">
 		<div class="compare-text">
 			<span>COMPARE</span>
 			<span>ITEMS HERE</span>
@@ -165,131 +86,32 @@
 		<a href="#" class="view-all">View All &gt;</a>
 	</div>
 	<div class="newest-items-container">
+		{% for data in newest %}
 		<div class="newest-item">
+			<a href="{{ url_for('keyboard.keyboard_details', keyboard_id=data.keyboard.id) }}" class="text-reset text-decoration-none">
 			<div class="newest-badge">New</div>
-			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
-			<h3>Vortexseries - Swift82</h3>
-			<p>Rapid Trigger - Snap Tap - Magnetic</p>
+				<img src="{{ url_for('static', filename=data.keyboard.image_url) }}" alt="{{ data.keyboard.name }}">
+			<h3> {{ data.keyboard.name }} </h3>
+			<p>{{ data.keyboard.subtitle }}</p>
 			<div class="rating">
-				<span class="stars">★★★★☆</span>
-				<span class="ratings">100+ Ratings</span>
+				<span class="stars">{{ data.stars }}</span>
+				<span class="ratings">{{ data.reviews.count }} Ratings</span>
 			</div>
 			<div class="price">
-				<span class="current-price">Rp659.000</span>
-				<span class="original-price">Rp1.299.000</span>
-				<span class="discount">49% OFF</span>
-			</div>
-			<button class="add-to-cart">Add to Cart</button>
-		</div>
-		<!-- Add more newest items as needed -->
-		<div class="newest-item">
-			<div class="newest-badge">New</div>
-			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
-			<h3>Vortexseries - Swift82</h3>
-			<p>Rapid Trigger - Snap Tap - Magnetic</p>
-			<div class="rating">
-				<span class="stars">★★★★☆</span>
-				<span class="ratings">100+ Ratings</span>
-			</div>
-			<div class="price">
-				<span class="current-price">Rp659.000</span>
-				<span class="original-price">Rp1.299.000</span>
-				<span class="discount">49% OFF</span>
-			</div>
-			<button class="add-to-cart">Add to Cart</button>
-		</div>
+				<span class="current-price">Rp. {{ data.discounted_price }}</span>
+				{% if data.keyboard.discount > 0 %}
+					<span class="original-price">Rp. {{ data.price }} </span>
+					<span class="discount"> {{ data.keyboard.discount }}% OFF </span>
+				{% endif %}
 
-		<div class="newest-item">
-			<div class="newest-badge">New</div>
-			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
-			<h3>Vortexseries - Swift82</h3>
-			<p>Rapid Trigger - Snap Tap - Magnetic</p>
-			<div class="rating">
-				<span class="stars">★★★★☆</span>
-				<span class="ratings">100+ Ratings</span>
 			</div>
-			<div class="price">
-				<span class="current-price">Rp659.000</span>
-				<span class="original-price">Rp1.299.000</span>
-				<span class="discount">49% OFF</span>
-			</div>
+			</a>
 			<button class="add-to-cart">Add to Cart</button>
 		</div>
-
-		<div class="newest-item">
-			<div class="newest-badge">New</div>
-			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
-			<h3>Vortexseries - Swift82</h3>
-			<p>Rapid Trigger - Snap Tap - Magnetic</p>
-			<div class="rating">
-				<span class="stars">★★★★☆</span>
-				<span class="ratings">100+ Ratings</span>
-			</div>
-			<div class="price">
-				<span class="current-price">Rp659.000</span>
-				<span class="original-price">Rp1.299.000</span>
-				<span class="discount">49% OFF</span>
-			</div>
-			<button class="add-to-cart">Add to Cart</button>
-		</div>
-
-		<div class="newest-item">
-			<div class="newest-badge">New</div>
-			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
-			<h3>Vortexseries - Swift82</h3>
-			<p>Rapid Trigger - Snap Tap - Magnetic</p>
-			<div class="rating">
-				<span class="stars">★★★★☆</span>
-				<span class="ratings">100+ Ratings</span>
-			</div>
-			<div class="price">
-				<span class="current-price">Rp659.000</span>
-				<span class="original-price">Rp1.299.000</span>
-				<span class="discount">49% OFF</span>
-			</div>
-			<button class="add-to-cart">Add to Cart</button>
-		</div>
-
-		<div class="newest-item">
-			<div class="newest-badge">New</div>
-			<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
-			<h3>Vortexseries - Swift82</h3>
-			<p>Rapid Trigger - Snap Tap - Magnetic</p>
-			<div class="rating">
-				<span class="stars">★★★★☆</span>
-				<span class="ratings">100+ Ratings</span>
-			</div>
-			<div class="price">
-				<span class="current-price">Rp659.000</span>
-				<span class="original-price">Rp1.299.000</span>
-				<span class="discount">49% OFF</span>
-			</div>
-			<button class="add-to-cart">Add to Cart</button>
-		</div>
+		{% endfor %}
 	</div>
 </div>
 
-<!-- <div class="category-buttons">
-	<a href="keyboards.html" class="category-button">KEYBOARDS</a>
-	<a href="barebones.html" class="category-button">BAREBONES</a>
-	<a href="switches.html" class="category-button">SWITCHES</a>
-	<a href="keycaps.html" class="category-button">KEYCAPS</a>
-	<a href="accessories.html" class="category-button">ACCESSORIES</a>
-	<a href="others.html" class="category-button">OTHERS</a>
-</div> -->
-
-<div class="logos">
-	<div class="logos-slide">
-	  <img src="/static/assets/Ajazz logo.png" alt="">
-	  <img src="/static//assets//Fantech.png" alt="">
-	  <img src="/static//assets//gamenLogo.png" alt="">
-	  <img src="/static//assets//Keychron logo.png" alt="">
-	  <img src="/static//assets//Noir Logo.png" alt="">
-	  <img src="/static//assets//Press Play Logo.png" alt="">
-	  <img src="/static//assets//rexus.png" alt="">
-	  <img src="/static//assets//vortexLogo.png" alt="">
-	</div>
-  </div>
 
 
 

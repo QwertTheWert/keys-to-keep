@@ -2,6 +2,7 @@ const quantityField = document.getElementById('qty-field');
 const addToCartBtn = document.getElementById('add-to-cart-btn');
 const buyNowBtn = document.getElementById('by-now-btn');
 const alertBox = document.getElementById("alert");
+const copiedText = document.getElementById("copied-text");
 
 let variantInfo;
 let keyboardId;
@@ -41,5 +42,7 @@ function onAddtoCartClick() {
 	});
 }
 
-function onBuyNowtClick() {
+function copyID(id) {
+	navigator.clipboard.writeText(id);
+	copiedText.style.display = "inline";
 }

@@ -1,5 +1,7 @@
 from flask_login import UserMixin
 from app import db, add_and_commit, format_money
+from datetime import datetime, timezone
+
 
 class User(db.Model, UserMixin):
 	__tablename__ = 'user'
@@ -79,10 +81,12 @@ class Keycaps(Item):
 class Keyboard(Item):
 	__tablename__ = 'keyboard'
 	subtitle = db.Column(db.String(200))
+	image_url = db.Column(db.String(200), nullable=False, default="assets/Vortex series 82.png")
 	description = db.Column(db.String(1024))
 	switch_type = db.Column(db.Integer, db.ForeignKey('switch_type.id'))
 	keycaps = db.Column(db.Integer, db.ForeignKey('keycaps.id'))
 	discount = db.Column(db.Integer, nullable=False, default=0)
+	date_added = db.Column(db.DateTime, default=datetime.now(timezone.utc))
 	sold = db.Column(db.Integer, nullable=False, default=0)
 	price = db.Column(db.Integer, nullable=False, default=0)
 	quantity = db.Column(db.Integer, nullable=False, default=0)
@@ -91,12 +95,22 @@ class Keyboard(Item):
 	def get_data_all(is_ascending):
 		keyboards = db.session.query(Keyboard).order_by(Keyboard.price.asc() if is_ascending else Keyboard.price.desc()).all()
 		return [keyboard.get_data() for keyboard in keyboards]
+	
+	@staticmethod
+	def get_trending():
+		keyboards = db.session.query(Keyboard).order_by(Keyboard.sold.desc()).limit(6).all()
+		return [keyboard.get_data() for keyboard in keyboards]
+
+	@staticmethod
+	def get_newest():
+		keyboards = db.session.query(Keyboard).order_by(Keyboard.date_added.desc()).limit(6).all()
+		return [keyboard.get_data() for keyboard in keyboards]
 
 	@staticmethod
 	def get_by_id(query_id):
 		return db.session.query(Keyboard).filter(Keyboard.id == query_id).first()
 
-	def add_rating(self, user, rating, description):
+	def add_review(self, user, rating, description):
 		new_rating = Review(user_id=user.id, keyboard_id=self.id, rating=rating, description=description)
 		add_and_commit(new_rating)
 
@@ -124,17 +138,17 @@ class Keyboard(Item):
 		return int(self.price - self.price * (self.discount / 100))
 	
 	def get_reviews(self):
-		reviews = db.session.query(Review).filter(Review.id == self.id).all()
+		reviews = db.session.query(Review).filter(Review.keyboard_id == self.id).all()
 		reviewers = [review.get_reviewer() for review in reviews]
 		count = len(reviews)
 		sum = 0
-		for rating in reviews: sum += rating.rating
+		for rating in reviews: sum += rating.rating if rating.rating else 0
 		return {
 			"reviews" : reviews,
 			"reviewers" : reviewers,
 			"stars" : [review.get_stars() for review in reviews],
 			"count" : count,
-			"average" : round((sum / count) if count > 0 else -1, 1),
+			"average" : round((float(sum) / float(count)) if count > 0 else -1, 1),
 		}
 
 	def get_variants(self, variant_type):
@@ -171,7 +185,6 @@ class Cart(db.Model):
 	keyboard_id = db.Column(db.Integer, db.ForeignKey('keyboard.id'), nullable=False)
 	color_id = db.Column(db.Integer, db.ForeignKey('color.id'), nullable=False)
 	switch_id = db.Column(db.Integer, db.ForeignKey('switch.id'), nullable=False)
-	transaction_id = db.Column(db.Integer, db.ForeignKey('transaction.id'))
 	quantity = db.Column(db.Integer, nullable=False)
 
 	@staticmethod
@@ -201,14 +214,24 @@ class Review(db.Model):
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	keyboard_id = db.Column(db.Integer, db.ForeignKey('keyboard.id'), nullable=False)
+	transaction_id = db.Column(db.Integer, db.ForeignKey('transaction.id'))
+	color_id = db.Column(db.Integer, db.ForeignKey('color.id'), nullable=False)
+	switch_id = db.Column(db.Integer, db.ForeignKey('switch.id'), nullable=False)
 	rating = db.Column(db.Integer)
 	description = db.Column(db.String(1024))
 
+	@staticmethod
+	def create(cart):
+		review = Review(user_id=cart.user_id, keyboard_id=cart.keyboard_id, color_id=cart.color_id, switch_id=cart.switch_id)
+		add_and_commit(review)
+
 	def __repr__(self):
 		return '<Rating %r>' % self.id
+	
 
 	def get_stars(self):
-		return ('★' * self.rating) + ('☆' * (5 - self.rating)) if self.rating != -1 else ""
+		rating_int = self.rating if self.rating else 0
+		return ('★' * rating_int) + ('☆' * (5 - rating_int)) if rating_int != -1 else ""
 
 	def get_reviewer(self):
 		return db.session.query(User).filter(User.id == self.user_id).first()
@@ -234,6 +257,7 @@ class Transaction(db.Model):
 	__tablename__ = 'transaction'
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	delivery_id = db.Column(db.Integer, db.ForeignKey('transaction.id'), nullable=False)
+	user_id = db.Column(db.Integer, db.ForeignKey('transaction.id'), nullable=False)
 
 	def __repr__(self):
 		return '<Transaction %r>' % self.id

@@ -16,13 +16,17 @@
 <body data-color="{{ data.colors[0].id }}" data-switch="{{ data.switches[0].id }}"" data-id="{{ data.keyboard.id }}">
 	<div class="product-container">
 		<div class="product-image">
-			<img src="{{ url_for('static', filename='assets/xera87.jpg') }}" alt="{{ data.keyboard.name }}" />
+			<img src="{{ url_for('static', filename=data.keyboard.image_url) }}" alt="{{ data.keyboard.name }}">
 		</div>
 		<div class="product-details">
 			<div class="product-info">
-				<h1 class="product-name">{{ data.keyboard.name }}</h1>
+				<div class="product-title">
+					<button class="btn btn-outline-secondary btn-sm" onclick="copyID('{{ data.keyboard.id }}')">ID #{{ data.keyboard.id }}</button>
+					<h1 class="product-name">{{ data.keyboard.name }}</h1>
+				</div>
+				<p id="copied-text" style="display: none; color: green; margin-top: 12px;">ID Copied</p>
+
 				<p class="product-subtitle">{{ data.keyboard.subtitle }}</p>
-	
 				<div class="product-price">
 					{% if data.keyboard.discount > 0 %} <span class="price-current">Rp. {{ data.discounted_price }}</span> {% endif %}
 					<span class="price-original">Rp. {{ data.price }}</span>

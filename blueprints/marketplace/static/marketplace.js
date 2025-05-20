@@ -71,3 +71,46 @@ function addButton(text, id, variantType, container) {
 	}
 	container.appendChild(newBtn);
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Get all product containers
+    const productContainers = document.querySelectorAll('.product-container');
+    
+    productContainers.forEach(container => {
+        // Check if we're in compare mode
+        if (container.dataset.compareEnabled === 'true') {
+            container.addEventListener('click', function(e) {
+                // Prevent default link behavior 
+                e.preventDefault();
+                
+                // Get keyboard ID
+                const keyboardId = this.dataset.keyboardId;
+                
+                // Get compare slot from session storage
+                const compareSlot = sessionStorage.getItem('compareSlot');
+                
+                // Add to compare products
+                let compareProducts = JSON.parse(sessionStorage.getItem('compareProducts') || '[]');
+                
+                if (compareSlot) {
+                    // Set product for specific slot
+                    compareProducts[parseInt(compareSlot) - 1] = keyboardId;
+                } else {
+                    // Add as next available product
+                    if (compareProducts.length < 2) {
+                        compareProducts.push(keyboardId);
+                    }
+                }
+                
+                // Save back to session storage
+                sessionStorage.setItem('compareProducts', JSON.stringify(compareProducts));
+                
+                // Clear compare slot
+                sessionStorage.removeItem('compareSlot');
+                
+                // Redirect back to compare page
+                window.location.href = '/compare';
+            });
+        }
+    });
+});

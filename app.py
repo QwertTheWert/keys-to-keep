@@ -6,6 +6,7 @@ from flask_migrate import Migrate
 
 from werkzeug.middleware.proxy_fix import ProxyFix
 
+
 db = SQLAlchemy()
 
 def create_app():
@@ -35,6 +36,8 @@ def create_app():
 	from blueprints.keyboard import KeyboardPage
 	from blueprints.profile import ProfilePage
 	from blueprints.marketplace import MarketplacePage
+	from blueprints.complete import CompletePage
+	from blueprints.compare import ComparePage
 
 	MainPage(app, bcrypt)
 	RegisterPage(app, bcrypt)
@@ -44,6 +47,8 @@ def create_app():
 	MarketplacePage(app, bcrypt)
 	CartPage(app, bcrypt)
 	PaymentPage(app, bcrypt)
+	CompletePage(app, bcrypt)
+	ComparePage(app, bcrypt)
 
 	@login_manager.user_loader 
 	def load_user(user):		
@@ -61,7 +66,10 @@ def format_money(value):
 
 def create_dummy_data():
 	from models import db, User, SwitchType, Keycaps, Keyboard, Switch, Color, Cart, Review, DeliveryService
-	import random
+	from datetime import datetime, timedelta, timezone
+	from random import randint
+
+	now = datetime.now(timezone.utc)
 	
 	user1 = User(
 		username='john_doe',
@@ -77,7 +85,16 @@ def create_dummy_data():
 		password='password456',
 		address='West Land, 456'
 	)
-	db.session.add_all([user1, user2])
+
+	user3 = User(
+		username='Bob',
+		full_name='Bob Smith',
+		email='Bob@Bob.com',
+		password='$2b$12$vXRNQvdIOG2f4G03Bx77qerhCe8chHqq1HdFxpn9ABhTF0KBEqb8e',
+		address='Bob Road to the west of the Road Land, 456'
+	)
+
+	db.session.add_all([user1, user2, user3])
 
 	switch_data = [SwitchType(name="Switch A"), SwitchType(name="Switch B"), SwitchType(name="Switch C")]
 	db.session.add_all(switch_data)
@@ -96,30 +113,31 @@ def create_dummy_data():
 		('Gaming Mechanical Keyboard', 'Designed for gamers, with high-speed switches and customizable key lighting.'),
 		('Travel Mechanical Keyboard', 'Compact and durable mechanical keyboard perfect for on-the-go users.')
 	]
-	# ketboard_image = [
-	# 	"https:\\static\assets\keyboards_images\Ajazz-AK820-Max-With-Display-Stray-Night-600x600.jpeg",
-	# 	"https:\\static\assets\keyboards_images\ajazzAK870SC.jpg",
-	# 	"https:\\static\assets\keyboards_images\aulaF75.webp",
-	# 	"https:\\static\assets\keyboards_images\Fantech ATOM PRO83 MK913.jpg",
-	# 	"https:\\static\assets\keyboards_images\LANGTU GK65.webp",
-	# 	"https:\\static\assets\keyboards_images\noirSpade65.webp",
-	# 	"https:\\static\assets\keyboards_images\ROVER84_Lightyear.webp",
-	# 	"https:\\static\assets\keyboards_images\Voyager68_V2.webp",
-	# 	"https:\\static\assets\keyboards_images\vortexLogo.png",
-	# 	"https:\\static\assets\keyboards_images\xLogo.png",
-	# 	"https:\\static\assets\keyboards_images\zifriendZA68.jpg",
-	# ]
+	keyboard_images = [
+		"assets/keyboards_images/Ajazz-AK820-Max-With-Display-Stray-Night-600x600.jpeg",
+		"assets/keyboards_images/ajazzAK870SC.jpg",
+		"assets/keyboards_images/aulaF75.webp",
+		"assets/keyboards_images/Fantech%20ATOM%20PRO83%20MK913.jpg",
+		"assets/keyboards_images/LANGTU%20GK65.webp",
+		"assets/keyboards_images/noirSpade65.webp",
+		"assets/keyboards_images/ROVER84_Lightyear.webp",
+		"assets/keyboards_images/Voyager68_V2.webp",
+		"assets/keyboards_images/xera87.jpg",
+		"assets/keyboards_images/zifriendZA68.jpg"
+	]
 	for i, (name, description) in enumerate(keyboard_data):
 		keyboard = Keyboard(
 			name=name,
 			subtitle=f'{name} for the ultimate typing experience.',
 			description=description,
-			discount=random.randint(0, 20),
-			keycaps=random.randint(1,3),
-			switch_type=random.randint(1,3),
-			sold=random.randint(1,20),
-			quantity=random.randint(1, 20),
-			price= (random.randint(2,20) * 50000), 
+			discount=randint(0, 20),
+			keycaps=randint(1,3),
+			switch_type=randint(1,3),
+			sold=randint(1,20),
+			quantity=randint(1, 20),
+			price= (randint(2,20) * 50000), 
+			date_added=now - timedelta(days=randint(5,30)),
+			image_url=keyboard_images[randint(0,10)],
 		)
 		db.session.add(keyboard)
 		db.session.commit()
@@ -133,14 +151,19 @@ def create_dummy_data():
 		switch3 = Switch(name="Brown", keyboard_id=i+1)
 		db.session.add_all([switch1, switch2, switch3])	
 
+
+		rev1 = Review(user_id=1, keyboard_id=i+1, switch_id=randint(1,3), color_id=randint(1,3), rating=5, description='Great keyboard with responsive keys.')
+		rev2 = Review(user_id=2, keyboard_id=i+1, switch_id=randint(1,3), color_id=randint(1,3), rating=4, description='Feels great, but could use more clicking noises settings.')
+		rev3 = Review(user_id=1, keyboard_id=i+1, switch_id=randint(1,3), color_id=randint(1,3), rating=3, description='Eh, its mid, but it works.')
+		rev4 = Review(user_id=2, keyboard_id=i+1, switch_id=randint(1,3), color_id=randint(1,3), rating=1, description='This is Horrible! Dont buy it!!!')
+		db.session.add_all([rev1 if randint(1,2) == 1 else rev3, rev2 if randint(1,2) == 1 else rev4])
+
 	# Create Cart entries
 	cart1 = Cart(user_id=1, keyboard_id=1, color_id=1, switch_id=2, quantity=2)
 	cart2 = Cart(user_id=1, keyboard_id=2, color_id=4, switch_id=6, quantity=1)
 	db.session.add_all([cart1, cart2])
 	
-	rating1 = Review(user_id=1, keyboard_id=1, rating=5, description='Great keyboard with responsive keys.')
-	rating2 = Review(user_id=2, keyboard_id=2, rating=4, description='Feels great, but could use more clicking noises settings.')
-	db.session.add_all([rating1, rating2])
+	
 
 
 	deliveryservices = [
