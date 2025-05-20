@@ -35,6 +35,7 @@ def create_app():
 	from blueprints.keyboard import KeyboardPage
 	from blueprints.profile import ProfilePage
 	from blueprints.marketplace import MarketplacePage
+	from blueprints.complete import CompletePage
 
 	MainPage(app, bcrypt)
 	RegisterPage(app, bcrypt)
@@ -44,6 +45,7 @@ def create_app():
 	MarketplacePage(app, bcrypt)
 	CartPage(app, bcrypt)
 	PaymentPage(app, bcrypt)
+	CompletePage(app, bcrypt)
 
 	@login_manager.user_loader 
 	def load_user(user):		
