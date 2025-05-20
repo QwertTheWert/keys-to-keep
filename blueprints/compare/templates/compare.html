@@ -13,17 +13,19 @@
     <div class="products-container">
         <div class="product-card" id="product1">
             <div id="product1-placeholder" class="product-placeholder">
-                <a href="/marketplace" class="select-product-btn">
-                    Select First Product
-                </a>
+                <div class="product-input-container">
+                    <input type="text" id="product1-id" class="product-id-input" placeholder="Enter Product ID">
+                    <button class="compare-btn" onclick="loadProduct(1)">Load Product</button>
+                </div>
             </div>
         </div>
 
         <div class="product-card" id="product2">
             <div id="product2-placeholder" class="product-placeholder">
-                <a href="/marketplace" class="select-product-btn">
-                    Select Second Product
-                </a>
+                <div class="product-input-container">
+                    <input type="text" id="product2-id" class="product-id-input" placeholder="Enter Product ID">
+                    <button class="compare-btn" onclick="loadProduct(2)">Load Product</button>
+                </div>
             </div>
         </div>
     </div>
@@ -55,6 +57,12 @@
         </div>
     </div>
 </div>
+
+<script>
+function setCompareSlot(slot) {
+    sessionStorage.setItem('compareSlot', slot);
+}
+</script>
 
 <script src="{{ url_for('compare.static', filename='compare.js') }}"></script>
 {% endblock %}
