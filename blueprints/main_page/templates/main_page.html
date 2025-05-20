@@ -44,7 +44,7 @@
 		<div class="trending-item">
 			<a href="{{ url_for('keyboard.keyboard_details', keyboard_id=data.keyboard.id) }}" class="text-reset text-decoration-none">
 			<div class="trending-badge">Trending</div>
-				<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
+				<img src="{{ url_for('static', filename=data.keyboard.image_url) }}" alt="{{ data.keyboard.name }}">
 			<h3> {{ data.keyboard.name }} </h3>
 			<p>{{ data.keyboard.subtitle }}</p>
 			<div class="rating">
@@ -90,7 +90,7 @@
 		<div class="newest-item">
 			<a href="{{ url_for('keyboard.keyboard_details', keyboard_id=data.keyboard.id) }}" class="text-reset text-decoration-none">
 			<div class="newest-badge">New</div>
-				<img src="{{ url_for('static', filename='assets/Vortex series 82.png') }}" alt="Vortexseries - Swift82">
+				<img src="{{ url_for('static', filename=data.keyboard.image_url) }}" alt="{{ data.keyboard.name }}">
 			<h3> {{ data.keyboard.name }} </h3>
 			<p>{{ data.keyboard.subtitle }}</p>
 			<div class="rating">

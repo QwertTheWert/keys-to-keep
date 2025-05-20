@@ -104,19 +104,18 @@ def create_dummy_data():
 		('Gaming Mechanical Keyboard', 'Designed for gamers, with high-speed switches and customizable key lighting.'),
 		('Travel Mechanical Keyboard', 'Compact and durable mechanical keyboard perfect for on-the-go users.')
 	]
-	# ketboard_image = [
-	# 	"https:\\static\assets\keyboards_images\Ajazz-AK820-Max-With-Display-Stray-Night-600x600.jpeg",
-	# 	"https:\\static\assets\keyboards_images\ajazzAK870SC.jpg",
-	# 	"https:\\static\assets\keyboards_images\aulaF75.webp",
-	# 	"https:\\static\assets\keyboards_images\Fantech ATOM PRO83 MK913.jpg",
-	# 	"https:\\static\assets\keyboards_images\LANGTU GK65.webp",
-	# 	"https:\\static\assets\keyboards_images\noirSpade65.webp",
-	# 	"https:\\static\assets\keyboards_images\ROVER84_Lightyear.webp",
-	# 	"https:\\static\assets\keyboards_images\Voyager68_V2.webp",
-	# 	"https:\\static\assets\keyboards_images\vortexLogo.png",
-	# 	"https:\\static\assets\keyboards_images\xLogo.png",
-	# 	"https:\\static\assets\keyboards_images\zifriendZA68.jpg",
-	# ]
+	keyboard_images = [
+		"assets/keyboards_images/Ajazz-AK820-Max-With-Display-Stray-Night-600x600.jpeg",
+		"assets/keyboards_images/ajazzAK870SC.jpg",
+		"assets/keyboards_images/aulaF75.webp",
+		"assets/keyboards_images/Fantech%20ATOM%20PRO83%20MK913.jpg",
+		"assets/keyboards_images/LANGTU%20GK65.webp",
+		"assets/keyboards_images/noirSpade65.webp",
+		"assets/keyboards_images/ROVER84_Lightyear.webp",
+		"assets/keyboards_images/Voyager68_V2.webp",
+		"assets/keyboards_images/xera87.jpg",
+		"assets/keyboards_images/zifriendZA68.jpg"
+	]
 	for i, (name, description) in enumerate(keyboard_data):
 		keyboard = Keyboard(
 			name=name,
@@ -129,6 +128,7 @@ def create_dummy_data():
 			quantity=randint(1, 20),
 			price= (randint(2,20) * 50000), 
 			date_added=now - timedelta(days=randint(5,30)),
+			image_url=keyboard_images[randint(0,10)],
 		)
 		db.session.add(keyboard)
 		db.session.commit()

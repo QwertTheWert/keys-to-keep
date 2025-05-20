@@ -81,6 +81,7 @@ class Keycaps(Item):
 class Keyboard(Item):
 	__tablename__ = 'keyboard'
 	subtitle = db.Column(db.String(200))
+	image_url = db.Column(db.String(200), nullable=False, default="assets/Vortex series 82.png")
 	description = db.Column(db.String(1024))
 	switch_type = db.Column(db.Integer, db.ForeignKey('switch_type.id'))
 	keycaps = db.Column(db.Integer, db.ForeignKey('keycaps.id'))

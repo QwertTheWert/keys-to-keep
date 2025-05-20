@@ -12,7 +12,7 @@
 			<div class="inner-text">
 				<h3> {{ cart_datum.keyboard_data.keyboard.name }} </h3>
 				<div class="Preview_Container">
-					<img src="static\assets\xera87.jpg" alt="" class="Image_Preview">
+					<img src="{{ url_for('static', filename=data.keyboard.image_url) }}" alt="{{ data.keyboard.name }}" class="Image_Preview">
 					<div>
 						<p>{{ cart_datum.keyboard_data.keyboard.subtitle }}</p>
 						<p>

@@ -16,7 +16,7 @@
 <body data-color="{{ data.colors[0].id }}" data-switch="{{ data.switches[0].id }}"" data-id="{{ data.keyboard.id }}">
 	<div class="product-container">
 		<div class="product-image">
-			<img src="{{ url_for('static', filename='assets/xera87.jpg') }}" alt="{{ data.keyboard.name }}" />
+			<img src="{{ url_for('static', filename=data.keyboard.image_url) }}" alt="{{ data.keyboard.name }}">
 		</div>
 		<div class="product-details">
 			<div class="product-info">
