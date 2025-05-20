@@ -147,7 +147,7 @@ class Keyboard(Item):
 			"reviewers" : reviewers,
 			"stars" : [review.get_stars() for review in reviews],
 			"count" : count,
-			"average" : round((sum / count) if count > 0 else -1, 1),
+			"average" : round((float(sum) / float(count)) if count > 0 else -1, 1),
 		}
 
 	def get_variants(self, variant_type):
