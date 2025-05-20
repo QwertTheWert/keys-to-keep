@@ -9,28 +9,31 @@
 <div class="compare-container">
     <h1 class="compare-title">Compare Keyboards</h1>
     
-    <!-- Products container -->
+    <div class="select-container">
+        <select class="compare-select" id="select1" onchange="updateProduct1(this.value)">
+            <option value="0">Select First Keyboard</option>
+        </select>
+        <select class="compare-select" id="select2" onchange="updateProduct2(this.value)">
+            <option value="0">Select Second Keyboard</option>
+        </select>
+    </div>
+
+    <!-- Products at the top -->
     <div class="products-container">
         <div class="product-card" id="product1">
-            <div id="product1-placeholder" class="product-placeholder">
-                <div class="product-input-container">
-                    <input type="text" id="product1-id" class="product-id-input" placeholder="Enter Product ID">
-                    <button class="compare-btn" onclick="loadProduct(1)">Load Product</button>
-                </div>
-            </div>
+            <img class="product-image" id="img1" src="{{ url_for('static', filename='assets/placeholder.png') }}" alt="">
+            <h3 class="product-name" id="name1">-</h3>
+            <p class="product-price" id="price1">-</p>
         </div>
 
         <div class="product-card" id="product2">
-            <div id="product2-placeholder" class="product-placeholder">
-                <div class="product-input-container">
-                    <input type="text" id="product2-id" class="product-id-input" placeholder="Enter Product ID">
-                    <button class="compare-btn" onclick="loadProduct(2)">Load Product</button>
-                </div>
-            </div>
+            <img class="product-image" id="img2" src="{{ url_for('static', filename='assets/placeholder.png') }}" alt="">
+            <h3 class="product-name" id="name2">-</h3>
+            <p class="product-price" id="price2">-</p>
         </div>
     </div>
 
-    <!-- Comparison table -->
+    <!-- Comparison table below -->
     <div class="comparison-table">
         <div class="comparison-row">
             <div class="value" id="layout1">-</div>
@@ -57,12 +60,6 @@
         </div>
     </div>
 </div>
-
-<script>
-function setCompareSlot(slot) {
-    sessionStorage.setItem('compareSlot', slot);
-}
-</script>
 
 <script src="{{ url_for('compare.static', filename='compare.js') }}"></script>
 {% endblock %}
