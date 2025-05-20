@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, url_for, request, jsonify
 from app import db, request
 
 class ComparePage:
@@ -17,7 +17,17 @@ class ComparePage:
 			data = request.get_json()
 			keyboard = Keyboard.get_by_id(data["id"])
 			if keyboard:
-				return jsonify({"valid": True, "keyboard_data" : keyboard.get_data()})
+				keyboard_data = keyboard.get_data()
+				print(keyboard_data["discounted_price"])
+				return {
+					"valid": True, 
+					"image_url" : url_for('static', filename=keyboard.image_url),
+					"name" : keyboard.name,
+					"switch_type" : keyboard_data["switch_type"].name,
+					"keycaps" : keyboard_data["keycaps"].name,
+					"price" : keyboard_data["discounted_price"],
+					"rating" : keyboard_data["reviews"]["average"],
+				}
 			else:
 				return jsonify({"valid": False})
 

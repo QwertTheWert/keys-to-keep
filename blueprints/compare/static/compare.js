@@ -1,25 +1,24 @@
-
-document.querySelectorAll("product-id-input").forEach(element => {
+document.querySelectorAll(".product-id-input").forEach(element => {
 	element.addEventListener("input", () => {
-		const side = this.dataset.side;
-		this.value = this.value.replace(/(?!^-)-|[^-0-9]/g, '');
-		
+		const side = element.dataset.side;
+		element.value = element.value.replace(/(?!^-)-|[^-0-9]/g, '');
+		console.log();
 		fetch(`compare/get_data`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ id: parseInt(this.value) }),
+			body: JSON.stringify({ id: parseInt(element.value) }),
 		})
 		.then(response => response.json())
 		.then(data => {
-			if (data.valid == True) {
+			if (data.valid == true) {
 				// document.getElementById(`img${side}`).src = "/static/assets/placeholder.png";
-				document.getElementById(`name-${side}`).textContent = data.keyboard_data.keyboard.name;
-				document.getElementById(`price-${side}`).textContent = `Rp. ${data.keyboard_data.discounted_price}`;
-				document.getElementById(`switch-type-${side}`).textContent = data.keyboard_data.switch_type;
-				document.getElementById(`keycaps-${side}`).textContent = data.keyboard_data.keycaps;
-				document.getElementById(`review-${side}`).textContent = data.keyboard_data.reviews.sum;
+				document.getElementById(`name-${side}`).textContent = data.name;
+				document.getElementById(`price-${side}`).textContent = `Rp. ${data.price}`;
+				document.getElementById(`switch-type-${side}`).textContent = data.switch_type;
+				document.getElementById(`keycaps-${side}`).textContent = data.keycaps;
+				document.getElementById(`rating-${side}`).textContent = parseFloat(data.rating);
 			} else {
 
 			};
