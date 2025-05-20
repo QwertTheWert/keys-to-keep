@@ -176,7 +176,7 @@ class Color(Variant):
 class Switch(Variant):
 	__tablename__ = 'switch'
 	def __repr__(self):
-		return '<Color %r>' % self.id
+		return '<Switch %r>' % self.id
 
 class Cart(db.Model):
 	__tablename__ = 'cart'
@@ -221,9 +221,10 @@ class Review(db.Model):
 	description = db.Column(db.String(1024))
 
 	@staticmethod
-	def create(cart):
-		review = Review(user_id=cart.user_id, keyboard_id=cart.keyboard_id, color_id=cart.color_id, switch_id=cart.switch_id)
+	def create(cart, transaction_id):
+		review = Review(user_id=cart.user_id, keyboard_id=cart.keyboard_id, color_id=cart.color_id, switch_id=cart.switch_id, transaction_id=transaction_id)
 		add_and_commit(review)
+		return review
 
 	def __repr__(self):
 		return '<Rating %r>' % self.id
@@ -258,6 +259,22 @@ class Transaction(db.Model):
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	delivery_id = db.Column(db.Integer, db.ForeignKey('transaction.id'), nullable=False)
 	user_id = db.Column(db.Integer, db.ForeignKey('transaction.id'), nullable=False)
+
+
+	@staticmethod
+	def get_data(query_id):
+		transaction = db.session.query(Transaction).filter(Transaction.id == query_id).first()
+		review_data = db.session.query(Review, Keyboard, Color, Switch)\
+			.join(Keyboard, Review.keyboard_id == Keyboard.id)\
+			.join(Color, Review.color_id == Color.id)\
+			.join(Switch, Review.switch_id == Switch.id)\
+			.filter(Review.transaction_id == transaction.id)\
+			.all()
+
+		return {
+			"transaction" : transaction,
+			"review_data": review_data
+		}
 
 	def __repr__(self):
 		return '<Transaction %r>' % self.id

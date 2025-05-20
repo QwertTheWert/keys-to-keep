@@ -28,8 +28,7 @@ class PaymentPage:
 
 			carts = [cart_datum["cart"] for cart_datum in current_user.get_carts()["cart_data"]]
 			for cart in carts:
-				cart.transaction_id = transaction.id
-				Review.create(cart)
+				Review.create(cart, transaction.id)
 
 			return jsonify({"transaction_id" : transaction.id})
 

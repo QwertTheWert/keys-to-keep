@@ -42,7 +42,6 @@
 
 		{% for data in trending %}
 		<div class="trending-item">
-			<a href="{{ url_for('keyboard.keyboard_details', keyboard_id=data.keyboard.id) }}" class="text-reset text-decoration-none">
 			<div class="trending-badge">Trending</div>
 				<img src="{{ url_for('static', filename=data.keyboard.image_url) }}" alt="{{ data.keyboard.name }}">
 			<h3> {{ data.keyboard.name }} </h3>
@@ -59,8 +58,9 @@
 				{% endif %}
 
 			</div>
+			<form action="{{ url_for('keyboard.keyboard_details', keyboard_id=data.keyboard.id) }}" method="GET">			
+				<button action="submit" class="add-to-cart">Go to Page</button>
 			</a>
-			<button class="add-to-cart">Add to Cart</button>
 		</div>
 		{% endfor %}
 		
@@ -88,7 +88,6 @@
 	<div class="newest-items-container">
 		{% for data in newest %}
 		<div class="newest-item">
-			<a href="{{ url_for('keyboard.keyboard_details', keyboard_id=data.keyboard.id) }}" class="text-reset text-decoration-none">
 			<div class="newest-badge">New</div>
 				<img src="{{ url_for('static', filename=data.keyboard.image_url) }}" alt="{{ data.keyboard.name }}">
 			<h3> {{ data.keyboard.name }} </h3>
@@ -105,8 +104,9 @@
 				{% endif %}
 
 			</div>
+			<form action="{{ url_for('keyboard.keyboard_details', keyboard_id=data.keyboard.id) }}" method="GET">			
+				<button action="submit" class="add-to-cart">Go to Page</button>
 			</a>
-			<button class="add-to-cart">Add to Cart</button>
 		</div>
 		{% endfor %}
 	</div>

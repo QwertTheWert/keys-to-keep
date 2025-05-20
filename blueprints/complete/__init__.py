@@ -6,11 +6,14 @@ class CompletePage:
 	complete_bp = Blueprint("complete", __name__, template_folder="templates", static_folder="static", static_url_path="/complete/static/")
 
 	def __init__(self, flask_app, bcrypt):
+		from models import Transaction
 
 		@self.complete_bp.route('/complete/', methods=['POST'])
 		def complete():
 			transaction_id = request.form.get("transaction_id")
+			transaction = Transaction.get_data(transaction_id) # Review / Keyboard / Color / Switch 
+			print(transaction["review_data"][0])
 			
-			return render_template('complete.html')
+			return render_template('complete.html', )
 		
 		flask_app.register_blueprint(self.complete_bp)
