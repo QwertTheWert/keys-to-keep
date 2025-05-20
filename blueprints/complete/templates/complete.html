@@ -6,8 +6,52 @@
 {% endblock %}
 
 {% block content %}
-<h1>Complete</h1>
+<div class="complete-box">
+    <div class="main-block">
+        <div class="header">
+            <h2 class="complete-header">Purchase Complete</h2>
+        </div>
+        <hr class="complete-divider">
+        <div class="complete-content">
+            <div class="check-box">
+                <div class="checkmark-container">
+                <div class="check-pulse"></div>
+                <div class="check-pulse"></div>
+                    <div class="check-pulse"></div>
+                    <div class="checkmark-icon">
+                        <img src="/static/assets/checkmark.png" alt="Check_Mark">
+                    </div>
+                </div>
+            </div>
+            <div class="data-box">
+                <div class="data">
+                    <div class="transaction-item">
+						<img src="{{ url_for('static', filename='assets/xera87.jpg') }}" alt="">
+						<div class="item-details">
+							<h5>KEYBOARD NAME</h5>
+							<h6>KEYBOARD DESCRIPTION</h6>
+							<h6>KEYBOARD PRICE</h6>
+						</div>
 
+						<div class="ce">
+							<button type="button" class="btn btn-dark">
+								give review
+							</button>
+							<br>
+							<br>
+							<p>STATUS</p>
+						</div>
+					</div>
+                </div>
+                <div class="price-tag">
+                    <p>Total Harga</p>
+                    <p>RP.1,000,000</p> <!--isi dengan variable value total ahrga nanti-->
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 <script src="{{ url_for('complete.static', filename='complete.js') }}"></script>
 
 {% endblock %}
