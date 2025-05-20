@@ -24,7 +24,9 @@
 	<div class="main-block">
    		<div class="row">
 				{% for data in keyboard_data %}
-				<div class="product-container" id="container-{{ data.keyboard.id }}">
+				<div class="product-container" id="container-{{ data.keyboard.id }}" 
+				     data-keyboard-id="{{ data.keyboard.id }}" 
+				     data-compare-enabled="{{ request.args.get('compare', 'false') }}">
 					<div class="product-img-container">
 						<a href="{{ url_for('keyboard.keyboard_details', keyboard_id=data.keyboard.id) }}" class="text-reset text-decoration-none">
 						<img src="{{ url_for('static', filename='assets/xera87.jpg') }}" alt="">

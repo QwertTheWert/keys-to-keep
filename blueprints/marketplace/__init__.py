@@ -11,7 +11,10 @@ class MarketplacePage:
 		@self.marketplace_bp.route('/marketplace')
 		def marketplace():
 			is_ascending = request.args.get("asc", "true") == "true"
-			return render_template("marketplace.html", keyboard_data=Keyboard.get_data_all(is_ascending))
+			is_compare = request.args.get("compare", "false")
+			return render_template("marketplace.html", 
+                         keyboard_data=Keyboard.get_data_all(is_ascending),
+                         request=request)
 		
 		@self.marketplace_bp.route('/marketplace/get_variants', methods=['POST'])
 		def get_variants():

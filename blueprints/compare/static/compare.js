@@ -75,46 +75,46 @@ function resetProduct(productNum) {
     document.getElementById(`switches${productNum}`).textContent = "-";
 }
 
+function loadProduct(productNum) {
+    const productId = document.getElementById(`product${productNum}-id`).value;
+    
+    if (!productId) {
+        alert('Please enter a product ID');
+        return;
+    }
+
+    fetch(`/keyboard/details/${productId}`, {  // Changed API endpoint
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Product not found');
+        }
+        return response.json();
+    })
+    .then(data => {
+        const keyboard = data.keyboard;  // Adjust based on your response structure
+        document.getElementById(`product${productNum}-placeholder`).innerHTML = `
+            <img src="/static/assets/xera87.jpg" alt="${keyboard.name}" class="product-image">
+            <h3 class="product-name">${keyboard.name}</h3>
+            <p class="product-price">Rp ${formatPrice(keyboard.price)}</p>
+        `;
+        
+        // Update comparison details
+        document.getElementById(`layout${productNum}`).textContent = keyboard.layout;
+        document.getElementById(`connection${productNum}`).textContent = keyboard.connection;
+        document.getElementById(`material${productNum}`).textContent = keyboard.case_material;
+        document.getElementById(`switches${productNum}`).textContent = keyboard.switches.join(', ');
+    })
+    .catch(error => {
+        alert('Error: Product not found');
+        console.error('Error:', error);
+    });
+}
+
 function formatPrice(price) {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-}
-
-function addToCompare(productId) {
-    let compareProducts = JSON.parse(sessionStorage.getItem('compareProducts') || '[]');
-    
-    if (compareProducts.length === 0) {
-        compareProducts.push(productId);
-        sessionStorage.setItem('compareProducts', JSON.stringify(compareProducts));
-        showModal();
-    } else if (compareProducts.length === 1) {
-        if (compareProducts[0] === productId) {
-            alert('This product is already selected for comparison');
-            return;
-        }
-        compareProducts.push(productId);
-        sessionStorage.setItem('compareProducts', JSON.stringify(compareProducts));
-        window.location.href = '/compare';
-    }
-}
-
-function showModal() {
-    const modal = document.createElement('div');
-    modal.className = 'compare-modal';
-    modal.innerHTML = `
-        <div class="compare-modal-content">
-            <h3>Product added for comparison</h3>
-            <button onclick="window.location.href='/keyboards?compare=true'">
-                Select another product
-            </button>
-            <button onclick="window.location.href='/compare'">
-                View comparison
-            </button>
-        </div>
-    `;
-    document.body.appendChild(modal);
-}
-
-function resetComparison() {
-    sessionStorage.removeItem('compareProducts');
-    location.reload();
 }
