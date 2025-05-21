@@ -1,12 +1,12 @@
 from flask import Blueprint, render_template
 
 class MainPage:
-	main_page_bp = Blueprint("main_page", __name__, template_folder="templates", static_folder="static", static_url_path="/main_page/static/")
 	
 	def __init__(self, flask_app, bcrypt):
+		main_page_bp = Blueprint("main_page", __name__, template_folder="templates", static_folder="static", static_url_path="/main_page/static/")
 		from models import Keyboard
 		
-		@self.main_page_bp.route('/')
+		@main_page_bp.route('/')
 		def main_page():
 
 			trending = Keyboard.get_trending()
@@ -17,4 +17,4 @@ class MainPage:
 			return render_template("main_page.html", trending=trending, newest=newest)
 
 
-		flask_app.register_blueprint(self.main_page_bp)
+		flask_app.register_blueprint(main_page_bp)

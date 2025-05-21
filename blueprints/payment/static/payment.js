@@ -2,18 +2,26 @@ const deliveryFeeLabel = document.getElementById("delivery-fee");
 const deliveryOption = document.getElementById("delivery-option");
 const totalPriceLabel = document.getElementById("total-price");
 const purchaseButton = document.getElementById("purchase-button");
+const radioButtons = document.querySelectorAll('input[name="PaymentOptions"]');
 
 document.addEventListener("DOMContentLoaded", () => {
 	deliveryOption.value = "";
+	radioButtons.forEach(rb => {
+		rb.addEventListener("change", togglePurchaseButton);
+		rb.checked = false;
+	});
+
+	 togglePurchaseButton();
 });
 
+function togglePurchaseButton() {
+	const selected = Array.from(radioButtons).some(rb => rb.checked);
+	purchaseButton.disabled = !((deliveryOption.value != "") && (selected));
+}
+
 function onDeliverySelect(selectValue) {
-	if (selectValue == "") {
-		purchaseButton.disabled = true;
-		return;
-	} else {
-		purchaseButton.disabled = false;
-	}
+	togglePurchaseButton();
+	
 	fetch(`payment/get_delivery_data`, {
 		method: 'POST',
 		headers: {

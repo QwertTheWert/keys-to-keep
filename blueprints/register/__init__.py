@@ -5,11 +5,11 @@ from models import User
 
 class RegisterPage:
 	
-	register_bp = Blueprint("register", __name__, template_folder="templates", static_folder="static", static_url_path="/register/static/")
 	
 	def __init__(self, flask_app, bcrypt):
+		register_bp = Blueprint("register", __name__, template_folder="templates", static_folder="static", static_url_path="/register/static/")
 		
-		@self.register_bp.route('/register', methods=["GET", "POST"])
+		@register_bp.route('/register', methods=["GET", "POST"])
 		def register():
 			message = ""
 			full_name = request.form.get("full_name")
@@ -27,7 +27,7 @@ class RegisterPage:
 					message = validation_results["reason"]
 			return render_template('register.html', message=message, full_name=full_name, username=username, email=email, password=password, address=address)
 
-		flask_app.register_blueprint(self.register_bp)
+		flask_app.register_blueprint(register_bp)
 	
 	
 
