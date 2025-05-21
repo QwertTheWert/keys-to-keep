@@ -2,7 +2,7 @@
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/assets/keyboardBG.jpg');
     background-size: cover;
     background-position: center;
-    height: 70vh; /* Changed from 400px to 70vh for better screen coverage */
+    height: 90vh; /* Changed from 400px to 70vh for better screen coverage */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -28,7 +28,7 @@
 }
 
 .support-container {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('/static/assets/support-bg.jpg');
+    background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('/static/assets/keyboardBG2.jpg');
     background-size: cover;
     background-position: center;
     display: flex;
