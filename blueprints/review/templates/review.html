@@ -6,35 +6,40 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-container">
-    <div class="main-block">
-        <div class="container p-4">
-            <h1>Review</h1>
-            <hr><br>
-
-            <div class="img-text-container">
-                <img src="static\assets\Vortexseries82.png" alt="">
-                <div class="text-container">
-                    <h3>PRODUCT NAME</h2>
-                    <h6>PRODUCT COLOR | PRODUCT SWITCH TYPE</h2>
-
-                    <select class="review-option" id="review-option">
-                        <option value="">-- Select a review option --</option>
-                        <option value="">product is of excellent quality</option>
-                        <option value="">product arrived faster than anticipated</option>
-                        <option value="">product arrived late because driver got lost</option>
-                        <option value="">product received is different from the product page</option>
-                        <option value="">product arrived damaged</option>
-                    </select>
-                </div>
-            </div>
-            <br><br>
-
-            <textarea  placeholder="Write a review here" class="review-text-container"></textarea>
-            
-
+<div class="review-box">
+	<div class="main-block">
+        <div class="header">
+            <h1 class="review-header">Product Review</h1>
         </div>
-    </div>
+        <hr class="review-divider">
+        <img src="{{ url_for('static', filename='assets/Property 1=Slide 1.png') }}" alt="" class="review-img">
+        <div class="data-box">
+            <h2 class="item-name">Keyboard 1</h2>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium fugit officiis, at ipsa odit id. Est saepe iure inventore 
+                dolorem nihil nesciunt. Sunt quisquam cum accusantium molestias mollitia delectus suscipit?</p>
+            <form action="" method="POST">
+                <div class="review-data">
+                    <div class="rating-select">
+                        <span class="interactive-star" data-value="1">&#9733;</span>
+                        <span class="interactive-star" data-value="2">&#9733;</span>
+                        <span class="interactive-star" data-value="3">&#9733;</span>
+                        <span class="interactive-star" data-value="4">&#9733;</span>
+                        <span class="interactive-star" data-value="5">&#9733;</span>
+                    </div>
+
+                    <input type="hidden" name="selected_rating" id="selected-rating" value="0">
+                    <div class="price-tag">
+			        	<p>Harga : </p>
+			        	<p>RP.1,000,000</p> <!--isi dengan variable value total ahrga nanti-->
+			        </div>
+                </div>
+                <input type="hidden" name="keyboard_id" value="{{ data.keyboard_id }}">
+                <div class="submit">
+                    <button type="submit" class="submit-review-button">Submit Review</button>
+                </div>
+            </form>
+        </div>
+    </div>    
 </div>
 
 <script src="{{ url_for('review.static', filename='review.js') }}"></script>
