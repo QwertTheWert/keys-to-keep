@@ -85,14 +85,15 @@ def test_payment(client_d, add_to_cart_response):
 
 def test_create_transaction(flask_app_d, client_d, add_to_cart_response):
 	response = client_d.post("/payment/create_transaction", json={
-		"delivery_id": 1
+		"delivery_id": 1,
+		"total_price": 200000,
 	})
 	assert response.json["transaction_id"]
 	with flask_app_d.app_context():
 		assert Transaction.query.count() == 1 
 
 def test_complete(client_d, add_to_cart_response):
-	client_d.post("/payment/create_transaction", json={"delivery_id": 1})
+	client_d.post("/payment/create_transaction", json={"delivery_id": 1, "total_price": 200000,})
 	response = client_d.get("/complete/")
 	assert response.status_code == 405
 	response = client_d.post("/complete/", data={"transaction_id": 1})

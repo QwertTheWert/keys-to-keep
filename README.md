@@ -8,13 +8,16 @@
 5. Jalankan code ini untuk download library `python -m pip install -r requirements.txt`
 6. Jika belum ada database, ketik `py` di console untuk buka Python lalu lalukan perintah ini:
 ```
+import os
 from app import db, create_app, create_dummy_data
-from flask_bcrypt import Bcrypt
+
+file_path = 'instance/database.db'
+if os.path.exists(file_path):
+    os.remove(file_path)
 new_app = create_app()
-bcrypt = Bcrypt(new_app)
 new_app.app_context().push()
 db.create_all()
-create_dummy_data(bcrypt)
+create_dummy_data()
 exit()
 
 ```
