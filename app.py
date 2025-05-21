@@ -39,6 +39,7 @@ def create_app(database_uri='sqlite:///database.db'):
 	from blueprints.complete import CompletePage
 	from blueprints.compare import ComparePage
 	from blueprints.review import ReviewPage
+	from blueprints.additional_info import AdditionalInfoPage
 
 	MainPage(app, bcrypt)
 	RegisterPage(app, bcrypt)
@@ -51,6 +52,7 @@ def create_app(database_uri='sqlite:///database.db'):
 	CompletePage(app, bcrypt)
 	ComparePage(app, bcrypt)
 	ReviewPage(app, bcrypt)
+	AdditionalInfoPage(app, bcrypt)
 
 	@login_manager.user_loader 
 	def load_user(user_id):		

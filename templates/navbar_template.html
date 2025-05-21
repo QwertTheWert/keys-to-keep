@@ -5,25 +5,38 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='footer.css') }}">
 
 <nav class="navbar">
-	<div class="logo"><a class="text-decoration-none link-dark" href= "{{ url_for('main_page.main_page')}}">KEYS2KEEB</a></div>
-	<ul class="nav-links">
-		<li><a href="{{url_for('marketplace.marketplace') }}">Keyboards</a></li>
-		<li><a href="#">Support</a></li>
-		<li><a href="#">About Us</a></li>
-		<li>
-			<a href= "{{ url_for('cart.cart')}}">
-				<img src="{{ url_for('static', filename='assets/shopping-cart.png') }}" alt="Cart" class="icon">
-			</a>
-		</li>
-		<li><a href= "{% if current_user.is_authenticated %} {{ url_for('profile.profile')}} {% else %}
-		 {{ url_for('login.login')}} {% endif %}">
-			
-			{% if current_user.is_authenticated %} Profile {% else %} Login {% endif %}
-			
-		</a></li>
-		
-	</ul>
+	<div class="logo">
+		<a class="text-decoration-none link-dark" href="{{ url_for('main_page.main_page') }}">KEYS2KEEB</a>
+	</div>
+
+	<div class="nav-links-container">
+		<ul class="nav-links">
+			<li><a href="{{ url_for('marketplace.marketplace') }}">Keyboards</a></li>
+			<li><a href="#">Support</a></li>
+			<li><a href="#">About Us</a></li>
+			<li>
+				<a href="{{ url_for('cart.cart') }}" class="cart-link">
+					<img src="{{ url_for('static', filename='assets/shopping-cart.png') }}" alt="Cart" class="icon cart-icon">
+					<span class="cart-text">Cart</span>
+				</a>
+			</li>
+
+			<li>
+				<a href="{% if current_user.is_authenticated %}{{ url_for('profile.profile') }}{% else %}{{ url_for('login.login') }}{% endif %}">
+					{% if current_user.is_authenticated %}Profile{% else %}Login{% endif %}
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="burger">
+		<div class="line1"></div>
+		<div class="line2"></div>
+		<div class="line3"></div>
+	</div>
 </nav>
+<script src="{{ url_for('static', filename='navbar_template.js') }}"></script>
+
 
 {% block content %}{% endblock %}
 

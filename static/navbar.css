@@ -3,14 +3,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 40px 20px 40px;
+    padding: 20px 40px;
     background-color: white;
+    position: relative;  /* Add this */
 }
 
 /* Logo */
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
+    order: 1;  /* Add this */
 }
 
 /* Navbar Links */
@@ -45,4 +47,83 @@
     width: 24px;
     height: 24px;
     cursor: pointer;
+}
+
+/* Burger Menu */
+.burger {
+	display: none;
+	cursor: pointer;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 25px;
+	height: 21px;
+    order: 3;  /* Add this */
+}
+
+.burger div {
+	width: 100%;
+	height: 3px;
+	background-color: black;
+	transition: all 0.3s ease;
+}
+
+/* Toggle animation */
+.burger.toggle .line1 {
+	transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.burger.toggle .line2 {
+	opacity: 0;
+}
+
+.burger.toggle .line3 {
+	transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Nav links container positioning */
+.nav-links-container {
+    order: 2;  /* Add this */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+	.nav-links-container {
+		position: absolute;
+		right: 0;
+		top: 100%;  /* Changed from 80px to 100% */
+		background-color: white;
+		width: 100%;
+		height: 0;
+		overflow: hidden;
+		transition: height 0.3s ease;
+		box-shadow: 0 2px 5px rgba(0,0,0,0.1);  /* Add this for better visibility */
+	}
+
+	.nav-links-container.nav-active {
+		height: 250px;  /* Set a specific height instead of auto */
+		padding: 20px 0;
+	}
+
+	.nav-links {
+		flex-direction: column;
+		align-items: center;
+		gap: 20px;
+	}
+
+	.burger {
+		display: flex;
+	}
+}
+.cart-text {
+	display: none; /* default: hide text on desktop */
+}
+
+@media screen and (max-width: 768px) {
+	.cart-icon {
+		display: none; /* hide icon */
+	}
+
+	.cart-text {
+		display: inline; /* show text instead */
+	}
 }

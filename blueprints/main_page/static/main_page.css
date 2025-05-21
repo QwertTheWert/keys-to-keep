@@ -542,6 +542,40 @@
     margin: 0 40px;
   }
 
+/* Vendors Section */
+.vendors-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    padding: 40px 0;
+    width: 100%;
+}
+
+.vendors-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+/* Optional: Add an underline effect */
+.vendors-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: #f39c12;
+}
+
 /* Responsive Footer */
 .footer {
     width: 100vw;
