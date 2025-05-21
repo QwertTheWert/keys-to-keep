@@ -6,8 +6,36 @@
 {% endblock %}
 
 {% block content %}
+<div class="page-container">
+    <div class="main-block">
+        <div class="container p-4">
+            <h1>Review</h1>
+            <hr><br>
 
+            <div class="img-text-container">
+                <img src="static\assets\Vortexseries82.png" alt="">
+                <div class="text-container">
+                    <h3>PRODUCT NAME</h2>
+                    <h6>PRODUCT COLOR | PRODUCT SWITCH TYPE</h2>
 
+                    <select class="review-option" id="review-option">
+                        <option value="">-- Select a review option --</option>
+                        <option value="">product is of excellent quality</option>
+                        <option value="">product arrived faster than anticipated</option>
+                        <option value="">product arrived late because driver got lost</option>
+                        <option value="">product received is different from the product page</option>
+                        <option value="">product arrived damaged</option>
+                    </select>
+                </div>
+            </div>
+            <br><br>
+
+            <textarea  placeholder="Write a review here" class="review-text-container"></textarea>
+            
+
+        </div>
+    </div>
+</div>
 
 <script src="{{ url_for('review.static', filename='review.js') }}"></script>
 
