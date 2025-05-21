@@ -1,3 +1,26 @@
+/* Add these keyframes at the top of your file */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
 /* Navbar */
 .navbar {
     display: flex;
@@ -90,24 +113,34 @@
 	.nav-links-container {
 		position: absolute;
 		right: 0;
-		top: 100%;  /* Changed from 80px to 100% */
+		top: 100%;
 		background-color: white;
-		width: 100%;
-		height: 0;
+		width: 200px;
+		height: auto;
+		max-height: 0;
 		overflow: hidden;
-		transition: height 0.3s ease;
-		box-shadow: 0 2px 5px rgba(0,0,0,0.1);  /* Add this for better visibility */
+		transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+		box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+		z-index: 1000;
+		opacity: 0;
 	}
 
 	.nav-links-container.nav-active {
-		height: 250px;  /* Set a specific height instead of auto */
-		padding: 20px 0;
+		max-height: 300px;
+		opacity: 1;
+		animation: slideDown 0.3s ease-out forwards;
+	}
+
+	.nav-links-container:not(.nav-active) {
+		animation: slideUp 0.3s ease-out forwards;
 	}
 
 	.nav-links {
 		flex-direction: column;
 		align-items: center;
 		gap: 20px;
+		padding: 0; /* Add this to remove default padding */
+		margin: 0; /* Add this to remove default margin */
 	}
 
 	.burger {

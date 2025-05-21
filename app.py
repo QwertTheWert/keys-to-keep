@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
@@ -57,6 +57,11 @@ def create_app(database_uri='sqlite:///database.db'):
 	@login_manager.user_loader 
 	def load_user(user_id):		
 		return db.session.get(User, int(user_id))
+
+	# Register error handler for 404
+	@app.errorhandler(404)
+	def page_not_found(error):
+		return render_template('error_template.html'), 404
 
 	migrate = Migrate(app, db)
 	return app
