@@ -1,7 +1,7 @@
 import sys
 sys.path.insert(0, "C:/UnivProjects/keys_to_keep")
 
-from models import User, Transaction
+from models import User, Transaction, Review
 from flask import url_for
 
 def test_main(client):
@@ -152,4 +152,26 @@ def test_compare(client_d):
 	assert response.json["valid"] == False
 	response = client_d.post("/compare/get_data", json={"id":1})
 	assert response.json["valid"] == True
+
+def test_complete(client_d, add_to_cart_response, flask_app_d):
+	client_d.post("/payment/create_transaction", json={"delivery_id": 1, "total_price": 200000})
+	client_d.post("/complete/", data={"transaction_id": 1})
+	response = client_d.get("/review/3")
+	assert response.status_code == 200
+	response = client_d.post("/review/3", data={"selected_rating":5, "description": "Olala"})
+	assert response.status_code == 302
+	assert response.headers["Location"].endswith("profile")
+	assert b'<button type="button" class="btn btn-sm btn-dark">' not in response.data
+	with flask_app_d.app_context():
+		review = Review.query.filter(Review.id == 3).first()
+		assert review.rating == 5
+		assert review.description == "Olala"
+
+def test_additional_info(client):
+	response = client.get("/about_us")
+	assert response.status_code == 200
+	assert b"<title>About Us - Keys 2 Keep</title>" in response.data
+	response = client.get("/support")
+	assert response.status_code == 200
+	assert b"<title>Support - Keys 2 Keep</title>" in response.data
 

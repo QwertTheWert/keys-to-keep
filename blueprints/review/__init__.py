@@ -11,7 +11,11 @@ class ReviewPage:
 		@review_bp.route('/review/<int:review_id>', methods=["POST", "GET"])
 		def review(review_id):
 			if request.method == "GET":
-				return render_template("review.html", data=Review.get_edit_data(review_id))
+				data = Review.get_edit_data(review_id)
+				if data[0].rating != -1:
+					return render_template("review.html", data=data)
+				else:
+					return redirect(url_for('profile.profile'))
 			elif request.method == "POST":
 				review = Review.get_edit_data(review_id)[0]
 				review.rating = int(request.form.get("selected_rating"))
