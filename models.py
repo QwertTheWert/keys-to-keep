@@ -229,6 +229,18 @@ class Review(db.Model):
 	def __repr__(self):
 		return '<Rating %r>' % self.id
 	
+	@staticmethod
+	def get_edit_data(query_id):
+		review = db.session.query(Review, Keyboard, Color, Switch, User)\
+			.join(Keyboard, Review.keyboard_id == Keyboard.id)\
+			.join(Color, Review.color_id == Color.id)\
+			.join(Switch, Review.switch_id == Switch.id)\
+			.join(User, Review.user_id == User.id)\
+			.filter(Review.id == query_id)\
+			.first()
+
+		return review
+	
 
 	def get_stars(self):
 		rating_int = self.rating if self.rating else 0

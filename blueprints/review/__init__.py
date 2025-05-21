@@ -9,9 +9,8 @@ class ReviewPage:
 		from models import Review
 
 		@self.review_bp.route('/review/<int:review_id>')
-		def keyboard_details(review_id):
-			keyboard = Review.get_by_id(review_id)
-			return render_template("review.html", data=data)
+		def review(review_id):
+			return render_template("review.html", data=Review.get_edit_data(review_id))
 
 		
 		flask_app.register_blueprint(self.review_bp)
