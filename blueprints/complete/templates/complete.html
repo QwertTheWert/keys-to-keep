@@ -7,27 +7,27 @@
 
 {% block content %}
 <div class="complete-box">
-    <div class="main-block">
-        <div class="header">
-            <h2 class="complete-header">Purchase Complete</h2>
-        </div>
-        <hr class="complete-divider">
-        <div class="complete-content">
-            <div class="check-box">
-                <div class="checkmark-container">
-                <div class="check-pulse"></div>
-                <div class="check-pulse"></div>
-                    <div class="check-pulse"></div>
-                    <div class="checkmark-icon">
-                        <img src="/static/assets/checkmark.png" alt="Check_Mark">
-                    </div>
-                </div>
-            </div>
-            <div class="data-box">
-                <div class="data">
-                    <!-- # Review / Keyboard / Color / Switch  -->
-                    {% for d in range(data.review_data | length) %}
-                    <div class="transaction-item">
+	<div class="main-block">
+		<div class="header">
+			<h2 class="complete-header">Purchase Complete</h2>
+		</div>
+		<hr class="complete-divider">
+		<div class="complete-content">
+			<div class="check-box">
+				<div class="checkmark-container">
+				<div class="check-pulse"></div>
+				<div class="check-pulse"></div>
+					<div class="check-pulse"></div>
+					<div class="checkmark-icon">
+						<img src="/static/assets/checkmark.png" alt="Check_Mark">
+					</div>
+				</div>
+			</div>
+			<div class="data-box">
+				<div class="data">
+					<!-- # Review / Keyboard / Color / Switch  -->
+					{% for d in range(data.review_data | length) %}
+					<div class="transaction-item">
 						<img src="{{ url_for('static', filename=data.review_data[d].1.image_url) }}" alt="">
 						<div class="item-details">
 							<h5>{{ data.review_data[d].1.name }}</h5>
@@ -36,25 +36,25 @@
 
 						<div class="ce">
 							<a href="{{url_for('review.review', review_id=data.review_data[d].1.id)}}" class="text-reset text-decoration-none">
-                                <button type="button" class="btn btn-dark">
-							    	Give Review
-							    </button>
-                            </a>
+								<button type="button" class="btn btn-dark">
+									Review
+								</button>
+							</a>
 							<br>
 							<br>
 							<p>STATUS</p>
 						</div>
 					</div>
-                    {% endfor %}
-                </div>
-                <div class="price-tag">
-                    <p>Total Harga</p>
-                    <p>RP.1,000,000</p> <!--isi dengan variable value total ahrga nanti-->
-                </div>
-            </div>
-        </div>
+					{% endfor %}
+				</div>
+				<div class="price-tag">
+					<p>Total Harga</p>
+					<p>RP.1,000,000</p> <!--isi dengan variable value total ahrga nanti-->
+				</div>
+			</div>
+		</div>
 
-    </div>
+	</div>
 </div>
 <script src="{{ url_for('complete.static', filename='complete.js') }}"></script>
 

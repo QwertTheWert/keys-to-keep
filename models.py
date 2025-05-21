@@ -43,6 +43,18 @@ class User(db.Model, UserMixin):
 			cart_data = [cart.get_data() for cart in db.session.query(Cart).filter(Cart.user_id == self.id).all()]
 		return sum([cart_datum["subtotal_int"] for cart_datum in cart_data])
 
+	def get_reviews(self):
+		review_data = db.session.query(Review, Keyboard, Color, Switch)\
+			.join(Keyboard, Review.keyboard_id == Keyboard.id)\
+			.join(Color, Review.color_id == Color.id)\
+			.join(Switch, Review.switch_id == Switch.id)\
+			.filter(Review.user_id == self.id)\
+			.all()
+		return [{
+			"data" : data,
+			"stars" : data[0].get_stars(),
+		} for data in review_data]
+
 	def get_carts(self):
 		carts = db.session.query(Cart).filter(Cart.user_id == self.id).all()
 		cart_data = [cart.get_data() for cart in carts]
@@ -217,8 +229,8 @@ class Review(db.Model):
 	transaction_id = db.Column(db.Integer, db.ForeignKey('transaction.id'))
 	color_id = db.Column(db.Integer, db.ForeignKey('color.id'), nullable=False)
 	switch_id = db.Column(db.Integer, db.ForeignKey('switch.id'), nullable=False)
-	rating = db.Column(db.Integer)
-	description = db.Column(db.String(1024))
+	rating = db.Column(db.Integer, default="-1")
+	description = db.Column(db.String(1024), default="-1")
 
 	@staticmethod
 	def create(cart, transaction_id):

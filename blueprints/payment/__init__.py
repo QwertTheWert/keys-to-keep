@@ -5,7 +5,7 @@ from app import request, db
 class PaymentPage:
 
 	def __init__(self, flask_app, bcrypt):
-		from models import DeliveryService, Transaction, Review
+		from models import DeliveryService, Transaction, Review, Keyboard
 		payment_bp = Blueprint("payment", __name__, template_folder="templates", static_folder="static", static_url_path="/payment/static/")
 
 		@payment_bp.route('/payment')
@@ -32,6 +32,8 @@ class PaymentPage:
 
 			carts = [cart_datum["cart"] for cart_datum in current_user.get_carts()["cart_data"]]
 			for cart in carts:
+				keyboard = Keyboard.get_by_id(cart.keyboard_id)
+				keyboard.quantity -= cart.quantity
 				Review.create(cart, transaction.id)
 				db.session.delete(cart)
 			db.session.commit()
