@@ -166,7 +166,7 @@
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
-    gap: 20px;
+    gap: 15px;
     scroll-behavior: smooth;
     cursor: grab;
     /* Optional: show scrollbar always on mobile */
@@ -182,9 +182,12 @@
     padding: 15px;
     min-width: 260px;
     max-width: 300px;
+    height: 450px; /* Add fixed height */
     flex: 0 0 auto;
     position: relative;
     text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .trending-badge {
@@ -200,8 +203,9 @@
 
 .trending-item img {
     max-width: 100%;
-    height: auto;
-    margin-bottom: 10px;
+    height:180px; 
+    object-fit: contain;
+    margin-bottom: 15px;
 }
 
 .trending-item h3 {
@@ -236,7 +240,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 70px; /* Increased from 60px to accommodate larger image */
 }
 
 .current-price {
@@ -259,17 +263,23 @@
 }
 
 .add-to-cart {
-    background-color: #f39c12;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 80px); /* Changed from 30px to 80px for narrower width */
+    background-color:rgb(255, 0, 0);
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
+    transition: background-color 0.3s ease;
 }
 
 .add-to-cart:hover {
-    background-color: #e67e22;
+    background-color:rgb(255, 0, 0);
 }
 
 /* Optional: Style scrollbar for Webkit browsers */
@@ -312,7 +322,7 @@
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
-    gap: 20px;
+    gap: 15px;
     scroll-behavior: smooth;
     cursor: grab;
     /* Optional: show scrollbar always on mobile */
@@ -328,9 +338,12 @@
     padding: 15px;
     min-width: 260px;
     max-width: 300px;
+    height: 450px; /* Add fixed height */
     flex: 0 0 auto;
     position: relative;
     text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .newest-badge {
@@ -346,8 +359,9 @@
 
 .newest-item img {
     max-width: 100%;
-    height: auto;
-    margin-bottom: 10px;
+    height: 180px; 
+    object-fit: contain;
+    margin-bottom: 15px;
 }
 
 .newest-item h3 {
@@ -382,7 +396,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 70px; /* Increased from 60px to accommodate larger image */
 }
 
 .current-price {
@@ -405,13 +419,19 @@
 }
 
 .add-to-cart {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 80px); 
     background-color: #f39c12;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 10px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
+    transition: background-color 0.3s ease;
 }
 
 .add-to-cart:hover {
@@ -547,7 +567,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    background-color:rgb(45, 41, 41);
     padding: 40px 0;
     width: 100%;
 }
@@ -573,7 +593,7 @@
     transform: translateX(-50%);
     width: 60px;
     height: 3px;
-    background-color: #f39c12;
+    background-color:rgb(255, 0, 0);
 }
 
 /* Responsive Footer */
