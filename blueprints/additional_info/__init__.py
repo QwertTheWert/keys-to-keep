@@ -6,7 +6,7 @@ class AdditionalInfoPage:
     
     def __init__(self, flask_app, bcrypt):
         
-        @self.additional_info_bp.route('/about-us')
+        @self.additional_info_bp.route('/about_us')
         def about_us():
             return render_template("aboutUs.html")
 
