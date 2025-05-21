@@ -35,7 +35,7 @@
 						</div>
 
 						<div class="ce">
-							<a href="{{url_for('review.review', review_id=data.data.0.id)}}" class="text-reset text-decoration-none">
+							<a href="{{url_for('review.review', review_id=data.review_data[d].0.id)}}" class="text-reset text-decoration-none">
 								<button type="button" class="btn btn-sm btn-dark">
 									Review
 								</button>
@@ -47,8 +47,8 @@
 					{% endfor %}
 				</div>
 				<div class="price-tag">
-					<p>Total Harga</p>
-					<p>RP.1,000,000</p> <!--isi dengan variable value total ahrga nanti-->
+					<p>Total Price</p>
+					<p>Rp. {{ total_price }}</p> <!--isi dengan variable value total ahrga nanti-->
 				</div>
 			</div>
 		</div>

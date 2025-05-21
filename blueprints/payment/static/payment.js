@@ -37,12 +37,13 @@ function onDeliverySelect(selectValue) {
 }
 
 function onPurchaseClick() {
+	console.log(totalPriceLabel.textContent);
 	fetch(`payment/create_transaction`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ delivery_id: parseInt(deliveryOption.value) }),
+		body: JSON.stringify({ delivery_id: parseInt(deliveryOption.value), total_price : parseInt(totalPriceLabel.textContent.replace(/\./g, "")) }),
 	})
 	.then(response => response.json())
 	.then(data => {
@@ -63,5 +64,5 @@ function onPurchaseClick() {
 }
 
 function formatMoney(num) {
-  return "Rp. " + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }

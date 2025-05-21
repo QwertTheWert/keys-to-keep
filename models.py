@@ -283,6 +283,7 @@ class Transaction(db.Model):
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 	delivery_id = db.Column(db.Integer, db.ForeignKey('transaction.id'), nullable=False)
 	user_id = db.Column(db.Integer, db.ForeignKey('transaction.id'), nullable=False)
+	total_price = db.Column(db.Integer, nullable=False)
 
 
 	@staticmethod

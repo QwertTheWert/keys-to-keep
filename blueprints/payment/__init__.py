@@ -26,7 +26,8 @@ class PaymentPage:
 		@payment_bp.route('/payment/create_transaction', methods=['POST'])
 		def create_transaction():
 			data = request.get_json()
-			transaction = Transaction(delivery_id=data["delivery_id"], user_id=current_user.id)
+			print(data)
+			transaction = Transaction(delivery_id=data["delivery_id"], user_id=current_user.id, total_price=data["total_price"])
 			db.session.add(transaction)
 			db.session.commit()
 
