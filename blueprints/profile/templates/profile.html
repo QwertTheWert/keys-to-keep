@@ -8,7 +8,7 @@
 
 {% block content %}
 <div class="page-container">
-	<div class="main_block">
+	<div class="main-block">
 		<div class="container mt-4 p-4">
 			<h1>Profile</h1>
 			<hr>
@@ -31,19 +31,26 @@
 			<br>
 			<br><br>
 			
-			<a href="{{ url_for('profile.edit') }}" class="text-reset text-decoration-none">
-				<button type="button" class="btn btn-primary">
-					Edit
-				</button>
-			</a>
-			
-			<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#logout_modal" id="logout_modal_button">
-				Logout
-			</button>
+			<div class="button-container">
+				<div class="left-buttons">
+					<a href="{{ url_for('profile.edit') }}" class="text-reset text-decoration-none">
+						<button type="button" class="btn btn-primary">
+							Edit
+						</button>
+					</a>
+				</div>
+				
+				<div class="right-buttons">
+					<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#logout_modal" id="logout_modal_button">
+						Logout
+					</button>
 
-			<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_modal" id="delete_modal_button">
-				Delete Account
-			</button>
+					<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_modal" id="delete_modal_button">
+						Delete Account
+					</button>
+				</div>
+			</div>
+		
 			
 
 			<!-- Logout Modal -->
@@ -91,7 +98,7 @@
 	</div>
 
 
-	<div class="Side_Block">
+	<div class="side-Block">
 		<div class="container mt-4 p-4">
 			<h1>Transaction List</h2>
 				<hr>
