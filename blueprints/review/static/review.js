@@ -25,4 +25,4 @@ document.addEventListener("DOMContentLoaded", () => {
       star.classList.toggle("selected", i < selectedRating);
     });
   }
-});
+});``

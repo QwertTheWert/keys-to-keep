@@ -12,12 +12,12 @@
             <h1 class="review-header">Product Review</h1>
         </div>
         <hr class="review-divider">
-        <img src="{{ url_for('static', filename='assets/Property 1=Slide 1.png') }}" alt="" class="review-img">
+        <img src="{{ url_for('static', filename=data.1.image_url) }}" alt="" class="review-img">
         <div class="data-box">
-            <h2 class="item-name">Keyboard 1</h2>
+            <h2 class="item-name">{{ data.1.name }}</h2>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusantium fugit officiis, at ipsa odit id. Est saepe iure inventore 
                 dolorem nihil nesciunt. Sunt quisquam cum accusantium molestias mollitia delectus suscipit?</p>
-            <form action="" method="POST">
+            <form action="{{url_for('review.review', review_id=data.0.id)}}" method="POST">
                 <div class="review-data">
                     <div class="rating-select">
                         <span class="interactive-star" data-value="1">&#9733;</span>
@@ -33,7 +33,7 @@
 			        	<p>RP.1,000,000</p> <!--isi dengan variable value total ahrga nanti-->
 			        </div>
                 </div>
-                <input type="hidden" name="keyboard_id" value="{{ data.keyboard_id }}">
+                <input type="hidden" name="keyboard_id">
                 <div class="submit">
                     <button type="submit" class="submit-review-button">Submit Review</button>
                 </div>
