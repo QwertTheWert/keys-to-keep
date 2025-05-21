@@ -11,9 +11,7 @@ class CompletePage:
 		@self.complete_bp.route('/complete/', methods=['POST'])
 		def complete():
 			transaction_id = request.form.get("transaction_id")
-			transaction = Transaction.get_data(transaction_id) # Review / Keyboard / Color / Switch 
-			print(transaction["review_data"][0])
-			
-			return render_template('complete.html', )
+			data = Transaction.get_data(transaction_id) # Review / Keyboard / Color / Switch 			
+			return render_template('complete.html', data=data)
 		
 		flask_app.register_blueprint(self.complete_bp)

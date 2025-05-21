@@ -2,6 +2,7 @@ const colorContainer = document.getElementById("color-options");
 const switchContainer = document.getElementById("switch-options");
 const finalizeBtn = document.getElementById("finalize");	
 const alertBox = document.getElementById("alert");
+const productNameText = document.getElementById("product-name");
 
 let currentKeyboardId;
 let variantInfo;

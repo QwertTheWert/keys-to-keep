@@ -29,7 +29,9 @@ class PaymentPage:
 			carts = [cart_datum["cart"] for cart_datum in current_user.get_carts()["cart_data"]]
 			for cart in carts:
 				Review.create(cart, transaction.id)
-
+				db.session.delete(cart)
+			db.session.commit()
+			
 			return jsonify({"transaction_id" : transaction.id})
 
 		flask_app.register_blueprint(self.payment_bp)

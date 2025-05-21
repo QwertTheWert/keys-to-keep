@@ -25,23 +25,27 @@
             </div>
             <div class="data-box">
                 <div class="data">
+                    <!-- # Review / Keyboard / Color / Switch  -->
+                    {% for d in range(data.review_data | length) %}
                     <div class="transaction-item">
-						<img src="{{ url_for('static', filename='assets/xera87.jpg') }}" alt="">
+						<img src="{{ url_for('static', filename=data.review_data[d].1.image_url) }}" alt="">
 						<div class="item-details">
-							<h5>KEYBOARD NAME</h5>
-							<h6>KEYBOARD DESCRIPTION</h6>
-							<h6>KEYBOARD PRICE</h6>
+							<h5>{{ data.review_data[d].1.name }}</h5>
+							<h6><b>Color:</b> {{ data.review_data[d].2.name }} | <b>Switch Type:</b> {{ data.review_data[d].3.name }}</h6>
 						</div>
 
 						<div class="ce">
-							<button type="button" class="btn btn-dark">
-								give review
-							</button>
+							<a href="{{url_for('review.review', review_id=data.review_data[d].1.id)}}" class="text-reset text-decoration-none">
+                                <button type="button" class="btn btn-dark">
+							    	Give Review
+							    </button>
+                            </a>
 							<br>
 							<br>
 							<p>STATUS</p>
 						</div>
 					</div>
+                    {% endfor %}
                 </div>
                 <div class="price-tag">
                     <p>Total Harga</p>
