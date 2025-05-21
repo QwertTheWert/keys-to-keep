@@ -6,7 +6,7 @@ class ReviewPage:
 	
 	def __init__(self, flask_app, bcrypt):
 		from models import Review
-		review_bp = Blueprint("review", __name__, template_folder="templates", static_folder="static", static_url_path="/keyboard/static/")
+		review_bp = Blueprint("review", __name__, template_folder="templates", static_folder="static", static_url_path="/review/static/")
 
 		@review_bp.route('/review/<int:review_id>', methods=["GET", "POST"])
 		def review(review_id):
