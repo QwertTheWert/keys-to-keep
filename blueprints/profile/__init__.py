@@ -11,7 +11,9 @@ class ProfilePage:
 		@profile_bp.route('/profile')
 		def profile():
 			if current_user.is_authenticated:
-				return render_template("profile.html", user=current_user, username=str(current_user.username), full_name=str(current_user.full_name), email=str(current_user.email))
+				review_data = current_user.get_reviews()
+				print(review_data)
+				return render_template("profile.html", user=current_user, username=str(current_user.username), full_name=str(current_user.full_name), email=str(current_user.email), review_data=review_data)
 			else:
 				return redirect(url_for("login.login"))
 
@@ -19,8 +21,14 @@ class ProfilePage:
 		def edit():
 			if current_user.is_authenticated:
 				if request.method == "POST":
-					current_user.update(request.form.get("full_name"), request.form.get("email"), request.form.get("address"))
-					return redirect(url_for("profile.profile"))
+					full_name = request.form.get("full_name")
+					email = request.form.get("email")
+					address = request.form.get("address")
+					if full_name != "" and email != "" and address != "":
+						current_user.update(request.form.get("full_name"), request.form.get("email"), request.form.get("address"))
+						return redirect(url_for("profile.profile"))
+					else:
+						return render_template("edit_profile.html", user=current_user, full_name=str(full_name), email=str(email), address=str(address))
 				else:
 					return render_template("edit_profile.html", user=current_user, full_name=str(current_user.full_name), email=str(current_user.email), address=str(current_user.address))
 			else:
