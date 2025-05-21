@@ -1,7 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("Navbar is loaded!");
-});
-
 const slider = document.querySelector(".slider");
 const slides = document.querySelectorAll(".slide");
 const dots = document.querySelectorAll(".dot");

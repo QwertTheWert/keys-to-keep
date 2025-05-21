@@ -10,7 +10,6 @@ document.querySelectorAll(".product-id-input").forEach(element => {
 	element.addEventListener("input", () => {
 		const side = element.dataset.side;
 		element.value = element.value.replace(/(?!^-)-|[^-0-9]/g, '');
-		console.log();
 		fetch(`compare/get_data`, {
 			method: 'POST',
 			headers: {

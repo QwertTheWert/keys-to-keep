@@ -18,7 +18,6 @@ class ComparePage:
 			keyboard = Keyboard.get_by_id(data["id"])
 			if keyboard:
 				keyboard_data = keyboard.get_data()
-				print(keyboard_data["discounted_price"])
 				return {
 					"valid": True, 
 					"image_url" : url_for('static', filename=keyboard.image_url),

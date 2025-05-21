@@ -26,7 +26,6 @@ document.querySelectorAll('.open-modal').forEach(btn =>
 		})
 		.then(response => response.json())
 		.then(data => {
-			console.log(data);
 			if (data.success) {
 				colorContainer.innerHTML = "";
 				switchContainer.innerHTML = "";

@@ -11,7 +11,6 @@ class LoginPage:
 		@self.login_bp.route('/login', methods=["GET", "POST"])
 		def login():
 			message = ""
-			login_successfully = False
 			if request.method == "POST":
 				identifier = request.form.get("identifier")
 				password = request.form.get("password")

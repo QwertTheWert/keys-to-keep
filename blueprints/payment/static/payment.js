@@ -24,7 +24,6 @@ function onDeliverySelect(selectValue) {
 	.then(response => response.json())
 	.then(data => {
 		deliveryFeeLabel.textContent = formatMoney(data.price);
-		console.log(totalPriceLabel.dataset.total);
 		totalPriceLabel.textContent = formatMoney(data.price + parseInt(totalPriceLabel.dataset.total));
 	});
 }
