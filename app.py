@@ -120,7 +120,7 @@ def create_dummy_data():
 			"gasket mount for a soft typing feel, and supports QMK/VIA for full customization. "
 			"It also offers multi-layout flexibility."
 		),
-		image_url="assets/timeless82v2.png",  # Replace with your actual image path
+		image_url="assets/Noir new.png",  # Replace with your actual image path
 		switch_type=1,  # Assuming this ID exists in your switch_type table
 		keycaps=1,      # Assuming this ID exists in your keycaps table
 		discount=10,
@@ -135,7 +135,7 @@ def create_dummy_data():
 			"The VortexSeries Swift82 features a compact 82-key layout with hot-swappable sockets, "
 			"ideal for quick customization and vibrant RGB lighting. Perfect for gamers and coders alike."
 		),
-		image_url="assets/swift82.png",  # Replace with your actual image path
+		image_url="assets/keyboardBG.jpg",  # Replace with your actual image path
 		switch_type=2,  # Assuming ID 2 exists in your switch_type table (e.g., Kailh Box Pink)
 		keycaps=2,      # Assuming ID 2 exists in your keycaps table
 		discount=50,    # 50% discount: from 1,299,000 to 659,000
@@ -151,7 +151,7 @@ def create_dummy_data():
 			"support, hot-swappable switches, and a sleek aluminum frame. Ideal for professionals and enthusiasts "
 			"seeking flexibility and premium typing experience."
 		),
-		image_url="assets/keychron_k8_pro.png",  # Replace with actual file path
+		image_url="assets/keyboardBG2.jpg",  # Replace with actual file path
 		switch_type=3,  # Assuming ID 3 exists in switch_type table (e.g., Gateron Red)
 		keycaps=3,      # Assuming ID 3 exists in keycaps table
 		discount=20,    # 20% off
