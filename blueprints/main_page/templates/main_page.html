@@ -10,15 +10,21 @@
 
 <div class="slider-container">
 	<div class="slider">
-		<div class="slide active">
-			<img src="{{ url_for('static', filename='assets/Property 1=Slide 1.png') }}" alt="Keyboard 1">
-		</div>
-		<div class="slide">
-			<img src="{{ url_for('static', filename='assets/Property 1=Slide 2.png') }}" alt="Keyboard 2">
-		</div>
-		<div class="slide">
-			<img src="{{ url_for('static', filename='assets/Property 1=Slide 4.png') }}" alt="Keyboard 4">
-		</div>
+		<a href="{{ url_for('keyboard.keyboard_details', keyboard_id=1) }}" class="text-reset text-decoration-none">
+			<div class="slide active">
+				<img src="{{ url_for('static', filename='assets/Property 1=Slide 1.png') }}" alt="Keyboard 1">
+			</div>
+		</a>
+		<a href="{{ url_for('keyboard.keyboard_details', keyboard_id=3) }}" class="text-reset text-decoration-none">
+			<div class="slide">
+				<img src="{{ url_for('static', filename='assets/Property 1=Slide 2.png') }}" alt="Keyboard 2">
+			</div>
+		</a>
+		<a href="{{ url_for('keyboard.keyboard_details', keyboard_id=2) }}" class="text-reset text-decoration-none">
+			<div class="slide">
+				<img src="{{ url_for('static', filename='assets/Property 1=Slide 4.png') }}" alt="Keyboard 4">
+			</div>
+		</a>
 	</div>
 
 	<!-- Navigation Arrows -->
@@ -59,7 +65,6 @@
 			</div>
 			<form action="{{ url_for('keyboard.keyboard_details', keyboard_id=data.keyboard.id) }}" method="GET">			
 				<button action="submit" class="add-to-cart">Go to Page</button>
-			</a>
 		</div>
 		{% endfor %}
 		

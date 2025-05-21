@@ -111,6 +111,72 @@ def create_dummy_data():
 	keycaps_data = [Keycaps(name="ABS"), Keycaps(name="POM"), Keycaps(name="PBT")]
 	db.session.add_all(keycaps_data)
 
+
+	kb1 = Keyboard(
+		name="NOIR TIMELESS82 V2",
+		subtitle="75% keyboard with knob, screen, and VIA support",
+		description=(
+			"This 75% keyboard features a programmable knob, TFT LCD Screen, "
+			"gasket mount for a soft typing feel, and supports QMK/VIA for full customization. "
+			"It also offers multi-layout flexibility."
+		),
+		image_url="assets/timeless82v2.png",  # Replace with your actual image path
+		switch_type=1,  # Assuming this ID exists in your switch_type table
+		keycaps=1,      # Assuming this ID exists in your keycaps table
+		discount=10,
+		sold=25,
+		price=2100000,  # Example in Indonesian Rupiah or adjust as needed
+		quantity=50
+	)
+	kb2 = Keyboard(
+		name="VORTEXSERIES SWIFT82",
+		subtitle="Hot-swap 82-key compact keyboard",
+		description=(
+			"The VortexSeries Swift82 features a compact 82-key layout with hot-swappable sockets, "
+			"ideal for quick customization and vibrant RGB lighting. Perfect for gamers and coders alike."
+		),
+		image_url="assets/swift82.png",  # Replace with your actual image path
+		switch_type=2,  # Assuming ID 2 exists in your switch_type table (e.g., Kailh Box Pink)
+		keycaps=2,      # Assuming ID 2 exists in your keycaps table
+		discount=50,    # 50% discount: from 1,299,000 to 659,000
+		sold=73,
+		price=659000,   # After discount
+		quantity=120
+	)
+	kb3 = Keyboard(
+		name="KEYCHRON K8 PRO",
+		subtitle="Wireless Mechanical TKL Keyboard",
+		description=(
+			"The Keychron K8 Pro is a Tenkeyless (TKL) wireless mechanical keyboard that features QMK/VIA "
+			"support, hot-swappable switches, and a sleek aluminum frame. Ideal for professionals and enthusiasts "
+			"seeking flexibility and premium typing experience."
+		),
+		image_url="assets/keychron_k8_pro.png",  # Replace with actual file path
+		switch_type=3,  # Assuming ID 3 exists in switch_type table (e.g., Gateron Red)
+		keycaps=3,      # Assuming ID 3 exists in keycaps table
+		discount=20,    # 20% off
+		sold=124,
+		price=1049000,  # Original price: 1,311,250
+		quantity=95
+	)
+
+	db.session.add_all([kb1, kb2])
+	db.session.commit()
+	db.session.add_all([
+		Color(name="White & Maroon", keyboard_id=1), 
+		Color(name="Navy & Cream", keyboard_id=1), 
+		Color(name="Black & Orange", keyboard_id=2),
+		Color(name="Dark Gray with Red Accents", keyboard_id=3)])
+	
+	db.session.add_all([
+		Switch(name="Gateron Pro Red", keyboard_id=1), 
+		Switch(name="Kailh Box Pink", keyboard_id=2),
+		Switch(name="Keychron K Pro Brown", keyboard_id=3)])
+	db.session.commit()
+	
+
+
+
 	keyboard_data = [
 		('Mechanical Keyboard', 'A premium mechanical keyboard with red switches and customizable RGB lighting.'),
 		('Compact 60% Mechanical Keyboard', 'A small 60% layout mechanical keyboard perfect for portability.'),
