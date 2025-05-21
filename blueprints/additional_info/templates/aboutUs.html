@@ -1,0 +1,25 @@
+{% extends 'navbar_template.html' %}
+
+{% block head %}
+<title>About Us - Keys 2 Keep</title>
+<link rel="stylesheet" href="{{ url_for('additional_info.static', filename='aboutUs.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="story-section">
+    <h1 class="story-title">OUR STORY</h1>
+    <p class="story-subtitle">Keys 2 Keep has a long story providing gamers and typist around the world some of the best products with quality and affordability in mind.</p>
+    
+    <div class="story-content">
+        <div class="image-section">
+            <img src="{{ url_for('static', filename='assets/noirZ1.webp') }}" alt="Keyboard Story">
+        </div>
+        <div class="text-section">
+            <h2 class="beginnings-title">BACKGROUND</h2>
+            <p class="beginnings-text">
+                Established in 2025, Keys 2 Keep has gained a reputation for affordable peripherals in the gaming world. With the ambition of crafting every peripheral equipment extraordinary, we are motivated to integrate groundbreaking concepts and original aesthetics into keyboards, mouses, earphones, office sets, gaming peripherals, etc.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

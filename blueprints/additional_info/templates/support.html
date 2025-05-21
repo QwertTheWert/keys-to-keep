@@ -1,0 +1,59 @@
+{% extends 'navbar_template.html' %}
+
+{% block head %}
+<title>Support - Keys 2 Keep</title>
+<link rel="stylesheet" href="{{ url_for('additional_info.static', filename='support.css') }}">
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section">
+    <h1>KEYS2KEEB SUPPORT</h1>
+    <p>We're Here to Help</p>
+</div>
+
+<!-- Support Options -->
+<div class="support-container">
+    <div class="support-card">
+        <img src="{{ url_for('static', filename='assets/WA_LOGO.png') }}" alt="Whatsapp">
+        <h2>Contact our Admin</h2>
+        <p>Any detailed question? Here's our Whatsapp Contact</p>
+        <a href="#" class="support-button">Open Whatsapp</a>
+    </div>
+
+    <div class="support-card">
+        <img src="{{ url_for('static', filename='assets/DC_LOGO.png') }}" alt="Discord">
+        <h2>Team Keys2Keep</h2>
+        <p>Have a question? Ask the Keys2Keep Discord Community for help!</p>
+        <a href="#" class="support-button">Enter Discord Chat</a>
+    </div>
+</div>
+
+<!-- Support Links -->
+<div class="support-links">
+    <div class="links-column">
+        <h3>Contact</h3>
+        <a href="#">Contact Us</a>
+        <a href="#">Business Contact</a>
+    </div>
+    <div class="links-column">
+        <h3>Check Product Validity</h3>
+        <a href="#">Register Your Product</a>
+    </div>
+    <div class="links-column">
+        <h3>Online Stores</h3>
+        <a href="#">Shipping Policy</a>
+        <a href="#">Return & Refund Policy</a>
+        <a href="#">Become Our Affiliate</a>
+    </div>
+    <div class="links-column">
+        <h3>Downloads</h3>
+        <a href="#">Mice Software and User Manual</a>
+        <a href="#">Keyboard Software and User Manual</a>
+        <a href="#">Audio Software and User Manual</a>
+        <a href="#">Console Software and User Manual</a>
+        <a href="#">Driving Software and User Manual</a>
+        <a href="#">Others</a>
+    </div>
+</div>
+{% endblock %}

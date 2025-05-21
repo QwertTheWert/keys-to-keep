@@ -3,8 +3,8 @@ from flask_login import current_user, login_required
 from app import db
 from models import Review, Keyboard
 
-class ReviewPage:
 
+class ReviewPage: 
     def __init__(self, flask_app, bcrypt):
         review_bp = Blueprint("review", __name__, template_folder="templates", static_folder="static", static_url_path="/review/static")
 
