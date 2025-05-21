@@ -52,8 +52,13 @@
 						{% endif %}
 						</a>
 						<button class="add-to-cart open-modal" id="cart-btn-{{ data.keyboard.id }}" data-id="{{ data.keyboard.id }}"
-							data-bs-toggle="modal" data-bs-target="#cart_modal" id="cart_modal_button">
-							Add to Cart
+							data-bs-toggle="modal" data-bs-target="#cart_modal" id="cart_modal_button"
+							{% if data.keyboard.quantity <= 0 %} disabled=true {% endif %}>
+							{% if data.keyboard.quantity <= 0 %} 
+								Sold Out 
+							{% else %}
+								Add to Cart
+							{% endif %}
 						</button>
 					</div>
 				</div>

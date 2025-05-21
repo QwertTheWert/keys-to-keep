@@ -13,30 +13,10 @@ class ReviewPage:
 			if request.method == "GET":
 				return render_template("review.html", data=Review.get_edit_data(review_id))
 			elif request.method == "POST":
-				return render_template("review.html", data=Review.get_edit_data(review_id))
-
-		@review_bp.route('/review/<int:review_id>', methods=["POST"])
-		@login_required
-		def submit_review(review_id):
-			try:
-				keyboard_id = int(request.form.get("keyboard_id"))
-				rating = int(request.form.get("selected_rating"))
-				description = request.form.get("description", "")
-
-				# You may also want to check if the user already submitted a review, and update instead.
-				new_review = Review(
-					user_id=current_user.id,
-					keyboard_id=keyboard_id,
-					rating=rating,
-					description=description
-				)
-				db.session.add(new_review)
+				review = Review.get_edit_data(review_id)[0]
+				review.rating = int(request.form.get("selected_rating"))
+				review.description = request.form.get("description", "")
 				db.session.commit()
-				flash("Review submitted successfully!", "success")
-			except Exception as e:
-				db.session.rollback()
-				flash(f"Failed to submit review: {str(e)}", "danger")
-
-			return redirect(url_for('profile.profile', keyboard_id=keyboard_id))
+				return redirect(url_for('profile.profile'))
 
 		flask_app.register_blueprint(review_bp)

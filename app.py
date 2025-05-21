@@ -105,10 +105,10 @@ def create_dummy_data():
 
 	db.session.add_all([user1, user2, user3])
 
-	switch_data = [SwitchType(name="Switch A"), SwitchType(name="Switch B"), SwitchType(name="Switch C")]
+	switch_data = [SwitchType(name="Cherry MX Red"), SwitchType(name="Gateron Brown"), SwitchType(name="Kailh Box White")]
 	db.session.add_all(switch_data)
 	
-	keycaps_data = [Keycaps(name="Keycaps A"), Keycaps(name="Keycaps B"), Keycaps(name="Keycaps C")]
+	keycaps_data = [Keycaps(name="ABS"), Keycaps(name="POM"), Keycaps(name="PBT")]
 	db.session.add_all(keycaps_data)
 
 	keyboard_data = [

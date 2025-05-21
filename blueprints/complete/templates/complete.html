@@ -35,14 +35,13 @@
 						</div>
 
 						<div class="ce">
-							<a href="{{url_for('review.review', review_id=data.review_data[d].1.id)}}" class="text-reset text-decoration-none">
-								<button type="button" class="btn btn-dark">
+							<a href="{{url_for('review.review', review_id=data.data.0.id)}}" class="text-reset text-decoration-none">
+								<button type="button" class="btn btn-sm btn-dark">
 									Review
 								</button>
 							</a>
 							<br>
 							<br>
-							<p>STATUS</p>
 						</div>
 					</div>
 					{% endfor %}

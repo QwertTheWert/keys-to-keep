@@ -12,7 +12,6 @@ class ProfilePage:
 		def profile():
 			if current_user.is_authenticated:
 				review_data = current_user.get_reviews()
-				print(review_data)
 				return render_template("profile.html", user=current_user, username=str(current_user.username), full_name=str(current_user.full_name), email=str(current_user.email), review_data=review_data)
 			else:
 				return redirect(url_for("login.login"))

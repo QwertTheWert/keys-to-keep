@@ -105,20 +105,26 @@
 				{% for data in review_data %}
 				<div class="Transaction_List">
 					<div class="transaction-item">
-						<img src="{{ url_for('static', filename=data.data.1.image_url) }}" alt="">
-						<div class="item-details">
-							<h5>{{ data.data.1.name }}</h5>
-							<h6><b>Color:</b> {{ data.data.2.name }} | <b>Switch Type:</b> {{ data.data.3.name }}</h6>
-							{% if data.stars != "" %} <h6>{{ data.stars }} </h6> {% endif %}
-							{% if data.data.0.description == "None" %} <p>{{ data.data.0.description }} </p> {% endif %}
-						</div>
-
+						<a href="{{url_for('keyboard.keyboard_details', keyboard_id=data.data.1.id)}}" class="text-reset text-decoration-none">
+							<img src="{{ url_for('static', filename=data.data.1.image_url) }}" alt="">
+						</a>
+						<a href="{{url_for('keyboard.keyboard_details', keyboard_id=data.data.1.id)}}" class="text-reset text-decoration-none">
+							<div class="item-details">
+								<h5>{{ data.data.1.name }}</h5>
+								<h6><b>Color:</b> {{ data.data.2.name }} | <b>Switch Type:</b> {{ data.data.3.name }}</h6>
+								{% if data.stars != "" %} <h6>{{ data.stars }} </h6> {% endif %}
+								{% if data.data.0.description == "None" %} <p>{{ data.data.0.description }} </p> {% endif %}
+							</div>
+						</a>
+						
 						<div class="ce">
-							<a href="{{url_for('review.review', review_id=data.data.1.id)}}" class="text-reset text-decoration-none">
-								<button type="button" class="btn btn-dark">
-									Review
-								</button>
-							</a>
+							{% if data.data.0.rating == -1 %}
+								<a href="{{url_for('review.review', review_id=data.data.0.id)}}" class="text-reset text-decoration-none">
+									<button type="button" class="btn btn-sm btn-dark">
+										Review
+									</button>
+								</a>
+							{% endif %}
 							<br>
 							<br>
 						</div>
