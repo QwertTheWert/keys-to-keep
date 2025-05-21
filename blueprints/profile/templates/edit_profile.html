@@ -1,11 +1,11 @@
-{% extends 'base_template.html' %}
+{% extends 'navbar_template.html' %}
 
 {% block head %}
 <title>Edit Profile</title>
 {% endblock %}
 
 
-{% block body %}
+{% block content %}
 <form action="{{ url_for('profile.edit') }}" method="POST">
 	<div class="container border mt-4 p-4">
 		<h1>Edit Profile</h1>
