@@ -9,10 +9,10 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 
 db = SQLAlchemy()
 
-def create_app():
+def create_app(database_uri='sqlite:///database.db'):
 	app = Flask(__name__)
 
-	app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+	app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
 	app.secret_key = 'SECRET_KEY'
 	app.url_map.strict_slashes = False
 	app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1, x_port=1, x_prefix=1)
@@ -55,8 +55,8 @@ def create_app():
 	AdditionalInfoPage(app, bcrypt)
 
 	@login_manager.user_loader 
-	def load_user(user):		
-		return User.query.get(int(user))
+	def load_user(user_id):		
+		return db.session.get(User, int(user_id))
 
 	migrate = Migrate(app, db)
 	return app
@@ -79,7 +79,7 @@ def create_dummy_data():
 		username='john_doe',
 		full_name='John Doe',
 		email='john.doe@example.com',
-		password='password123',
+		password= 'password123',
 		address='Home Street, 123'
 	)
 	user2 = User(
@@ -141,7 +141,7 @@ def create_dummy_data():
 			quantity=randint(1, 20),
 			price= (randint(2,20) * 50000), 
 			date_added=now - timedelta(days=randint(5,30)),
-			image_url=keyboard_images[randint(0,10)],
+			image_url=keyboard_images[randint(0,9)],
 		)
 		db.session.add(keyboard)
 		db.session.commit()

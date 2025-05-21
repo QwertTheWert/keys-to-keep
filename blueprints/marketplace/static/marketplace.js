@@ -40,12 +40,12 @@ document.querySelectorAll('.open-modal').forEach(btn =>
 );
 
 finalizeBtn.addEventListener('click', function () {
-	fetch(`marketplace/add_to_cart`, {
+	fetch(`/keyboard/add_to_cart`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ keyboard_id: currentKeyboardId, variant_info : variantInfo }),
+		body: JSON.stringify({ keyboard_id: currentKeyboardId, variant_info : variantInfo, quantity : 1 }),
 	})
 	.then(response => response.json())
 	.then(data => {
