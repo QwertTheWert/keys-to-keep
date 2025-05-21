@@ -135,16 +135,17 @@ body {
 }
 
 .product-specs {
-  border: 1px solid black;
   flex: 1;
-  margin: 10px; /* remove the margin from previous layout */
-  padding: #cce0f5;
+  padding: 10px;
+  box-shadow: -2px 1px 5px rgba(0, 0, 0, 0.4);
+  margin-bottom: 20px;
 }
 
 .spec-list{
   display: flex;
   flex-direction: column;
   gap: 6px;
+  margin-bottom: 20px;
 }
 
 .spec-item{
