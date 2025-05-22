@@ -23,14 +23,15 @@
 				
 				<div class="product-specs">
 					<div class="product-title">
-						<button class="btn btn-outline-secondary btn-sm" style="margin-bottom: 20px;" onclick="copyID('{{ data.keyboard.id }}')">ID #{{ data.keyboard.id }}</button>
+						<button class="btn btn-outline-secondary btn-sm" style="margin-bottom: 20px;" onclick="copyID('{{ data.keyboard.id }}')">ID # {{ data.keyboard.id }}</button>
 						<div>
 							<h1 class="product-name">{{ data.keyboard.name }}</h1>
 							<p class="product-subtitle">{{ data.keyboard.subtitle }}</p>
 						</div>	
 					</div>
+							<p>{{ data.keyboard.description }}</p>
 					<p id="copied-text" style="display: none; color: green; margin-top: 12px;">ID Copied</p>
-					<h2>specification ↓</h2>
+					<h2>Specification</h2>
 					<div class="spec-list">
 
 						<div class="spec-item">
