@@ -222,20 +222,20 @@ def create_dummy_data():
 		db.session.add(keyboard)
 		db.session.commit()
 
-		color1 = Color(name="Black", keyboard_id=i+3)
-		color2 = Color(name="White", keyboard_id=i+3)
-		color3 = Color(name="Silver", keyboard_id=i+3)
+		color1 = Color(name="Black", keyboard_id=i+4)
+		color2 = Color(name="White", keyboard_id=i+4)
+		color3 = Color(name="Silver", keyboard_id=i+4)
 		db.session.add_all([color1, color2, color3])
-		switch1 = Switch(name="Blue", keyboard_id=i+3)
-		switch2 = Switch(name="Red", keyboard_id=i+3)
-		switch3 = Switch(name="Brown", keyboard_id=i+3)
+		switch1 = Switch(name="Blue", keyboard_id=i+4)
+		switch2 = Switch(name="Red", keyboard_id=i+4)
+		switch3 = Switch(name="Brown", keyboard_id=i+4)
 		db.session.add_all([switch1, switch2, switch3])	
 
 
-		rev1 = Review(user_id=1, keyboard_id=i+3, switch_id=randint(1,3), color_id=randint(1,3), rating=5, description='Great keyboard with responsive keys.')
-		rev2 = Review(user_id=2, keyboard_id=i+3, switch_id=randint(1,3), color_id=randint(1,3), rating=4, description='Feels great, but could use more clicking noises settings.')
-		rev3 = Review(user_id=1, keyboard_id=i+3, switch_id=randint(1,3), color_id=randint(1,3), rating=3, description='Eh, its mid, but it works.')
-		rev4 = Review(user_id=2, keyboard_id=i+3, switch_id=randint(1,3), color_id=randint(1,3), rating=1, description='This is Horrible! Dont buy it!!!')
+		rev1 = Review(user_id=1, keyboard_id=i+4, switch_id=randint(1,3), color_id=randint(1,3), rating=5, description='Great keyboard with responsive keys.')
+		rev2 = Review(user_id=2, keyboard_id=i+4, switch_id=randint(1,3), color_id=randint(1,3), rating=4, description='Feels great, but could use more clicking noises settings.')
+		rev3 = Review(user_id=1, keyboard_id=i+4, switch_id=randint(1,3), color_id=randint(1,3), rating=3, description='Eh, its mid, but it works.')
+		rev4 = Review(user_id=2, keyboard_id=i+4, switch_id=randint(1,3), color_id=randint(1,3), rating=1, description='This is Horrible! Dont buy it!!!')
 		db.session.add_all([rev1 if randint(1,2) == 1 else rev3, rev2 if randint(1,2) == 1 else rev4])
 
 	# Create Cart entries

@@ -23,6 +23,15 @@ function onVariantBtnClick(btn, variantType)  {
 	variantInfo[variantType] = btn.dataset.id;
 }
 
+quantityField.addEventListener("input", () => {
+	quantityField.value = quantityField.value.replace(/(?!^-)-|[^-0-9]/g, '');
+	console.log(quantityField.max);
+	console.log(quantityField.value);
+    if (parseInt(quantityField.value) > quantityField.max) {
+      quantityField.value = quantityField.max;
+    }
+});
+
 function onAddtoCartClick() {
 	fetch(`/keyboard/add_to_cart`, {
 		method: 'POST',
