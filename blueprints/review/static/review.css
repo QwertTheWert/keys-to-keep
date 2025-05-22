@@ -141,6 +141,10 @@
     width: auto;
 }
 
+.submit-review-button:disabled {
+    opacity: 0.5;
+}
+
 .main-block{
     width: 80em;
     min-height: 19.1em;
