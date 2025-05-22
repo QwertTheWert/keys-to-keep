@@ -10,8 +10,7 @@
 
 .cart-container {
     flex: 2; 
-    max-width: 1000px;
-    max-height: 1200px;
+    max-width: 60em;
     background: #f4f4f4;
     padding: 20px;
     border-radius: 10px;
@@ -73,13 +72,7 @@
     margin: 0 5px;
 }
 
-.remove {
-    background: red;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-}
+
 
 .cart-summary {
     text-align: right;
@@ -97,6 +90,11 @@
     background: palegreen;
 }
 
-button{
-    border-radius: 8px;
+.qty-btn{
+    border-radius: 7px;
+}
+
+.qty-field{
+    border-radius: 5px;
+    min-height: 32px;
 }
