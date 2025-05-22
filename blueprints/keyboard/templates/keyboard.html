@@ -79,7 +79,7 @@
 					<div class="product-action">
 						<input id="qty-field" type="number" value="1" min="1" max="{{ data.keyboard.quantity }}"/>
 						<span> Stock: {{ data.keyboard.quantity }} </span>
-						<button id="add-to-cart-btn" onclick="onAddtoCartClick()" 
+						<button class="btn btn-warning" id="add-to-cart-btn" onclick="onAddtoCartClick()" 
 							{% if data.keyboard.quantity <= 0 %} disabled=true {% endif %}
 						>
 						{% if data.keyboard.quantity <= 0 %} 
