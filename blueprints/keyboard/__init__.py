@@ -13,6 +13,7 @@ class KeyboardPage:
 			keyboard = Keyboard.get_by_id(keyboard_id)
 			if keyboard:
 				data = keyboard.get_data()
+				print(data)
 				return render_template("keyboard.html", data=data)
 			else:
 				return "404", 404

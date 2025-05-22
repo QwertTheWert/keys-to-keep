@@ -108,23 +108,6 @@ body {
   font-size: 14px;
 }
 
-.product-action button {
-  padding: 10px 16px;
-  font-size: 14px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.product-action button:first-of-type {
-  background-color: #fff;
-  border: 1px solid #000;
-}
-
-.product-action .buy-now {
-  background-color: #000;
-  color: white;
-}
 
 .product-details {
   display: flex;
