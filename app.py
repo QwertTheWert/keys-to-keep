@@ -126,6 +126,7 @@ def create_dummy_data():
 		discount=10,
 		sold=25,
 		price=2100000,  # Example in Indonesian Rupiah or adjust as needed
+		date_added=now - timedelta(days=16),
 		quantity=50
 	)
 	kb2 = Keyboard(
@@ -141,6 +142,8 @@ def create_dummy_data():
 		discount=50,    # 50% discount: from 1,299,000 to 659,000
 		sold=73,
 		price=659000,   # After discount
+		date_added=now - timedelta(days=5),
+
 		quantity=120
 	)
 	kb3 = Keyboard(
@@ -157,10 +160,12 @@ def create_dummy_data():
 		discount=20,    # 20% off
 		sold=124,
 		price=1049000,  # Original price: 1,311,250
+		date_added=now - timedelta(days=30),
+
 		quantity=95
 	)
 
-	db.session.add_all([kb1, kb2])
+	db.session.add_all([kb1, kb2, kb3])
 	db.session.commit()
 	db.session.add_all([
 		Color(name="White & Maroon", keyboard_id=1), 
@@ -208,10 +213,10 @@ def create_dummy_data():
 			discount=randint(0, 20),
 			keycaps=randint(1,3),
 			switch_type=randint(1,3),
-			sold=randint(1,20),
-			quantity=randint(1, 20),
+			sold=randint(1,50),
+			quantity=randint(1, 50),
 			price= (randint(2,20) * 50000), 
-			date_added=now - timedelta(days=randint(5,30)),
+			date_added=now - timedelta(days=randint(5,80)),
 			image_url=keyboard_images[randint(0,9)],
 		)
 		db.session.add(keyboard)
