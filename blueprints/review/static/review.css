@@ -55,7 +55,8 @@
 
 .review-img{
     width: 100%;
-    height: 300px;
+    height: auto;
+    max-height: 400px;
     object-fit: cover;
     border-radius: 5px;
 }
@@ -68,7 +69,7 @@
     flex-direction: column;
     position: relative;
     padding: 2%;
-    background-color: antiquewhite;
+    background-color: rgb(245, 245, 245);
     border-radius: 0 0 13px;
 }
 
@@ -122,6 +123,7 @@
 .submit{
     align-items: center;
     display: flex;    
+    flex-direction: column;
     position: relative;
     margin: 10px;
     width: 100%;
@@ -135,7 +137,7 @@
     border-radius: 13px;
     justify-content: center;
     gap: 20px;
-    margin: 90px 90px 290px 90px;
+    margin: 20px;
     width: auto;
 }
 
@@ -167,4 +169,12 @@
     max-width: 77em;
     min-height: 20em;
     border-radius: 5px;
+}
+
+.review-desc{
+    width: 100%;
+    min-height: 150px;
+    height: auto;
+    position: relative;
+    display: flex;
 }

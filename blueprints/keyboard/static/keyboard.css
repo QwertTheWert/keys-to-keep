@@ -60,10 +60,19 @@ body {
   font-weight: bold;
 }
 
+.product-options{
+  margin-bottom: 20px;
+}
+
 .product-options label {
   font-weight: bold;
   display: block;
   margin: 10px 0 5px;
+}
+
+.switch-options label,
+.color-options label{
+  margin-top: 3px;
 }
 
 .color-options button,
@@ -135,16 +144,17 @@ body {
 }
 
 .product-specs {
-  border: 1px solid black;
   flex: 1;
-  margin: 10px; /* remove the margin from previous layout */
-  padding: #cce0f5;
+  padding: 10px;
+  box-shadow: -2px 1px 5px rgba(0, 0, 0, 0.4);
+  margin-bottom: 20px;
 }
 
 .spec-list{
   display: flex;
   flex-direction: column;
   gap: 6px;
+  margin-bottom: 20px;
 }
 
 .spec-item{
