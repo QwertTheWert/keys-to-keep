@@ -35,7 +35,7 @@
 /* Responsive Slider */
 .slider-container {
     width: 100vw;
-    max-width: 100%;
+    max-width: 1920px;
     aspect-ratio: 16 / 4.5; /* Keeps similar ratio as 1920x540 */
     height: auto;
     overflow: hidden;
@@ -81,7 +81,7 @@
 .slide-text h2 {
     font-size: 4rem;
     font-weight: bold;
-    color: #FFDAB9; /* Light peach color */
+    color: #FFDAB9; 
 }
 
 .slide-text p {
@@ -182,7 +182,7 @@
     padding: 15px;
     min-width: 260px;
     max-width: 300px;
-    height: 450px; /* Add fixed height */
+    height: 450px; 
     flex: 0 0 auto;
     position: relative;
     text-align: center;
@@ -240,7 +240,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 70px; /* Increased from 60px to accommodate larger image */
+    margin-bottom: 70px; 
 }
 
 .current-price {
@@ -267,7 +267,7 @@
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    width: calc(100% - 80px); /* Changed from 30px to 80px for narrower width */
+    width: calc(100% - 80px); 
     background-color:rgb(255, 0, 0);
     color: white;
     border: none;
@@ -282,7 +282,6 @@
     background-color:rgb(255, 0, 0);
 }
 
-/* Optional: Style scrollbar for Webkit browsers */
 .trending-items-container::-webkit-scrollbar {
     height: 8px;
 }
@@ -338,7 +337,7 @@
     padding: 15px;
     min-width: 260px;
     max-width: 300px;
-    height: 450px; /* Add fixed height */
+    height: 450px; 
     flex: 0 0 auto;
     position: relative;
     text-align: center;
@@ -396,7 +395,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 70px; /* Increased from 60px to accommodate larger image */
+    margin-bottom: 70px; 
 }
 
 .current-price {
@@ -500,7 +499,7 @@
     text-decoration: none;
     font-size: 1.5rem;
     font-weight: bold;
-    flex: 1 1 calc(33.333% - 40px); /* Adjust the width of the buttons */
+    flex: 1 1 calc(33.333% - 40px); 
     box-sizing: border-box;
     transition: background-color 0.3s;
 }
@@ -584,7 +583,6 @@
     position: relative;
 }
 
-/* Optional: Add an underline effect */
 .vendors-title::after {
     content: '';
     position: absolute;
