@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const stars = document.querySelectorAll(".interactive-star");
   const hiddenInput = document.getElementById("selected-rating");
+  const submitButton = document.getElementById("submit-button");
   let selectedRating = 0;
 
   stars.forEach((star, index) => {
@@ -15,6 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
     star.addEventListener("click", () => {
       selectedRating = index + 1;
       hiddenInput.value = selectedRating;
+      submitButton.disabled = hiddenInput.value == 0;
+
       highlightStars(selectedRating);
     });
   });
@@ -26,3 +29,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });``
+
