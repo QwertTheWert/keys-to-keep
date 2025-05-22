@@ -157,14 +157,14 @@ def test_compare(client_d):
 def test_complete(client_d, add_to_cart_response, flask_app_d):
 	client_d.post("/payment/create_transaction", json={"delivery_id": 1, "total_price": 200000})
 	client_d.post("/complete/", data={"transaction_id": 1})
-	response = client_d.get("/review/3")
+	response = client_d.get("review/19")
 	assert response.status_code == 200
-	response = client_d.post("/review/3", data={"selected_rating":5, "description": "Olala"})
+	response = client_d.post("/review/19", data={"selected_rating":5, "description": "Olala"})
 	assert response.status_code == 302
 	assert response.headers["Location"].endswith("profile")
 	assert b'<button type="button" class="btn btn-sm btn-dark">' not in response.data
 	with flask_app_d.app_context():
-		review = Review.query.filter(Review.id == 3).first()
+		review = Review.query.filter(Review.id == 19).first()
 		assert review.rating == 5
 		assert review.description == "Olala"
 

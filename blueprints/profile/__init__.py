@@ -12,7 +12,7 @@ class ProfilePage:
 		def profile():
 			if current_user.is_authenticated:
 				review_data = current_user.get_reviews()
-				return render_template("profile.html", user=current_user, username=str(current_user.username), full_name=str(current_user.full_name), email=str(current_user.email), review_data=review_data)
+				return render_template("profile.html", user=current_user, username=str(current_user.username), full_name=str(current_user.full_name), address=str(current_user.full_name), email=str(current_user.email), review_data=review_data)
 			else:
 				return redirect(url_for("login.login"))
 
@@ -23,8 +23,9 @@ class ProfilePage:
 					full_name = request.form.get("full_name")
 					email = request.form.get("email")
 					address = request.form.get("address")
+					print(full_name, email, address)
 					if full_name != "" and email != "" and address != "":
-						current_user.update(request.form.get("full_name"), request.form.get("email"), request.form.get("address"))
+						current_user.update(full_name, email, address)
 						return redirect(url_for("profile.profile"))
 					else:
 						return render_template("edit_profile.html", user=current_user, full_name=str(full_name), email=str(email), address=str(address))
