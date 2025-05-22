@@ -128,6 +128,7 @@ body {
 
 .product-details {
   display: flex;
+  background-color: #f7f7f7;
   flex: 1;
   gap: 40px;
 }
@@ -145,9 +146,8 @@ body {
 
 .product-specs {
   flex: 1;
-  padding: 10px;
+  padding: 30px;
   box-shadow: -2px 1px 5px rgba(0, 0, 0, 0.4);
-  margin-bottom: 20px;
 }
 
 .spec-list{
