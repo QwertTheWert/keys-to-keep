@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, abort
 from flask_login import current_user, login_required
 from app import db, format_money
-from models import Review, Keyboard
+from models import Review
 
 
 class ReviewPage: 
@@ -12,10 +12,13 @@ class ReviewPage:
 		def review(review_id):
 			if request.method == "GET":
 				data = Review.get_edit_data(review_id)
-				if data[0].rating == -1:
-					return render_template("review.html", data=data, price=format_money(data[1].get_discounted_price()))
+				if data:
+					if data[0].rating == -1:
+						return render_template("review.html", data=data, price=format_money(data[1].get_discounted_price()))
+					else:
+						return redirect(url_for('profile.profile'))
 				else:
-					return redirect(url_for('profile.profile'))
+					abort(404)
 			elif request.method == "POST":
 				review = Review.get_edit_data(review_id)[0]
 				review.rating = int(request.form.get("selected_rating"))

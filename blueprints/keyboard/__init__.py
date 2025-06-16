@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, abort
 from flask_login import current_user
 from app import request
 
@@ -16,7 +16,7 @@ class KeyboardPage:
 				print(data)
 				return render_template("keyboard.html", data=data)
 			else:
-				return "404", 404
+				abort(404)
 
 		@keyboard_bp.route('/keyboard/add_to_cart', methods=['POST'])
 		def add_to_cart():
